@@ -23,12 +23,12 @@ public class Block : MonoBehaviour
     }
 
 
-    private float _speed = 2.10f;
+    private float _speed = 5.0f;
     public float speed
     {
         get
         {
-            return _speed * Time.deltaTime * 10.0f;
+            return _speed * Time.deltaTime;
         }
         private set
         {
@@ -48,8 +48,8 @@ public class Block : MonoBehaviour
         isMoving = true;
         while(isMoving)
         {
-            transform.Translate(Vector2.right * speed);
-            if (transform.position.x >= GameData.maxXPosition - GameData.blockCount * 2.1f)
+            transform.Translate((Vector2.right * speed).normalized / 3.0f);
+            if (transform.position.x >= GameData.maxXPosition.x - GameData.blockCount * 2.0f)
             {
                 isMoving = false;
             }

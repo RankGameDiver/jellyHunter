@@ -7,6 +7,9 @@ public class Game : MonoBehaviour
 
     GameObject[] skillBlocks = new GameObject[GameData.blockKinds];
 
+    [SerializeField]
+    GameObject[] sBlock = new GameObject[7]; // 블럭 7개를 배열로 선언해놓음
+
     void Start()
     {
         //ObjectPool
