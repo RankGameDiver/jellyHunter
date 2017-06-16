@@ -8,7 +8,7 @@ public class Game : MonoBehaviour
     GameObject[] skillBlocks = new GameObject[GameData.blockKinds];
 
     [SerializeField]
-    GameObject[] sBlock = new GameObject[7]; // 블럭 7개를 배열로 선언해놓음
+    public static GameObject[] sBlock = new GameObject[7]; // 블럭 7개를 배열로 선언해놓음
 
     void Start()
     {
@@ -28,10 +28,10 @@ public class Game : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    bool isSeven()
-    {
-        return true;
-    }
+    //bool isSeven()
+    //{
+    //    return true;
+    //}
     IEnumerator Create()
     {
         if (GameData.blockCount < 7)
@@ -39,6 +39,8 @@ public class Game : MonoBehaviour
             int index = Random.Range(0, GameData.blockKinds);
 
             curretBlock = Instantiate(skillBlocks[index], GameData.spawnPos, Quaternion.identity);
+
+            sBlock[GameData.blockCount] = curretBlock;
 
             GameData.blockCount += 1;
 

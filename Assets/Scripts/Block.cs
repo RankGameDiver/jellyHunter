@@ -20,6 +20,7 @@ public class Block : MonoBehaviour
     void Update()
     {
         TouchBlock();
+        ClickBlock();
     }
 
 
@@ -66,13 +67,42 @@ public class Block : MonoBehaviour
             {
                 Ray2D ray = new Ray2D(touchPos, Vector2.zero);
                 RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-                if (hit.collider != null)
+                if (hit.collider != null) // 수정 필요(blockCount)
                 {
                     touchBlock = hit.collider.gameObject;
                     GameData.blockCount -= 1;
                     Destroy(touchBlock);
                 }
             }
+        }
+    }
+
+    private void ClickBlock() // 테스트 전용 클릭함수
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Ray2D ray = new Ray2D(clickPos, Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+            if (hit.collider != null)
+            {
+                touchBlock = hit.collider.gameObject;
+                GameData.blockCount -= 1;
+                BlockUpdate();
+                Destroy(touchBlock);
+            }
+        }
+    }
+
+    private void BlockUpdate()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (Game.sBlock[i] == null)
+            {
+                Game.sBlock[i + 1] = Game.sBlock[i];
+            }
+
         }
     }
 }
