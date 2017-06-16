@@ -21,6 +21,7 @@ public class Block : MonoBehaviour
     {
         TouchBlock();
         ClickBlock();
+        BlockUpdate();
     }
 
 
@@ -88,7 +89,7 @@ public class Block : MonoBehaviour
             {
                 touchBlock = hit.collider.gameObject;
                 GameData.blockCount -= 1;
-                BlockUpdate();
+                //BlockUpdate();
                 Destroy(touchBlock);
             }
         }
@@ -102,6 +103,7 @@ public class Block : MonoBehaviour
             {
                 Game.sBlock[i + 1] = Game.sBlock[i];
             }
+            //transform.Translate((Vector2.right * speed).normalized / 3.0f);
 
         }
     }
