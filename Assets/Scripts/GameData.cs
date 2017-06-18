@@ -2,13 +2,15 @@
 
 public static class GameData
 {
-    public static float maxXPos = 7.8f; // 블럭이 이동할 수 있는 최대 x좌표
+    public static float maxXPos = 8.0f; // 블럭이 이동할 수 있는 최대 x좌표
     public static float maxYPos = -3.0f; // 블럭이 이동할 수 있는 최대 y좌표
     public static int blockCount = 0;   // 현재 나와있는 블럭의 개수
 
     // 블럭 생성 좌표
     const float spawnXpos = -8.0f;      //컴파일 타임 값이 정해짐
     const float spawnYpos = -3.0f;   //런타임에 값이 정해짐
+
+    public static bool touchblock = false; // 다른 블럭을 터치했을때 true(블럭이 사라졌을때 빈자리를 다른 블럭이 채우기 위함)
 
 
     private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos);

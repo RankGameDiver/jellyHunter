@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
         skillBlocks[1] = Resources.Load<GameObject>("Prefabs/skill_2");
         skillBlocks[2] = Resources.Load<GameObject>("Prefabs/skill_3");
         StartCoroutine(LogicLoop());
+        StartCoroutine(CheckLoop());
     }
 
     IEnumerator LogicLoop()
@@ -28,10 +29,6 @@ public class Game : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    //bool isSeven()
-    //{
-    //    return true;
-    //}
     IEnumerator Create()
     {
         if (GameData.blockCount < 7)
@@ -41,6 +38,8 @@ public class Game : MonoBehaviour
             curretBlock = Instantiate(skillBlocks[index], GameData.spawnPos, Quaternion.identity);
 
             sBlock[GameData.blockCount] = curretBlock;
+
+            Debug.Log(sBlock[GameData.blockCount]);
 
             GameData.blockCount += 1;
 
@@ -53,5 +52,32 @@ public class Game : MonoBehaviour
         }
 
         yield break;    //코루틴 종료시키는 코드
+    }
+
+    IEnumerator CheckLoop()
+    {
+        while (true)
+        {
+            yield return PullBlock();
+        }
+    }
+
+    IEnumerator PullBlock()
+    {
+        while (GameData.touchblock)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                if (sBlock[i] != null)
+                {
+                    Block block = sBlock[i].GetComponent<Block>();
+
+                    block.PullBlock(i);
+                }
+            }
+            GameData.touchblock = false;
+            yield return null;
+        }
+        yield break;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     private GameObject touchBlock; // 터치되는 블럭
-    //[SerializeField] new Rigidbody2D rigidbody;
     
     void Start ()
     {
@@ -17,13 +16,17 @@ public class Block : MonoBehaviour
         StartCoroutine(Move());
     }
 
+    public void PullBlock(int count)
+    {
+        if (isMoving == false)
+            StartCoroutine(Pull(count));
+    }
+
     void Update()
     {
         TouchBlock();
         ClickBlock();
-        BlockUpdate();
     }
-
 
     private float _speed = 5.0f;
     public float speed
@@ -38,22 +41,46 @@ public class Block : MonoBehaviour
         }
     }
 	
-    bool _isMoving;
-    //public int a { get; private set; }
+    bool _isMoving; // 블럭이 생성된 후 움직임을 체크
+
     public bool isMoving
     {
         get { return _isMoving; }
         private set { _isMoving = value; }
     }
+
+    bool _pullMoving; // 한번 멈춘 블럭이 다시 움직이게함
+    
+    public bool pullMoving
+    {
+        get { return _pullMoving; }
+        private set { _pullMoving = value; }
+    }
+
     IEnumerator Move()
     {
         isMoving = true;
-        while(isMoving)
+        while (isMoving)
         {
-            transform.Translate((Vector2.right * speed).normalized / 3.0f);
+            transform.Translate((Vector2.right * speed).normalized / 4.0f);
             if (transform.position.x >= GameData.maxXPosition.x - GameData.blockCount * 2.0f)
             {
                 isMoving = false;
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator Pull(int count)
+    {
+        pullMoving = true;
+        while (pullMoving)
+        {
+            transform.Translate((Vector2.right * speed).normalized / 4.0f);
+
+            if (transform.position.x >= GameData.maxXPosition.x - count * 2.0f)
+            {
+                pullMoving = false;
             }
             yield return null;
         }
@@ -89,22 +116,29 @@ public class Block : MonoBehaviour
             {
                 touchBlock = hit.collider.gameObject;
                 GameData.blockCount -= 1;
-                //BlockUpdate();
+                GameData.touchblock = true;
                 Destroy(touchBlock);
+                BlockUpdate();
             }
         }
     }
 
-    private void BlockUpdate()
+    private void BlockUpdate() // 블럭 클릭시 블럭 배열을 재배열함
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             if (Game.sBlock[i] == null)
             {
-                Game.sBlock[i + 1] = Game.sBlock[i];
+                if (i == 6)
+                {
+                    Game.sBlock[i] = null;
+                }
+                else
+                {
+                    Game.sBlock[i] = Game.sBlock[i + 1];
+                    Game.sBlock[i + 1] = null;
+                }
             }
-            //transform.Translate((Vector2.right * speed).normalized / 3.0f);
-
         }
     }
 }
