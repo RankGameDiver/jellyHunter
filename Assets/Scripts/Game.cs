@@ -22,6 +22,14 @@ public class Game : MonoBehaviour
         StartCoroutine(CheckLoop());
     }
 
+    void Update()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            checkBlock[i] = sBlock[i];
+        }
+    }
+
     IEnumerator LogicLoop()
     {
         while (true)
@@ -39,7 +47,6 @@ public class Game : MonoBehaviour
             curretBlock = Instantiate(skillBlocks[index], GameData.spawnPos, Quaternion.identity);
 
             sBlock[GameData.blockCount] = curretBlock;
-            checkBlock[GameData.blockCount] = curretBlock;
 
             GameData.blockCount += 1;
 
@@ -68,11 +75,10 @@ public class Game : MonoBehaviour
         {
             for (int i = 0; i < 7; i++)
             {
-                if (sBlock[i] != null)
+                if (sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
                 {
                     Block block = sBlock[i].GetComponent<Block>();
-
-                    block.PullBlock(i);
+                    block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
                 }
             }
             GameData.touchblock = false;

@@ -25,6 +25,7 @@ public class Block : MonoBehaviour
     {
         TouchBlock();
         ClickBlock();
+        BlockUpdate();
     }
 
     private float _speed = 5.0f;
@@ -114,10 +115,9 @@ public class Block : MonoBehaviour
             if (hit.collider != null)
             {
                 touchBlock = hit.collider.gameObject;
+                Destroy(touchBlock);
                 GameData.blockCount -= 1;
                 GameData.touchblock = true;
-                Destroy(touchBlock);
-                BlockUpdate();
             }
         }
     }
