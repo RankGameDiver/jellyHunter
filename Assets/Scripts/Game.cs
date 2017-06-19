@@ -8,7 +8,8 @@ public class Game : MonoBehaviour
     GameObject[] skillBlocks = new GameObject[GameData.blockKinds];
 
     [SerializeField]
-    public static GameObject[] sBlock = new GameObject[7]; // 블럭 7개를 배열로 선언해놓음
+    public static GameObject[] sBlock = new GameObject[8]; // 블럭 7개를 배열로 선언해놓음
+    public GameObject[] checkBlock = new GameObject[8];
 
     void Start()
     {
@@ -38,8 +39,7 @@ public class Game : MonoBehaviour
             curretBlock = Instantiate(skillBlocks[index], GameData.spawnPos, Quaternion.identity);
 
             sBlock[GameData.blockCount] = curretBlock;
-
-            Debug.Log(sBlock[GameData.blockCount]);
+            checkBlock[GameData.blockCount] = curretBlock;
 
             GameData.blockCount += 1;
 

@@ -8,7 +8,6 @@ public class Block : MonoBehaviour
     
     void Start ()
     {
-
     }
 
     public void Create()
@@ -129,16 +128,10 @@ public class Block : MonoBehaviour
         {
             if (Game.sBlock[i] == null)
             {
-                if (i == 6)
-                {
-                    Game.sBlock[i] = null;
-                }
-                else
-                {
-                    Game.sBlock[i] = Game.sBlock[i + 1];
-                    Game.sBlock[i + 1] = null;
-                }
+                Game.sBlock[i] = Game.sBlock[i + 1];
+                Game.sBlock[i + 1] = null;
             }
+            else { }
         }
     }
 }
