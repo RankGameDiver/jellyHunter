@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class Heal : MonoBehaviour {
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    private int skillNum = 3;
 }

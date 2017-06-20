@@ -7,8 +7,17 @@ public class Game : MonoBehaviour
 
     GameObject[] skillBlocks = new GameObject[GameData.blockKinds];
 
-    [SerializeField]
-    public static GameObject[] sBlock = new GameObject[8]; // 블럭 7개를 배열로 선언해놓음
+    class SkillBlock // 미완
+    {
+        public static GameObject[] sBlock = new GameObject[8]; // 블럭 7개를 배열로 선언해놓음
+        public static int skillKind; // 스킬 종류
+
+        public void CreateBlock(int i, GameObject curretBlock, int index)
+        {
+            sBlock[i] = curretBlock;
+            skillKind = index;
+        }
+    }
     public GameObject[] checkBlock = new GameObject[8];
 
     private int deleteBlock;
@@ -27,22 +36,20 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        ClickBlock();
-        TouchBlock();
         BlockUpdate();
 
         if (delete == true)
             PullBlock();
 
         for (int i = 0; i < 7; i++)
-            checkBlock[i] = sBlock[i];
+            checkBlock[i] = SkillBlock.sBlock[i];
     }
 
     private void BlockUpdate() // 블럭 배열을 재배열함
     {
         for (int i = 0; i < GameData.blockCount; i++)
         {
-            if (sBlock[i] == null)
+            if (SkillBlock.sBlock[i] == null)
             {
                 if (delete == false)
                 {
@@ -51,14 +58,14 @@ public class Game : MonoBehaviour
                     Debug.Log(deleteBlock);
                     delete = true;
                 }
-                sBlock[i] = sBlock[i + 1];
-                sBlock[i + 1] = null;
+                SkillBlock.sBlock[i] = SkillBlock.sBlock[i + 1];
+                SkillBlock.sBlock[i + 1] = null;
             }
             else
             { }
         }
     }
-
+    
     IEnumerator LogicLoop()
     {
         while (true)
@@ -75,7 +82,8 @@ public class Game : MonoBehaviour
 
             curretBlock = Instantiate(skillBlocks[index], GameData.spawnPos, Quaternion.identity);
 
-            sBlock[GameData.blockCount] = curretBlock;
+            SkillBlock.sBlock[GameData.blockCount] = curretBlock; // 미완
+            SkillBlock.skillKind = index;
 
             GameData.blockCount += 1;
 
@@ -97,9 +105,9 @@ public class Game : MonoBehaviour
                 Debug.Log("deleteBlock");
                 for (int i = deleteBlock; i < 7; i++)
                 {
-                    if (sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
+                    if (SkillBlock.sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
                     {
-                        Block block = sBlock[i].GetComponent<Block>();
+                        Block block = SkillBlock.sBlock[i].GetComponent<Block>();
                         block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
                     }
                 }
@@ -108,41 +116,5 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void TouchBlock()
-    {
-        for (int i = 0; i < Input.touchCount; i++)
-        {
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            if (touchPos != null)
-            {
-                Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Ray2D ray = new Ray2D(clickPos, Vector2.zero);
-                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-                if (hit.collider != null)
-                {
-                    GameData.touchBlock = hit.collider.gameObject;
-                    Destroy(GameData.touchBlock);
-                    GameData.blockCount -= 1;
-                    GameData.checkTouchblock = true;
-                }
-            }
-        }
-    }
-
-    private void ClickBlock() // 테스트 전용 클릭함수
-    {      
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Ray2D ray = new Ray2D(clickPos, Vector2.zero);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider != null)
-            {
-                GameData.touchBlock = hit.collider.gameObject;
-                Destroy(GameData.touchBlock);
-                GameData.blockCount -= 1;
-                GameData.checkTouchblock = true;
-            }
-        }
-    }
+    
 }

@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    
-    
-    void Start ()
-    {
-        
-    }
-
     public void Create()
     {
         StartCoroutine(Move());
@@ -80,9 +73,5 @@ public class Block : MonoBehaviour
             transform.Translate((Vector2.right * speed).normalized / 4.0f);
             yield return null;
         }
-    }
-
-    
-
-    
+    } 
 }

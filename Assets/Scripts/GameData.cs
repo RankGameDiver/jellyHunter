@@ -47,9 +47,6 @@ public static class GameData
     public const int blockKinds = 3; // 블럭의 종류
     public const int blockAmount = 7; // 한번에 생성될 수 있는 블럭의 최대 개수
 
-    class SkillBlock // 블럭 클래스
-    {
-        private GameObject skillBlock;
-        private int skillNum;
-    }
+    public static int skillKind = 0; // 스킬 종류 구분
+
 }
