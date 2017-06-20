@@ -14,6 +14,7 @@ public static class GameData
 
     public static GameObject touchBlock; // 터치되는 블럭
 
+    public static int skillState;
 
     private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos);
 
@@ -45,4 +46,10 @@ public static class GameData
 
     public const int blockKinds = 3; // 블럭의 종류
     public const int blockAmount = 7; // 한번에 생성될 수 있는 블럭의 최대 개수
+
+    class SkillBlock // 블럭 클래스
+    {
+        private GameObject skillBlock;
+        private int skillNum;
+    }
 }
