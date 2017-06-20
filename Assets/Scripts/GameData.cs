@@ -10,7 +10,9 @@ public static class GameData
     const float spawnXpos = -8.0f;      //컴파일 타임 값이 정해짐
     const float spawnYpos = -3.0f;   //런타임에 값이 정해짐
 
-    public static bool touchblock = false; // 다른 블럭을 터치했을때 true(블럭이 사라졌을때 빈자리를 다른 블럭이 채우기 위함)
+    public static bool checkTouchblock = false; // 다른 블럭을 터치했을때 true(블럭이 사라졌을때 빈자리를 다른 블럭이 채우기 위함)
+
+    public static GameObject touchBlock; // 터치되는 블럭
 
 
     private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos);

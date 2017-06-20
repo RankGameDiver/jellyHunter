@@ -11,6 +11,9 @@ public class Game : MonoBehaviour
     public static GameObject[] sBlock = new GameObject[8]; // 블럭 7개를 배열로 선언해놓음
     public GameObject[] checkBlock = new GameObject[8];
 
+    private int deleteBlock;
+    private bool delete;
+
     void Start()
     {
         //ObjectPool
@@ -20,6 +23,7 @@ public class Game : MonoBehaviour
         skillBlocks[2] = Resources.Load<GameObject>("Prefabs/skill_3");
         StartCoroutine(LogicLoop());
         StartCoroutine(CheckLoop());
+        delete = false;
     }
 
     void Update()
@@ -28,6 +32,10 @@ public class Game : MonoBehaviour
         {
             checkBlock[i] = sBlock[i];
         }
+        ClickBlock();
+        TouchBlock();
+        BlockUpdate();
+        
     }
 
     IEnumerator LogicLoop()
@@ -71,19 +79,78 @@ public class Game : MonoBehaviour
 
     IEnumerator PullBlock()
     {
-        while (GameData.touchblock)
+        while (GameData.checkTouchblock)
         {
-            for (int i = 0; i < 7; i++)
+            Debug.Log(deleteBlock);
+            GameData.checkTouchblock = false;
+            for (int i = deleteBlock; i < 7; i++)
             {
                 if (sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
                 {
                     Block block = sBlock[i].GetComponent<Block>();
                     block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
                 }
+                
             }
-            GameData.touchblock = false;
+            delete = false;
             yield return null;
         }
         yield break;
+    }
+
+    private void BlockUpdate() // 블럭 배열을 재배열함
+    {
+        for (int i = 0; i < GameData.blockCount; i++)
+        {
+            if (sBlock[i] == null)
+            {
+                if (delete == false)
+                {
+                    Debug.Log("checkloop");
+                    deleteBlock = i;
+                    delete = true;
+                }
+                sBlock[i] = sBlock[i + 1];
+                sBlock[i + 1] = null;
+            }
+            else { }
+        }
+
+    }
+
+    private void TouchBlock()
+    {
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            if (touchPos != null)
+            {
+                Ray2D ray = new Ray2D(touchPos, Vector2.zero);
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+                if (hit.collider != null) // 수정 필요(blockCount)
+                {
+                    GameData.touchBlock = hit.collider.gameObject;
+                    GameData.blockCount -= 1;
+                    Destroy(GameData.touchBlock);
+                }
+            }
+        }
+    }
+
+    private void ClickBlock() // 테스트 전용 클릭함수
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Ray2D ray = new Ray2D(clickPos, Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+            if (hit.collider != null)
+            {
+                GameData.touchBlock = hit.collider.gameObject;
+                Destroy(GameData.touchBlock);
+                GameData.blockCount -= 1;
+                GameData.checkTouchblock = true;
+            }
+        }
     }
 }
