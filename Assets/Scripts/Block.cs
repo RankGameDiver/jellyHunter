@@ -74,7 +74,7 @@ public class Block : MonoBehaviour
         pullMoving = true;
         while (pullMoving)
         {
-            if (transform.position.x >= GameData.maxXPosition.x - count * 2.0f)
+            if (transform.position.x >= GameData.maxXPosition.x - (count + 1) * 2.0f)
                 pullMoving = false;
 
             transform.Translate((Vector2.right * speed).normalized / 4.0f);
