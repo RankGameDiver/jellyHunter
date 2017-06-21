@@ -1,11 +1,8 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UnityEngine;
 
-namespace Assets.Scripts
-{
-    class Defend
-    {
-    }
+public class Defend : MonoBehaviour {
+
+    private int skillNum = 2;
 }
