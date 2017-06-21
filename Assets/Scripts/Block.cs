@@ -15,10 +15,6 @@ public class Block : MonoBehaviour
             StartCoroutine(Pull(count));
     }
 
-    void Update()
-    {
-    }
-
     private float _speed = 5.0f;
     public float speed
     {
