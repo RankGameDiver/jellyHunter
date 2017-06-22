@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Touch : MonoBehaviour
 {
+    public static GameObject[] sBlock = new GameObject[8];
+
     void Update()
     {
         TouchBlock();
         ClickBlock();
+        for (int i = 0; i < 8; i++)
+        {
+            sBlock[i] = Game.sBlock[i];
+        }
     }
 
     private void TouchBlock()
@@ -41,8 +47,23 @@ public class Touch : MonoBehaviour
             if (hit.collider != null)
             {
                 GameData.touchBlock = hit.collider.gameObject;
-                Destroy(GameData.touchBlock);
-                GameData.blockCount -= 1;
+
+                for (int i = 0; i < GameData.blockCount; i++)
+                {
+                    if (sBlock[i] == GameData.touchBlock)
+                    {
+                        for (int j = i; j < GameData.blockCount; j++)
+                        {
+                            if (sBlock[j] == null)
+                                j = i + 5;
+                            else if (sBlock[i].GetComponent<Block>().skillNum == sBlock[j].GetComponent<Block>().skillNum)
+                            {
+                                Destroy(sBlock[j]);
+                                GameData.blockCount -= 1;
+                            }
+                        }
+                    }
+                }
                 GameData.checkTouchblock = true;
             }
         }

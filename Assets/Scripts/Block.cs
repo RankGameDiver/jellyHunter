@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public void Create()
+    public int skillNum; // 스킬 종류
+
+    public void MoveBlock()
     {
         StartCoroutine(Move());
     }
@@ -27,7 +29,7 @@ public class Block : MonoBehaviour
             _speed = value;
         }
     }
-	
+
     bool _isMoving; // 블럭이 생성된 후 움직임을 체크
 
     public bool isMoving
@@ -37,7 +39,7 @@ public class Block : MonoBehaviour
     }
 
     bool _pullMoving; // 한번 멈춘 블럭이 다시 움직이게함
-    
+
     public bool pullMoving
     {
         get { return _pullMoving; }
@@ -69,5 +71,5 @@ public class Block : MonoBehaviour
             transform.Translate((Vector2.right * speed).normalized / 4.0f);
             yield return null;
         }
-    } 
+    }
 }

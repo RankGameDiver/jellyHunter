@@ -7,17 +7,9 @@ public class Game : MonoBehaviour
 
     GameObject[] skillBlocks = new GameObject[GameData.blockKinds];
 
-    class SkillBlock // 미완
-    {
-        public static GameObject[] sBlock = new GameObject[8]; // 블럭 7개를 배열로 선언해놓음
-        public static int skillKind; // 스킬 종류
+    public static GameObject[] sBlock = new GameObject[8]; // 블럭 7개를 배열로 선언해놓음
+    public static int skillNum; // 스킬 종류
 
-        public void CreateBlock(int i, GameObject curretBlock, int index)
-        {
-            sBlock[i] = curretBlock;
-            skillKind = index;
-        }
-    }
     public GameObject[] checkBlock = new GameObject[8];
 
     private int deleteBlock;
@@ -42,30 +34,30 @@ public class Game : MonoBehaviour
             PullBlock();
 
         for (int i = 0; i < 7; i++)
-            checkBlock[i] = SkillBlock.sBlock[i];
+        {
+            checkBlock[i] = sBlock[i];
+        }
     }
 
     private void BlockUpdate() // 블럭 배열을 재배열함
     {
         for (int i = 0; i < GameData.blockCount; i++)
         {
-            if (SkillBlock.sBlock[i] == null)
-            {
+            if (sBlock[i] == null)
+            {              
                 if (delete == false)
                 {
-                    Debug.Log("checkloop");
                     deleteBlock = i;
-                    Debug.Log(deleteBlock);
                     delete = true;
                 }
-                SkillBlock.sBlock[i] = SkillBlock.sBlock[i + 1];
-                SkillBlock.sBlock[i + 1] = null;
+                sBlock[i] = sBlock[i + 1];
+                sBlock[i + 1] = null;
             }
             else
             { }
         }
     }
-    
+
     IEnumerator LogicLoop()
     {
         while (true)
@@ -82,14 +74,16 @@ public class Game : MonoBehaviour
 
             curretBlock = Instantiate(skillBlocks[index], GameData.spawnPos, Quaternion.identity);
 
-            SkillBlock.sBlock[GameData.blockCount] = curretBlock; // 미완
-            SkillBlock.skillKind = index;
+            sBlock[GameData.blockCount] = curretBlock;
+            
+            Block block = curretBlock.GetComponent<Block>();
+
+            skillNum = block.GetComponent<Block>().skillNum; // 스킬 종류 받아오기
+
+            block.MoveBlock();
 
             GameData.blockCount += 1;
 
-            Block block = curretBlock.GetComponent<Block>();
-
-            block.Create();
 
             yield return new WaitUntil(() => { return !block.isMoving; });//*
 
@@ -102,19 +96,18 @@ public class Game : MonoBehaviour
     {
         while (GameData.checkTouchblock)
         {
-                Debug.Log("deleteBlock");
-                for (int i = deleteBlock; i < 7; i++)
+            for (int i = deleteBlock; i < 7; i++)
+            {
+                if (sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
                 {
-                    if (SkillBlock.sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
-                    {
-                        Block block = SkillBlock.sBlock[i].GetComponent<Block>();
-                        block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
-                    }
+                    Block block = sBlock[i].GetComponent<Block>();
+                    block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
                 }
-                delete = false;
-                GameData.checkTouchblock = false;
+            }
+            delete = false;
+            GameData.checkTouchblock = false;
         }
     }
 
-    
+
 }
