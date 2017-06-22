@@ -52,16 +52,10 @@ public class Touch : MonoBehaviour
                 {
                     if (sBlock[i] == GameData.touchBlock)
                     {
-                        for (int j = i; j < GameData.blockCount; j++)
-                        {
-                            if (sBlock[j] == null)
-                                j = i + 5;
-                            else if (sBlock[i].GetComponent<Block>().skillNum == sBlock[j].GetComponent<Block>().skillNum)
-                            {
-                                Destroy(sBlock[j]);
-                                GameData.blockCount -= 1;
-                            }
-                        }
+                        Block block = sBlock[i].GetComponent<Block>();
+                        GameData.skillKind = block.skillNum;
+                        Destroy(sBlock[i]);
+                        GameData.blockCount -= 1;
                     }
                 }
                 GameData.checkTouchblock = true;

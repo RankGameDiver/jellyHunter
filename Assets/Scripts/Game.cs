@@ -78,12 +78,9 @@ public class Game : MonoBehaviour
             
             Block block = curretBlock.GetComponent<Block>();
 
-            skillNum = block.GetComponent<Block>().skillNum; // 스킬 종류 받아오기
-
             block.MoveBlock();
 
             GameData.blockCount += 1;
-
 
             yield return new WaitUntil(() => { return !block.isMoving; });//*
 
@@ -98,7 +95,7 @@ public class Game : MonoBehaviour
         {
             for (int i = deleteBlock; i < 7; i++)
             {
-                if (sBlock[i] != null) // 이부분 수정 필요(null이 아닌곳부터 움직이면 2번째 블럭이 사라졌을때 앞에 블럭까지 적용됨)
+                if (sBlock[i] != null)
                 {
                     Block block = sBlock[i].GetComponent<Block>();
                     block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
