@@ -5,16 +5,11 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     public int skillNum; // 스킬 종류
+    public int blockNum; // 블럭의 배열 순서
 
-    public void MoveBlock()
+    public void MoveBlock(int count)
     {
-        StartCoroutine(Move());
-    }
-
-    public void PullBlock(int count)
-    {
-        if (isMoving == false)
-            StartCoroutine(Pull(count));
+        StartCoroutine(Move(count));
     }
 
     private float _speed = 5.0f;
@@ -38,38 +33,24 @@ public class Block : MonoBehaviour
         private set { _isMoving = value; }
     }
 
-    bool _pullMoving; // 한번 멈춘 블럭이 다시 움직이게함
-
-    public bool pullMoving
+    IEnumerator Move(int count)
     {
-        get { return _pullMoving; }
-        private set { _pullMoving = value; }
-    }
-
-    IEnumerator Move()
-    {
-        isMoving = true;
-        while (isMoving)
+        if (isMoving == false)
         {
-            if (transform.position.x >= GameData.maxXPosition.x - GameData.blockCount * 2.0f)
+            isMoving = true;
+            while (isMoving)
             {
-                isMoving = false;
+                if (transform.position.x >= GameData.maxXPosition.x - (count + 1) * 2.0f)
+                {
+                    isMoving = false;
+                }
+                transform.Translate((Vector2.right * speed).normalized / 4.0f);
+                yield return null;
             }
-            transform.Translate((Vector2.right * speed).normalized / 4.0f);
-            yield return null;
         }
-    }
-
-    IEnumerator Pull(int count)
-    {
-        pullMoving = true;
-        while (pullMoving)
+        else // 움직이고 있는 블럭은 여기로 들어옴 //  미완성
         {
-            if (transform.position.x >= GameData.maxXPosition.x - (count + 1) * 2.0f)
-                pullMoving = false;
 
-            transform.Translate((Vector2.right * speed).normalized / 4.0f);
-            yield return null;
         }
     }
 }

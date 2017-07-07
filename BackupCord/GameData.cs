@@ -14,6 +14,8 @@ public static class GameData
 
     public static GameObject touchBlock; // 터치되는 블럭
 
+    public static int skillState;
+
     private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos);
 
     public static Vector2 spawnPos

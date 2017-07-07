@@ -12,7 +12,7 @@ public class Game : MonoBehaviour
 
     public GameObject[] checkBlock = new GameObject[8];
 
-    private int deleteBlock; // 지워진 블럭의 배열 값
+    private int deleteBlock;
     private bool delete;
 
     void Start()
@@ -30,6 +30,9 @@ public class Game : MonoBehaviour
     {
         BlockUpdate();
 
+        if (delete == true)
+            PullBlock();
+
         for (int i = 0; i < 7; i++)
         {
             checkBlock[i] = sBlock[i];
@@ -38,10 +41,10 @@ public class Game : MonoBehaviour
 
     private void BlockUpdate() // 블럭 배열을 재배열함
     {
-        for (int i = 0; i < GameData.blockCount; i++) // 지워진 블럭의 배열값을 delete안에 넣고 배열을 당겨준다
+        for (int i = 0; i < GameData.blockCount; i++)
         {
             if (sBlock[i] == null)
-            {
+            {              
                 if (delete == false)
                 {
                     deleteBlock = i;
@@ -50,16 +53,8 @@ public class Game : MonoBehaviour
                 sBlock[i] = sBlock[i + 1];
                 sBlock[i + 1] = null;
             }
-        }
-        if (delete == true) // PullBlock 넣을 자리
-        {
-            Block block = null;
-            for (int i = deleteBlock; i < GameData.blockCount; i++)
-            {
-                block = sBlock[i].GetComponent<Block>();
-                block.MoveBlock(i);
-            }
-            delete = false;
+            else
+            { }
         }
     }
 
@@ -83,7 +78,7 @@ public class Game : MonoBehaviour
             
             Block block = curretBlock.GetComponent<Block>();
 
-            block.MoveBlock(GameData.blockCount);
+            block.MoveBlock();
 
             GameData.blockCount += 1;
 
@@ -93,5 +88,23 @@ public class Game : MonoBehaviour
 
         yield break;    //코루틴 종료시키는 코드
     }
+
+    public void PullBlock()
+    {
+        while (GameData.checkTouchblock)
+        {
+            for (int i = deleteBlock; i < 7; i++)
+            {
+                if (sBlock[i] != null)
+                {
+                    Block block = sBlock[i].GetComponent<Block>();
+                    block.PullBlock(i); // i는 지워진 블럭 바로 다음 블럭의 배열
+                }
+            }
+            delete = false;
+            GameData.checkTouchblock = false;
+        }
+    }
+
 
 }
