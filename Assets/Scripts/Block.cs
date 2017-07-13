@@ -45,12 +45,9 @@ public class Block : MonoBehaviour
                     isMoving = false;
                 }
                 transform.Translate((Vector2.right * speed).normalized / 4.0f);
+                count = blockNum;
                 yield return null;
             }
-        }
-        else // 움직이고 있는 블럭은 여기로 들어옴 //  미완성
-        {
-
         }
     }
 }

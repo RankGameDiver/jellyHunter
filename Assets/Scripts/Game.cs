@@ -40,6 +40,7 @@ public class Game : MonoBehaviour
     {
         for (int i = 0; i < GameData.blockCount; i++) // 지워진 블럭의 배열값을 delete안에 넣고 배열을 당겨준다
         {
+            Block block = null;
             if (sBlock[i] == null)
             {
                 if (delete == false)
@@ -48,6 +49,8 @@ public class Game : MonoBehaviour
                     delete = true;
                 }
                 sBlock[i] = sBlock[i + 1];
+                block = sBlock[i].GetComponent<Block>();
+                block.blockNum -= 1;
                 sBlock[i + 1] = null;
             }
         }
@@ -84,6 +87,8 @@ public class Game : MonoBehaviour
             Block block = curretBlock.GetComponent<Block>();
 
             block.MoveBlock(GameData.blockCount);
+
+            block.blockNum = GameData.blockCount;
 
             GameData.blockCount += 1;
 
