@@ -50,9 +50,18 @@ public class Touch : MonoBehaviour
 
                 for (int i = 0; i < GameData.blockCount; i++)
                 {
-                    if (sBlock[i] == GameData.touchBlock)
+                    if (sBlock[i] == GameData.touchBlock) // 클릭한 블럭 1개 제거
                     {
                         Block block = sBlock[i].GetComponent<Block>();
+                        //for (int j = 1; j <= 2; j++)
+                        //{
+                        //    Block CBlock = sBlock[i + j].GetComponent<Block>();
+                        //    if (CBlock.skillNum == block.skillNum)
+                        //    {
+                        //        Destroy(sBlock[i + j]);
+                        //        GameData.blockCount -= 1;
+                        //    }
+                        //}
                         GameData.skillKind = block.skillNum;
                         Destroy(sBlock[i]);
                         GameData.blockCount -= 1;
