@@ -47,28 +47,44 @@ public class Touch : MonoBehaviour
             if (hit.collider != null)
             {
                 GameData.touchBlock = hit.collider.gameObject;
-
-                for (int i = 0; i < GameData.blockCount; i++)
-                {
-                    if (sBlock[i] == GameData.touchBlock) // 클릭한 블럭 1개 제거
-                    {
-                        Block block = sBlock[i].GetComponent<Block>();
-                        //for (int j = 1; j <= 2; j++)
-                        //{
-                        //    Block CBlock = sBlock[i + j].GetComponent<Block>();
-                        //    if (CBlock.skillNum == block.skillNum)
-                        //    {
-                        //        Destroy(sBlock[i + j]);
-                        //        GameData.blockCount -= 1;
-                        //    }
-                        //}
-                        GameData.skillKind = block.skillNum;
-                        Destroy(sBlock[i]);
-                        GameData.blockCount -= 1;
-                    }
-                }
-                GameData.checkTouchblock = true;
+                Deleting();
             }
         }
     }
+
+    private void Deleting()
+    {
+        for (int i = 0; i < GameData.blockCount; i++) // 생성되어 있는 블럭만큼 반복
+        {
+            if (sBlock[i] == GameData.touchBlock) // sBlock[i]와 터치된 블럭이 같으면 실행
+            {
+                Block block = sBlock[i].GetComponent<Block>();
+                if (i != GameData.blockCount) // 가장 최근에 생긴 블럭을 제외한 다른 블럭을 터치했을때
+                {
+                    GameData.otherBlock = 0;
+                    for (int j = 1; j <= GameData.blockCount - i - 1; j++)
+                    {
+                        Block CBlock = sBlock[i + j].GetComponent<Block>();                      
+                        if (CBlock.skillNum == block.skillNum)
+                        {
+                            Destroy(sBlock[i + j]);
+                            GameData.blockCount -= 1;
+                        }
+                        else
+                        {
+                            GameData.otherBlock = i + j - 1;
+                        }
+                    }
+                    if (GameData.otherBlock == 0)
+                        GameData.otherBlock = GameData.blockCount - 1;
+                }
+                GameData.skillKind = block.skillNum;
+                Destroy(sBlock[i]);
+                GameData.blockCount -= 1;
+            }
+        }
+        GameData.checkTouchblock = true;
+    }
 }
+
+
