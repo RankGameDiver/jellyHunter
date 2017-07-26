@@ -48,12 +48,14 @@ public class Game : MonoBehaviour
                     deleteBlock = i;
                     delete = true;
                 }
-                Debug.Log(GameData.otherBlock);
-                Debug.Log(i);
-                sBlock[i] = sBlock[GameData.otherBlock];
-                block = sBlock[i].GetComponent<Block>();
-                block.blockNum -= GameData.otherBlock - i;
-                sBlock[GameData.otherBlock] = null;
+                for (int j = 0; i + j < GameData.blockCount; j++)
+                {
+                    Debug.Log(GameData.otherBlock);
+                    sBlock[i + j] = sBlock[GameData.otherBlock - i + j];
+                    block = sBlock[i + j].GetComponent<Block>();
+                    block.blockNum -= (GameData.otherBlock - i);
+                    sBlock[GameData.otherBlock - i + j] = null;
+                }
             }
         }
         if (delete == true) // PullBlock 넣을 자리

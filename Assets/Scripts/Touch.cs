@@ -59,28 +59,37 @@ public class Touch : MonoBehaviour
             if (sBlock[i] == GameData.touchBlock) // sBlock[i]와 터치된 블럭이 같으면 실행
             {
                 Block block = sBlock[i].GetComponent<Block>();
-                if (i != GameData.blockCount) // 가장 최근에 생긴 블럭을 제외한 다른 블럭을 터치했을때
+                GameData.otherBlock = i + 1;
+                int j = i + 1;
+                while (j <= GameData.blockCount)
                 {
-                    GameData.otherBlock = 0;
-                    for (int j = 1; j <= GameData.blockCount - i - 1; j++)
+                    if (sBlock[j] != null)
                     {
-                        Block CBlock = sBlock[i + j].GetComponent<Block>();                      
-                        if (CBlock.skillNum == block.skillNum)
+                        Block CBlock = sBlock[j].GetComponent<Block>();
+                        if (block.skillNum == CBlock.skillNum)
                         {
-                            Destroy(sBlock[i + j]);
-                            GameData.blockCount -= 1;
+                            GameData.otherBlock += 1;
+                            Destroy(sBlock[j]);
                         }
                         else
                         {
-                            GameData.otherBlock = i + j - 1;
+                            j = GameData.blockCount;
                         }
                     }
-                    if (GameData.otherBlock == 0)
-                        GameData.otherBlock = GameData.blockCount - 1;
+
+                    if (GameData.otherBlock >= 5)
+                    {
+                        j = GameData.blockCount;
+                    }
+                    j++;
                 }
                 GameData.skillKind = block.skillNum;
+                for (int temp = i; temp < GameData.otherBlock; temp++)
+                {
+                    Destroy(sBlock[temp]);
+                }
                 Destroy(sBlock[i]);
-                GameData.blockCount -= 1;
+                GameData.blockCount -= GameData.otherBlock;
             }
         }
         GameData.checkTouchblock = true;
