@@ -49,4 +49,6 @@ public static class GameData
     public static int skillKind = 0; // 스킬 종류 구분
     public static int otherBlock; // 스킬 체인시 다른 종류의 블럭의 배열값 저장
 
+    public static int tempBlock; // 스킬 체인시 사라지는 블럭의 개수를 저장
+
 }

@@ -6,6 +6,8 @@ public class Touch : MonoBehaviour
 {
     public static GameObject[] sBlock = new GameObject[8];
 
+    
+
     void Update()
     {
         TouchBlock();
@@ -84,11 +86,12 @@ public class Touch : MonoBehaviour
                     j++;
                 }
                 GameData.skillKind = block.skillNum;
+                GameData.tempBlock = 0;
                 for (int temp = i; temp < GameData.otherBlock; temp++)
                 {
                     Destroy(sBlock[temp]);
+                    GameData.tempBlock++;
                 }
-                Destroy(sBlock[i]);
                 GameData.blockCount -= GameData.otherBlock;
             }
         }
