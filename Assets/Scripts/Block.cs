@@ -4,8 +4,28 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [SerializeField]
+    Sprite[] skillImg;
+    SpriteRenderer blockSprite;
+
     public int skillNum; // 스킬 종류
     public int blockNum; // 블럭의 배열 순서
+    public int tempBlockNum; // 대기중인 블럭 순서
+
+    void Start()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        int index = Random.Range(0, GameData.blockKinds);
+        blockSprite = GetComponent<SpriteRenderer>();
+        skillNum = index;
+        Vector2 pos = GameData.spawnPos;
+        blockNum = GameData.blockCount;
+        GameData.blockCount++;
+    }
 
     public void MoveBlock(int count)
     {
@@ -26,7 +46,6 @@ public class Block : MonoBehaviour
     }
 
     bool _isMoving; // 블럭이 생성된 후 움직임을 체크
-
     public bool isMoving
     {
         get { return _isMoving; }
@@ -40,12 +59,11 @@ public class Block : MonoBehaviour
             isMoving = true;
             while (isMoving)
             {
-                if (transform.position.x >= GameData.maxXPosition.x - (count + 1) * 2.0f)
+                if (transform.position.x > GameData.maxPos.x - blockNum * 1.9f)
                 {
                     isMoving = false;
                 }
                 transform.Translate((Vector2.right * speed).normalized / 4.0f);
-                count = blockNum;
                 yield return null;
             }
         }

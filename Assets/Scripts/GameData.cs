@@ -2,13 +2,13 @@
 
 public static class GameData
 {
-    public static float maxXPos = 8.0f; // 블럭이 이동할 수 있는 최대 x좌표
-    public static float maxYPos = -3.0f; // 블럭이 이동할 수 있는 최대 y좌표
+    const float maxXPos = 6.5f; // 블럭이 이동할 수 있는 최대 x좌표
+    const float maxYPos = -3.05f; // 블럭이 이동할 수 있는 최대 y좌표
     public static int blockCount = 0;   // 현재 나와있는 블럭의 개수
 
     // 블럭 생성 좌표
-    const float spawnXpos = -7.0f;      //컴파일 타임 값이 정해짐
-    const float spawnYpos = -3.0f;   //런타임에 값이 정해짐
+    const float spawnXpos = -6.5f;      //컴파일 타임 값이 정해짐
+    const float spawnYpos = -3.05f;   //런타임에 값이 정해짐
 
     public static bool checkTouchblock = false; // 다른 블럭을 터치했을때 true(블럭이 사라졌을때 빈자리를 다른 블럭이 채우기 위함)
 
@@ -28,17 +28,17 @@ public static class GameData
         }
     }
 
-    public static Vector2 _maxXPosition = new Vector2(maxXPos, maxYPos);
+    public static Vector2 _maxPos = new Vector2(maxXPos, maxYPos);
 
-    public static Vector2 maxXPosition
+    public static Vector2 maxPos
     {
         get
         {
-            return _maxXPosition;
+            return _maxPos;
         }
         private set
         {
-            _maxXPosition = value;
+            _maxPos = value;
         }
     }
 
@@ -50,5 +50,9 @@ public static class GameData
     public static int otherBlock; // 스킬 체인시 다른 종류의 블럭의 배열값 저장
 
     public static int tempBlock; // 스킬 체인시 사라지는 블럭의 개수를 저장
+
+    public static int skill_1;
+    public static int skill_2;
+    public static int skill_3;
 
 }

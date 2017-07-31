@@ -6,7 +6,8 @@ public class Touch : MonoBehaviour
 {
     public static GameObject[] sBlock = new GameObject[8];
 
-    
+    private int deleteBlock; // 지워진 블럭의 배열 값
+    //private bool delete = false;
 
     void Update()
     {
@@ -86,12 +87,25 @@ public class Touch : MonoBehaviour
                     j++;
                 }
                 GameData.skillKind = block.skillNum;
-                GameData.tempBlock = 0;
+                GameData.tempBlock = GameData.otherBlock - i;
                 for (int temp = i; temp < GameData.otherBlock; temp++)
                 {
                     Destroy(sBlock[temp]);
-                    GameData.tempBlock++;
+                    Block arrBlock = null;
+                    sBlock[temp] = sBlock[GameData.otherBlock + temp];
+                    arrBlock = sBlock[temp].GetComponent<Block>();
+                    arrBlock.blockNum -= GameData.tempBlock;
                 }
+
+                
+                for (int temp = deleteBlock; temp < GameData.blockCount; temp++)
+                {
+                    Block tblock = null;
+                    tblock = sBlock[temp].GetComponent<Block>();
+                    tblock.MoveBlock(temp);
+                }
+
+
                 GameData.blockCount -= GameData.otherBlock;
             }
         }
