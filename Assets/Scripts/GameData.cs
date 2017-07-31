@@ -51,8 +51,6 @@ public static class GameData
 
     public static int tempBlock; // 스킬 체인시 사라지는 블럭의 개수를 저장
 
-    public static int skill_1;
-    public static int skill_2;
-    public static int skill_3;
+    public static int chainPower = 0; // 체인된 블럭의 개수
 
 }

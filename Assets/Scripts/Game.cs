@@ -3,21 +3,29 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    public static GameObject[] sBlock = new GameObject[8];
+    public GameObject[] sBlock;
     public GameObject currentBlock;
 
     void Start()
     {
         StartCoroutine(LogicLoop());
-        GameData.skill_1 = 0;
-        GameData.skill_2 = 0;
-        GameData.skill_3 = 0;
     }
 
     void Update()
     {
 
-    } 
+    }
+
+    public void OnAct() // 오브젝트 활성화
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void OffAct() // 오브젝트 비활성화
+    {
+        gameObject.SetActive(false);
+        GameData.blockCount--;
+    }
 
     IEnumerator LogicLoop()
     {
@@ -41,17 +49,6 @@ public class Game : MonoBehaviour
         }
 
         yield break;    //코루틴 종료시키는 코드
-    }
-
-    public void OnAct()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void OffAct()
-    {
-        gameObject.SetActive(false);
-        GameData.blockCount--;
     }
 
 }

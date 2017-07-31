@@ -9,15 +9,9 @@ public class Block : MonoBehaviour
     SpriteRenderer blockSprite;
 
     public int skillNum; // 스킬 종류
-    public int blockNum; // 블럭의 배열 순서
-    public int tempBlockNum; // 대기중인 블럭 순서
+    public int blockNum; // 활성화 상태일 때 블럭의 순서
 
     void Start()
-    {
-        Init();
-    }
-
-    public void Init()
     {
         int index = Random.Range(0, GameData.blockKinds);
         blockSprite = GetComponent<SpriteRenderer>();
