@@ -14,7 +14,7 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-
+        UsingBlock();
     }
 
     public void OnAct() // 오브젝트 활성화
@@ -25,21 +25,11 @@ public class Game : MonoBehaviour
             {
                 sBlock[i].SetActive(true);
                 sBlock[i].transform.position = (GameData.spawnPos);
-                currentBlock = sBlock[i] ;
+                currentBlock = sBlock[i];
+                cBlock[i].Init();
                 return;
             }
         }
-    }
-
-    public void OffAct() // 오브젝트 비활성화
-    {
-        gameObject.SetActive(false);
-        GameData.blockCount--;
-    }
-
-    private void OnMouseDown()
-    {
-        Debug.Log(gameObject);
     }
 
     IEnumerator LogicLoop()
@@ -52,7 +42,7 @@ public class Game : MonoBehaviour
     }
     IEnumerator Create()
     {
-        if (GameData.blockCount < 7)
+        if (GameData.blockCount < GameData.blockAmount)
         {
             OnAct();
 
@@ -60,13 +50,40 @@ public class Game : MonoBehaviour
             {
                 if (currentBlock == sBlock[i])
                 {
-                    cBlock[i].MoveBlock(GameData.blockCount);
+                    cBlock[i].MoveBlock();
                     yield return new WaitUntil(() => { return !cBlock[i].isMoving; });//*
                 }
             }
         }
 
         yield break;    //코루틴 종료시키는 코드
+    }
+
+    public void UsingBlock()
+    {
+        if (GameData.touchBlock != null)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                if (GameData.touchBlock == sBlock[i])
+                {
+                    int temp = cBlock[i].blockNum + 1;
+                    for (int j=0; j < 7; j++)
+                    {
+                        for (int a = 0; a < 7; a++)
+                        {
+                            if (cBlock[a].blockNum == temp)
+                            {
+                                cBlock[a].blockNum--;
+                                cBlock[a].MoveBlock();
+                                temp++;
+                            }
+                        } 
+                    }
+                }
+            }
+            GameData.touchBlock = null;
+        }
     }
 
 }

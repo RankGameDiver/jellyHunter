@@ -7,23 +7,32 @@ public class Block : MonoBehaviour
     [SerializeField]
     Sprite[] skillImg;
     SpriteRenderer blockSprite;
+    public GameObject game;
 
     public int skillNum; // 스킬 종류
     public int blockNum; // 활성화 상태일 때 블럭의 순서
 
-    void Start()
+    public void Init()
     {
         int index = Random.Range(0, GameData.blockKinds);
         blockSprite = GetComponent<SpriteRenderer>();
+        blockSprite.sprite = skillImg[index];
         skillNum = index;
         Vector2 pos = GameData.spawnPos;
+        Debug.Log(GameData.blockCount);
         blockNum = GameData.blockCount;
         GameData.blockCount++;
     }
 
-    public void MoveBlock(int count)
+    public void OffAct() // 오브젝트 비활성화
     {
-        StartCoroutine(Move(count));
+        gameObject.SetActive(false);
+        GameData.blockCount--;
+    }
+
+    public void MoveBlock()
+    {
+        StartCoroutine(Move());
     }
 
     private float _speed = 5.0f;
@@ -46,14 +55,14 @@ public class Block : MonoBehaviour
         private set { _isMoving = value; }
     }
 
-    IEnumerator Move(int count)
+    IEnumerator Move() // 생성할때
     {
         if (isMoving == false)
         {
             isMoving = true;
             while (isMoving)
             {
-                if (transform.position.x > GameData.maxPos.x - blockNum * 1.9f)
+                if (transform.position.x > GameData.maxPos.x - blockNum * 2.0f)
                 {
                     isMoving = false;
                 }
@@ -62,4 +71,11 @@ public class Block : MonoBehaviour
             }
         }
     }
+
+    private void OnMouseDown()
+    {
+        GameData.touchBlock = gameObject;
+        OffAct();
+    }
+
 }
