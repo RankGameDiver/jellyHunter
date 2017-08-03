@@ -47,7 +47,5 @@ public static class GameData
 
     public static int lastSkillKind = 0; // 전에 쓴 스킬 종류
     public static int skillKind = 0; // 스킬 종류 구분
-    public static int otherBlock; // 스킬 체인시 다른 종류의 블럭의 배열값 저장
-    public static int chainPower = 0; // 체인된 블럭의 개수
 
 }

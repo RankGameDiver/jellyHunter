@@ -12,6 +12,8 @@ public class Block : MonoBehaviour
     public int skillNum; // 스킬 종류
     public int blockNum; // 활성화 상태일 때 블럭의 순서
 
+    public bool chaining = false; // 터치한 블럭에 대해서 체인인 상태이면 true, 아니면 false
+
     public void Init()
     {
         int index = Random.Range(0, GameData.blockKinds);
