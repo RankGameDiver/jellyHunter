@@ -44,7 +44,7 @@ public class Game : MonoBehaviour
                 obj.SetActive(false);
                 GameData.blockCount--;
                 block.blockNum--;
-                block.chaining = false;
+                block.chaining = true;
             }
         }
     }
@@ -100,25 +100,30 @@ public class Game : MonoBehaviour
             {
                 if (GameData.touchBlock == sBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    int tempNum = cBlock[i].blockNum + 1;
+                    int tempNum = cBlock[i].blockNum;
                     //chainCheck(i);
-                    for (int j = 0; j < 7; j++)
+
+                    while (tempNum < 7)
                     {
-                        for (int a = 0; a < 7; a++)
+                        int j = 0;
+                        if (cBlock[j].blockNum == tempNum)
                         {
-                            if (cBlock[a].blockNum == tempNum)
+                            if (cBlock[j].chaining)
                             {
-                                if (cBlock[a].chaining)
-                                    OffAct(sBlock[a]);
-                                else
-                                {
-                                    cBlock[a].blockNum -= (1 + chainCount);
-                                    cBlock[a].MoveBlock();
-                                }
-                                tempNum++;
+                                Debug.Log("OffAct");
+                                OffAct(sBlock[j]);
+                                j++;
                             }
+                            else
+                            {
+                                cBlock[j].blockNum -= (1 + chainCount);
+                                cBlock[j].MoveBlock();
+                                j++;
+                            }
+                            tempNum++;
                         }
                     }
+
                 }
             }
             // 비활성화 된 블럭들의 blockNum값을 조절
@@ -128,6 +133,7 @@ public class Game : MonoBehaviour
                 if (!sBlock[i].activeInHierarchy)
                 {
                     block = sBlock[i].GetComponent<Block>();
+                    block.chaining = false;
                     block.blockNum = 10;
                 }
             }
