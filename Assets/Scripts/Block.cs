@@ -21,7 +21,6 @@ public class Block : MonoBehaviour
         blockSprite.sprite = skillImg[index];
         skillNum = index;
         Vector2 pos = GameData.spawnPos;
-        Debug.Log(GameData.blockCount);
         blockNum = GameData.blockCount;
         GameData.blockCount++;
     }
