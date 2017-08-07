@@ -12,7 +12,11 @@ public class Game : MonoBehaviour
     void Start()
     {
         StartCoroutine(CreateBlockLoop());
-        StartCoroutine(TouchLoop());
+    }
+
+    void Update()
+    {
+        UsingBlock();
     }
 
     public void OnAct() // 오브젝트 활성화
@@ -30,19 +34,10 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void OffAct(GameObject obj) // 오브젝트 비활성화
+    public void OffAct(int i) // 오브젝트 비활성화
     {
-        Block block = obj.GetComponent<Block>();
-        for (int i = 0; i < 7; i++)
-        {
-            if (block == cBlock[i])
-            {
-                obj.SetActive(false);
-                GameData.blockCount--;
-                block.blockNum--;
-                block.chaining = true;
-            }
-        }
+        sBlock[i].SetActive(false);
+        GameData.blockCount--;
     }
 
     IEnumerator CreateBlockLoop()
@@ -72,55 +67,50 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    IEnumerator TouchLoop()
-    {
-        while (true)
-            yield return UsingBlock();
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
     public void chainCheck(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭의 위치값, count는 현재 활성화된 블럭의 개수
     {
-        Block block;
-
-        for (int i = 0; i < GameData.blockCount; i++)
+        int i = temp; // 현재 반복문에서 돌고있는 블럭의 위치
+        int j = cBlock[temp].blockNum; // 다음 블럭이 가져야 하는 blockNum값(blockNum은 배열이라 0부터 시작)
+        int blockCount = GameData.blockCount;
+        while (j < blockCount) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
-            for (int j = 0; j < GameData.blockCount;)
+            if (cBlock[i].blockNum == j) //*
             {
-                block = cBlock[j];
-                if (block.skillNum == cBlock[temp].skillNum)
+                if (cBlock[i].skillNum == cBlock[temp].skillNum)
                 {
-                    block.chaining = true;
                     chainCount++;
-                    GameData.blockCount--;
-                    j++;
+                    OffAct(i);
                 }
                 else
-                {
                     j += 7;
-                }
+                i = cBlock[temp].blockNum;
+                j++;
             }
+            else
+                i++;
         }
     }
 
-    public void BlockNum() // 비활성화 된 블럭들의 blockNum값을 조절
-    {     
-        Block block;
+    public void BlockNum(int temp) // 비활성화 된 블럭들의 blockNum값을 조절
+    {
+        int blockNum = cBlock[temp].blockNum;
         for (int i = 0; i < 7; i++)
         {
             if (!sBlock[i].activeInHierarchy)
+            {             
+                cBlock[i].blockNum = 10;
+            }
+            else if(sBlock[i].activeInHierarchy && cBlock[i].blockNum > blockNum)
             {
-                block = sBlock[i].GetComponent<Block>();
-                block.chaining = false;
-                block.blockNum = 10;
+                cBlock[i].blockNum -= chainCount;
+                cBlock[i].MoveBlock();
             }
         }
         chainCount = 0;
         GameData.touchBlock = null;
     }
 
-    IEnumerator UsingBlock() // 블럭이 사용되어질때
+    public void UsingBlock() // 블럭이 사용되어질때
     {
         if (GameData.touchBlock != null) // 무언가 터치되었을때 실행
         {
@@ -128,36 +118,14 @@ public class Game : MonoBehaviour
             {
                 if (GameData.touchBlock == sBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    int tempNum = cBlock[i].blockNum;
                     chainCheck(i);
-
-                    for (int j = 0; j < GameData.blockCount; j++)
-                    {
-                        for (int temp = tempNum; temp < GameData.blockCount; temp++)
-                        {
-                            if (cBlock[j].blockNum == temp)
-                            {
-                                Debug.Log("check");
-                                if (cBlock[j].chaining == true)
-                                {
-                                    OffAct(sBlock[j]);
-                                }
-                                else
-                                {
-                                    cBlock[j].blockNum -= chainCount;
-                                    cBlock[j].MoveBlock();
-                                }
-                                temp++;
-                                j -= j;
-                            }
-                        }
-                    }
-
+                    BlockNum(i);
                 }
             }
-            BlockNum();
         }
-        yield break;
     }
 
 }
+
+
+
