@@ -67,14 +67,55 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    public void chainCheck(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭의 위치값, count는 현재 활성화된 블럭의 개수
+    public void chainCheckR(int temp) // 미완
     {
         int i = temp; // 현재 반복문에서 돌고있는 블럭의 위치
         int j = cBlock[temp].blockNum; // 다음 블럭이 가져야 하는 blockNum값(blockNum은 배열이라 0부터 시작)
         int blockCount = GameData.blockCount;
-        while (j < blockCount) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
+        while (j > 0 && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
-            if (cBlock[i].blockNum == j) //*
+            if (i <= 0)
+            {
+                i = blockCount;
+                j--;
+            }
+
+            if (cBlock[i].blockNum == j)
+            {
+                if (cBlock[i].skillNum == cBlock[temp].skillNum)
+                {
+                    if (sBlock[i] == sBlock[temp])
+                    { }
+                    else
+                    {
+                        chainCount++;
+                        OffAct(i);
+                    }
+                }
+                else
+                    j -= 7;
+                i = blockCount;
+                j--;
+            }
+            else
+                i--;
+        }
+    }
+
+    public void chainCheckL(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭의 위치값, count는 현재 활성화된 블럭의 개수
+    {
+        int i = temp; // 현재 반복문에서 돌고있는 블럭의 위치
+        int j = cBlock[temp].blockNum; // 다음 블럭이 가져야 하는 blockNum값(blockNum은 배열이라 0부터 시작)
+        int blockCount = GameData.blockCount;
+        while (j < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
+        {
+            if (i >= 8)
+            {
+                i = 0;
+                j++;
+            }
+
+            if (cBlock[i].blockNum == j) // cBlock[i]의 활성화된 순서가 j와 같을때
             {
                 if (cBlock[i].skillNum == cBlock[temp].skillNum)
                 {
@@ -83,7 +124,7 @@ public class Game : MonoBehaviour
                 }
                 else
                     j += 7;
-                i = cBlock[temp].blockNum;
+                i = 0;
                 j++;
             }
             else
@@ -118,7 +159,8 @@ public class Game : MonoBehaviour
             {
                 if (GameData.touchBlock == sBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    chainCheck(i);
+                    //chainCheckR(i);
+                    chainCheckL(i);
                     BlockNum(i);
                 }
             }
