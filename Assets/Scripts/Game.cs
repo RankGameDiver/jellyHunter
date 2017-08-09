@@ -67,68 +67,66 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    public void chainCheckR(int temp) // 미완
+    public void chainCheck(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
     {
-        int i = temp; // 현재 반복문에서 돌고있는 블럭의 위치
-        int j = cBlock[temp].blockNum; // 다음 블럭이 가져야 하는 blockNum값(blockNum은 배열이라 0부터 시작)
+        int currentBlock = temp; // 현재 반복문에서 돌고있는 블럭
+        int nextBlockNum = cBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
         int blockCount = GameData.blockCount;
-        while (j > 0 && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
-        {
-            if (i <= 0)
-            {
-                i = blockCount;
-                j--;
-            }
 
-            if (cBlock[i].blockNum == j)
+        bool checkRight = true;
+
+        while (checkRight)
+        {           
+            for (int i = 0; i < 7; i++)
             {
-                if (cBlock[i].skillNum == cBlock[temp].skillNum)
+                for (int j = 0; j < 7; j++)
                 {
-                    if (sBlock[i] == sBlock[temp])
-                    { }
+                    if (!sBlock[j].activeInHierarchy) { }
                     else
                     {
-                        chainCount++;
-                        OffAct(i);
+                        if (nextBlockNum - 1 == cBlock[j].blockNum)
+                        {
+                            if (cBlock[temp].skillNum == cBlock[j].skillNum)
+                            {
+                                currentBlock = j;
+                                nextBlockNum--;
+                            }
+                            else
+                            {
+                                checkRight = false;
+                            }
+                        }
+                        else { }
                     }
+                    
                 }
-                else
-                    j -= 7;
-                i = blockCount;
-                j--;
             }
-            else
-                i--;
+            checkRight = false;
         }
-    }
+        Debug.Log(nextBlockNum);
 
-    public void chainCheckL(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭의 위치값, count는 현재 활성화된 블럭의 개수
-    {
-        int i = temp; // 현재 반복문에서 돌고있는 블럭의 위치
-        int j = cBlock[temp].blockNum; // 다음 블럭이 가져야 하는 blockNum값(blockNum은 배열이라 0부터 시작)
-        int blockCount = GameData.blockCount;
-        while (j < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
+        while (nextBlockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
-            if (i >= 8)
+            if (currentBlock >= 8)
             {
-                i = 0;
-                j++;
+                currentBlock = 0;
+                nextBlockNum++;
             }
 
-            if (cBlock[i].blockNum == j) // cBlock[i]의 활성화된 순서가 j와 같을때
+            if (cBlock[currentBlock].blockNum == nextBlockNum) // cBlock[i]의 활성화된 순서가 j와 같을때
             {
-                if (cBlock[i].skillNum == cBlock[temp].skillNum)
+                if (cBlock[currentBlock].skillNum == cBlock[temp].skillNum)
                 {
                     chainCount++;
-                    OffAct(i);
+                    OffAct(currentBlock);
                 }
                 else
-                    j += 7;
-                i = 0;
-                j++;
+                    nextBlockNum += 7;
+                currentBlock = 0;
+                nextBlockNum++;
             }
             else
-                i++;
+                currentBlock++;
         }
     }
 
@@ -159,8 +157,7 @@ public class Game : MonoBehaviour
             {
                 if (GameData.touchBlock == sBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    //chainCheckR(i);
-                    chainCheckL(i);
+                    chainCheck(i);
                     BlockNum(i);
                 }
             }
