@@ -7,28 +7,28 @@ public class Game : MonoBehaviour
     public Block[] cBlock; // 모든 블럭 스크립트의 배열
     public GameObject currentBlock; // 현재 생성된 블럭
 
-    public int chainCount = 0;
+    public int chainCount = 0; //연결된 체인 개수
 
     void Start()
     {
-        StartCoroutine(CreateBlockLoop());
+        StartCoroutine(CreateBlockLoop()); //블럭 생성 코루틴
     }
 
     void Update()
     {
-        UsingBlock();
+        UsingBlock(); //블럭 상태 변화 확인
     }
 
     public void OnAct() // 오브젝트 활성화
     {
-        for (int i = 0; i < GameData.blockAmount; i++)
+        for (int i = 0; i < GameData.blockAmount; i++) //블럭 갯수만큼 실행
         {
-            if (!sBlock[i].activeInHierarchy)
+            if (!sBlock[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
-                sBlock[i].SetActive(true);
-                sBlock[i].transform.position = (GameData.spawnPos);
-                currentBlock = sBlock[i];
-                cBlock[i].Init();
+                sBlock[i].SetActive(true); //블럭 활성화
+                sBlock[i].transform.position = (GameData.spawnPos); //블럭 위치를 스폰 위치로 변경
+                currentBlock = sBlock[i]; //현재 블럭으로 지정
+                cBlock[i].Init(); //블럭 스크립트 초기화
                 return;
             }
         }
@@ -36,31 +36,31 @@ public class Game : MonoBehaviour
 
     public void OffAct(int i) // 오브젝트 비활성화
     {
-        sBlock[i].SetActive(false);
-        GameData.blockCount--;
+        sBlock[i].SetActive(false); //비활성화
+        GameData.blockCount--; //블럭 갯수 감소
     }
 
     IEnumerator CreateBlockLoop()
     {
         while (true)
         {
-            yield return Create();//*
-            yield return new WaitForSeconds(1f);
+            yield return Create(); //* //블럭 생성 코루틴 실행
+            yield return new WaitForSeconds(1f); //1초 대기
         }
     }
 
     IEnumerator Create() // 블럭 생성
     {
-        if (GameData.blockCount < GameData.blockAmount)
+        if (GameData.blockCount < GameData.blockAmount) //현재 필드에 나와있는 블럭 갯수 < 최대 블럭 갯수일 경우
         {
-            OnAct();
+            OnAct(); //블럭 활성화
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++) //최대 블럭 갯수만큼 실행
             {
-                if (currentBlock == sBlock[i])
+                if (currentBlock == sBlock[i]) //현재 블럭 = sBlock[i]일 경우
                 {
-                    cBlock[i].MoveBlock();
-                    yield return new WaitUntil(() => { return !cBlock[i].isMoving; });//*
+                    cBlock[i].MoveBlock(); //블럭 이동
+                    yield return new WaitUntil(() => { return !cBlock[i].isMoving; });//* //블럭 이동 종료시까지 대기
                 }
             }
         }
@@ -71,11 +71,11 @@ public class Game : MonoBehaviour
     {
         int currentBlock = temp; // 현재 반복문에서 돌고있는 블럭
         int nextBlockNum = cBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
-        int blockCount = GameData.blockCount;
+        int blockCount = GameData.blockCount; //현재 블럭 갯수
 
-        bool checkRight = true;
+        bool checkRight = true; //오른쪽 -> 왼쪽으로 체크
 
-        while (checkRight)
+        while (checkRight) 
         {           
             for (int i = 0; i < 7; i++)
             {
@@ -96,12 +96,12 @@ public class Game : MonoBehaviour
                                 checkRight = false;
                             }
                         }
-                        else { }
+//                        else { }
                     }
                     
                 }
             }
-            checkRight = false;
+            checkRight = false; //체크 종료
         }
         Debug.Log(nextBlockNum);
 
@@ -153,12 +153,12 @@ public class Game : MonoBehaviour
     {
         if (GameData.touchBlock != null) // 무언가 터치되었을때 실행
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++) //블럭 최대 갯수만큼 실행
             {
                 if (GameData.touchBlock == sBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    chainCheck(i);
-                    BlockNum(i);
+                    chainCheck(i); //체인 연결 확인
+                    BlockNum(i); //blockNum 조절
                 }
             }
         }
