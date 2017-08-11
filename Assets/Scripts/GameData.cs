@@ -14,31 +14,31 @@ public static class GameData
 
     public static GameObject touchBlock = null; // 터치되는 블럭
 
-    private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos);
+    private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos); //스폰 좌표
 
     public static Vector2 spawnPos
     {
         get
         {
-            return _spawnPos;
+            return _spawnPos; //스폰 좌표 반환
         }
         private set
         {
-            _spawnPos = value;
+            _spawnPos = value; //스폰 좌표 변경
         }
     }
 
-    public static Vector2 _maxPos = new Vector2(maxXPos, maxYPos);
+    public static Vector2 _maxPos = new Vector2(maxXPos, maxYPos); //최대 이동 좌표
 
     public static Vector2 maxPos
     {
         get
         {
-            return _maxPos;
+            return _maxPos; //최대 이동 좌표 반환
         }
         private set
         {
-            _maxPos = value;
+            _maxPos = value; //최대 이동 좌표 변경
         }
     }
 
