@@ -34,31 +34,24 @@ public class CatAnimation : MonoBehaviour
         switch (GameData.skillKind) // GameData.skillKind: 스킬블럭 상태 받아오는 거 표현한 임시변수
         {
             case 0:
-                //timer += Time.deltaTime;
-                //if (GameData.lastSkillKind != GameData.skillKind && timer >= waitTime)
-                //{
                     GameData.lastSkillKind = 0;       
-                //}
                 break;
             case 1:
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Skill_1", true);
                 GameData.skillKind = 0;
-                //Debug.Log("skillNum_1");
                 timer = 0;
                 break;
             case 2:
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Skill_2", true);
                 GameData.skillKind = 0;
-                //Debug.Log("skillNum_2");
                 timer = 0;
                 break;
             case 3:
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Skill_3", true);
                 GameData.skillKind = 0;
-                //Debug.Log("skillNum_3");
                 timer = 0;
                 break;
             default:

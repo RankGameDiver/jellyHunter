@@ -36,6 +36,7 @@ public class Game : MonoBehaviour
 
     public void OffAct(int i) // 오브젝트 비활성화
     {
+        GameData.skillKind = cBlock[i].skillNum + 1;
         sBlock[i].SetActive(false); //비활성화
         GameData.blockCount--; //블럭 갯수 감소
     }
@@ -67,12 +68,11 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    public void chainCheck(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
+    public void chainStartPos(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
     {
         int currentBlock = temp; // 현재 반복문에서 돌고있는 블럭
         int nextBlockNum = cBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
         int blockCount = GameData.blockCount; //현재 블럭 갯수
-
         bool checkRight = true; //오른쪽 -> 왼쪽으로 체크
 
         while (checkRight) 
@@ -96,15 +96,19 @@ public class Game : MonoBehaviour
                                 checkRight = false;
                             }
                         }
-//                        else { }
                     }
                     
                 }
             }
             checkRight = false; //체크 종료
         }
-        Debug.Log(nextBlockNum);
 
+        chainCheck(currentBlock, nextBlockNum, blockCount, checkRight, temp);
+     
+    }
+
+    public void chainCheck(int currentBlock, int nextBlockNum, int blockCount, bool checkRight, int temp)
+    {
         while (nextBlockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
             if (currentBlock >= 8)
@@ -157,7 +161,7 @@ public class Game : MonoBehaviour
             {
                 if (GameData.touchBlock == sBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    chainCheck(i); //체인 연결 확인
+                    chainStartPos(i); //체인 연결 확인
                     BlockNum(i); //blockNum 조절
                 }
             }
