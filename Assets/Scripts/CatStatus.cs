@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CatStatus : MonoBehaviour
 {
-    int health; // 체력
-    int damage; // 공격력
+    public int health; // 체력
+    public int damage; // 공격력
+    public int defend; // 방어력
 
     void Start()
     {
-        health = 20;
-        damage = 5;
+
     }
 
     void Update()

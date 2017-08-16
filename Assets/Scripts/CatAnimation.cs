@@ -34,7 +34,7 @@ public class CatAnimation : MonoBehaviour
         switch (GameData.skillKind) // GameData.skillKind: 스킬블럭 상태 받아오는 거 표현한 임시변수
         {
             case 0:
-                    GameData.lastSkillKind = 0;       
+                    GameData.lastSkillKind = 0;
                 break;
             case 1:
                 GameData.lastSkillKind = GameData.skillKind;
