@@ -8,31 +8,12 @@ public class Stage : MonoBehaviour
 
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
     public JellyStatus[] sJelly; // 모든 젤리맨 스크립트의 배열
-    public int health; // 체력
-    public int damage; // 공격력
-    public int defend; // 방어력
 
     int jellyKind = 0; // 젤리 종류
 
-    public void NomalJelly()
+    void Start()
     {
-        health = 50;
-        damage = 8;
-        defend = 5;
-    }
-
-    public void StrongJelly()
-    {
-        health = 120;
-        damage = 15;
-        defend = 10;
-    }
-
-    public void BigJelly()
-    {
-        health = 300;
-        damage = 25;
-        defend = 20;
+        StartCoroutine(CreateLoop());
     }
 
     void StageKind() // 단계별 스테이지
@@ -56,6 +37,7 @@ public class Stage : MonoBehaviour
         while (true)
         {
             yield return Create();
+            yield return new WaitForSeconds(5f); // 5초 대기
         }
     }
 
@@ -65,12 +47,14 @@ public class Stage : MonoBehaviour
         {
             if (!gJelly[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
-                gJelly[i].SetActive(true); //블럭 활성화
-                gJelly[i].transform.position = (GameData.spawnPos); //블럭 위치를 스폰 위치로 변경
-                sJelly[i].Init(jellyKind); //블럭 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함 // Init 미완성
+                
+                gJelly[i].SetActive(true); // 젤리맨 활성화
+                gJelly[i].transform.position = new Vector2(6.8f, -1.7f); // 젤리맨 위치를 스폰 위치로 변경
+                sJelly[i].Init(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
+                sJelly[i].MoveJelly();
+                i = 5;
             }
         }
-
         yield break;
     }
 }

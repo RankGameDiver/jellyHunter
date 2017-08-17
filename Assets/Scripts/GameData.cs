@@ -14,7 +14,7 @@ public static class GameData
 
     public static GameObject touchBlock = null; // 터치되는 블럭
 
-    private static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos); //스폰 좌표
+    public static Vector2 _spawnPos = new Vector2(spawnXpos, spawnYpos); //스폰 좌표
 
     public static Vector2 spawnPos
     {
@@ -47,5 +47,20 @@ public static class GameData
 
     public static int lastSkillKind = 0; // 전에 쓴 스킬 종류
     public static int skillKind = 0; // 스킬 종류 구분
+
+    /////////////////////////젤리맨/////////////////////////////
+
+    public static int jellyNum = 0; // 한 스테이지에서 나온 젤리맨 갯수 카운팅
+
+    const float jellyMaxX = -1.5f;
+    const float jellyMaxY = 0.0f;
+
+    public static Vector2 _jellyMax = new Vector2(jellyMaxX, jellyMaxY);
+    public static Vector2 jellyMax
+    {
+        get { return _jellyMax; }
+        set { _jellyMax = value; }
+    }
+    ///////////////////////////////////////////////////////////
 
 }
