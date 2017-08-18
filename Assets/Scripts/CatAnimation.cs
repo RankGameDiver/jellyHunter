@@ -9,6 +9,8 @@ public class CatAnimation : MonoBehaviour
     public float waitTime;
     public float checkTime;
 
+    public CatStatus catStatus;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -39,12 +41,14 @@ public class CatAnimation : MonoBehaviour
             case 1:
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Skill_1", true);
+                catStatus.Attack();
                 GameData.skillKind = 0;
                 timer = 0;
                 break;
             case 2:
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Skill_2", true);
+                catStatus.Defend();
                 GameData.skillKind = 0;
                 timer = 0;
                 break;
@@ -52,6 +56,7 @@ public class CatAnimation : MonoBehaviour
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Skill_3", true);
                 GameData.skillKind = 0;
+                catStatus.Heal();
                 timer = 0;
                 break;
             default:

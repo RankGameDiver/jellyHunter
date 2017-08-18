@@ -48,6 +48,8 @@ public static class GameData
     public static int lastSkillKind = 0; // 전에 쓴 스킬 종류
     public static int skillKind = 0; // 스킬 종류 구분
 
+    public static int skillPower = 0; // 스킬 체인 수
+
     /////////////////////////젤리맨/////////////////////////////
 
     public static int jellyNum = 0; // 한 스테이지에서 나온 젤리맨 갯수 카운팅

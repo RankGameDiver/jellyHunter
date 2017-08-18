@@ -8,16 +8,30 @@ public class JellyStatus : MonoBehaviour
     public int damage; // 공격력
     public int defend; // 방어력
 
-    void Start()
-    {
+    public Stage stage;
 
-    }
+    public int jellyCount; // 현재 젤리의 순서
 
     void Update()
     {
         if (health <= 0) // 젤리맨이 죽었을 때 실행
         {
-            gameObject.SetActive(false);
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        gameObject.SetActive(false);
+        GameData.jellyNum--;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (stage.sJelly[i].jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)
+            {
+                stage.sJelly[i].jellyCount--;
+                stage.sJelly[i].MoveJelly();
+            }
         }
     }
 
@@ -83,18 +97,18 @@ public class JellyStatus : MonoBehaviour
         private set { _isMoving = value; } //움직임 상태 변경
     }
 
-    IEnumerator Move() // 생성할때
+    IEnumerator Move()
     {
         if (isMoving == false) //움직이고 있지 않으면
         {
             isMoving = true; //움직임
             while (isMoving) //움직이는 동안
             {
-                if (transform.position.x < GameData.jellyMax.x) //최대 x좌표에 도달했을 경우
+                if (transform.position.x < GameData.jellyMax.x + (jellyCount - 1) * 1.2f) //최대 x좌표에 도달했을 경우
                 {
                     isMoving = false; //더 이상 움직이지 않음
                 }
-                transform.Translate((Vector2.left * speed).normalized / 10.0f); //블럭 이동
+                transform.Translate((Vector2.left * speed).normalized / 40.0f); //블럭 이동
                 yield return null; //Update문 수행 완료시까지 대기
             }
         }

@@ -7,6 +7,8 @@ public class Game : MonoBehaviour
     public Block[] cBlock; // 모든 블럭 스크립트의 배열
     public GameObject currentBlock; // 현재 생성된 블럭
 
+    public CatStatus catstatus;
+
     public int chainCount = 0; //연결된 체인 개수
 
     void Start()
@@ -68,7 +70,7 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    public void chainStartPos(int temp) // 블럭 체인 시스템(미완성) // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
+    public void chainStartPos(int temp) // 블럭 체인 시스템 // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
     {
         int currentBlock = temp; // 현재 반복문에서 돌고있는 블럭
         int nextBlockNum = cBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
@@ -149,6 +151,7 @@ public class Game : MonoBehaviour
                 cBlock[i].MoveBlock();
             }
         }
+        GameData.skillPower = chainCount;
         chainCount = 0;
         GameData.touchBlock = null;
     }
@@ -164,7 +167,7 @@ public class Game : MonoBehaviour
                     chainStartPos(i); //체인 연결 확인
                     BlockNum(i); //blockNum 조절
                 }
-            }
+            }           
         }
     }
 

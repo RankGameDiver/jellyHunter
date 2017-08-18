@@ -52,6 +52,8 @@ public class Stage : MonoBehaviour
                 gJelly[i].transform.position = new Vector2(6.8f, -1.7f); // 젤리맨 위치를 스폰 위치로 변경
                 sJelly[i].Init(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
                 sJelly[i].MoveJelly();
+                GameData.jellyNum++;
+                sJelly[i].jellyCount = GameData.jellyNum;
                 i = 5;
             }
         }
