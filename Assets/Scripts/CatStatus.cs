@@ -6,15 +6,18 @@ public class CatStatus : MonoBehaviour
 {
     public int health; // 체력
     public int damage; // 공격력
-    public int defend; // 방어력
+    public int defend; // 방어력(현재 적용 수치)
+    public int def; // 기본 방어력
 
     public Stage stage;
+
+    public float lastTime;
 
     public bool shield; // 방어 활성화 체크
 
     void Start()
     {
-
+        lastTime = 0;
     }
 
     void Update()
@@ -23,6 +26,20 @@ public class CatStatus : MonoBehaviour
         {
 
         }
+
+        if (shield)
+        {
+            defend = def + (2 + GameData.skillPower);
+            lastTime += Time.deltaTime;
+            if (lastTime >= 5.0f)
+            {
+                shield = false;
+                lastTime = 0;
+            }
+        }
+        else
+            defend = 8;
+
     }
 
     public void Attack()
@@ -42,8 +59,7 @@ public class CatStatus : MonoBehaviour
     {
         if (shield == false)
             shield = true;
-        else
-            shield = false;
+        else { }
         Debug.Log("Defend");
     }
 
