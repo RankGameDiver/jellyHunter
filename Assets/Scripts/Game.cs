@@ -84,7 +84,7 @@ public class Game : MonoBehaviour
                 for (int j = 0; j < 7; j++) //최대 블럭 갯수
                 {
                     if (!sBlock[j].activeInHierarchy) { } //sBlock[j]가 비활성화 상태일 때
-                    else
+                    else if(sBlock[j].activeInHierarchy)
                     {
                         if (nextBlockNum - 1 == cBlock[j].blockNum) //현재 블록 넘버와 일치할 때
                         {
@@ -121,7 +121,7 @@ public class Game : MonoBehaviour
 
             if (cBlock[currentBlock].blockNum == nextBlockNum) // cBlock[i]의 활성화된 순서가 j와 같을때
             {
-                if (cBlock[currentBlock].skillNum == cBlock[temp].skillNum) //스킬 종류 동일할 시
+                if (cBlock[currentBlock].skillNum == cBlock[temp].skillNum && cBlock[currentBlock].isMoving == false) //스킬 종류 동일할 시
                 {
                     chainCount++; //체인 카운트 증가
                     OffAct(currentBlock); //비활성화 함수

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class JellyStatus : MonoBehaviour
 {
-    public int health; // 체력
-    public int damage; // 공격력
-    public int defend; // 방어력
+    public float health; // 체력
+    public float damage; // 공격력
+    public float defend; // 방어력
 
+    public CatStatus catstatus;
     public Stage stage;
 
     public int jellyCount; // 현재 젤리의 순서
@@ -107,10 +108,26 @@ public class JellyStatus : MonoBehaviour
                 if (transform.position.x < GameData.jellyMax.x + (jellyCount - 1) * 1.2f) //최대 x좌표에 도달했을 경우
                 {
                     isMoving = false; //더 이상 움직이지 않음
+                    if (transform.position.x < GameData.jellyMax.x)
+                    {
+                        StartCoroutine(Attack());
+                    }
                 }
                 transform.Translate((Vector2.left * speed).normalized / 40.0f); //블럭 이동
                 yield return null; //Update문 수행 완료시까지 대기
             }
         }
+    }
+
+    IEnumerator Attack()
+    {
+        while (gameObject.activeInHierarchy)
+        {
+            catstatus.health -= damage * 2 - catstatus.defend * 1.5f;
+            if (catstatus.health > 100)
+                catstatus.health = 100;
+            yield return new WaitForSeconds(3.0f);
+        }
+        yield break;
     }
 }

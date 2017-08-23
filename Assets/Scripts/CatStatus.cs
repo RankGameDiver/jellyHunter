@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CatStatus : MonoBehaviour
 {
-    public int health; // 체력
-    public int damage; // 공격력
-    public int defend; // 방어력(현재 적용 수치)
-    public int def; // 기본 방어력
+    public float health; // 체력
+    public float damage; // 공격력
+    public float defend; // 방어력(현재 적용 수치)
+    public float def; // 기본 방어력
 
     public Stage stage;
 
@@ -44,11 +44,12 @@ public class CatStatus : MonoBehaviour
 
     public void Attack()
     {
+        float  trueDamage = (damage + (3 + GameData.skillPower * 3));
         for (int i = 0; i < 5; i++)
         {
             if (stage.sJelly[i].jellyCount < 2)
             {
-                stage.sJelly[i].health -= (damage + (3 + GameData.skillPower * 3));
+                stage.sJelly[i].health -= (trueDamage - stage.sJelly[i].defend * 1.5f);
             }
         }
         GameData.skillPower = 0;
