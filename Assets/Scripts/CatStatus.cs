@@ -10,10 +10,11 @@ public class CatStatus : MonoBehaviour
     public float def; // 기본 방어력
 
     public Stage stage;
-
-    public float lastTime;
+    public float lastTime; // 방어 적용 시간
 
     public bool shield; // 방어 활성화 체크
+
+    public bool shieldAct;
 
     void Start()
     {
@@ -27,9 +28,45 @@ public class CatStatus : MonoBehaviour
 
         }
 
-        if (shield)
+        Defending();
+    }
+
+    public void Attack()
+    {
+        float trueDamage = (damage + (GameData.skillPower * 4));
+        for (int i = 0; i < 3; i++)
         {
-            defend = def + (2 + GameData.skillPower);
+            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
+
+            if (GameData.skillPower <= 1)
+            {
+                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+            }
+            else if (GameData.skillPower <= 4)
+            {
+                if (stage.gJelly[i].activeInHierarchy)
+                    sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+            }
+            else
+            {
+                if (stage.gJelly[i].activeInHierarchy)
+                    sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+            }
+        }
+        
+        GameData.skillPower = 0;
+        Debug.Log("Attack");
+    }
+
+    public void Defending() // 방어 버프 적용중
+    {
+        if (shield && !shieldAct)
+        {
+            defend = def + (1 + GameData.skillPower);
+            shieldAct = true;
+        }
+        else if (shield && shieldAct)
+        {
             lastTime += Time.deltaTime;
             if (lastTime >= 5.0f)
             {
@@ -38,29 +75,21 @@ public class CatStatus : MonoBehaviour
             }
         }
         else
-            defend = 8;
-
-    }
-
-    public void Attack()
-    {
-        float  trueDamage = (damage + (3 + GameData.skillPower * 3));
-        for (int i = 0; i < 5; i++)
         {
-            if (stage.sJelly[i].jellyCount < 2)
-            {
-                stage.sJelly[i].health -= (trueDamage - stage.sJelly[i].defend * 1.5f);
-            }
+            defend = 8;
+            shieldAct = false;
         }
-        GameData.skillPower = 0;
-        Debug.Log("Attack");
     }
 
-    public void Defend()
+    public void Defend() // 방어중인지 체크
     {
         if (shield == false)
             shield = true;
-        else { }
+        else
+        {
+            shieldAct = false;
+            lastTime = 0;
+        }
         Debug.Log("Defend");
     }
 

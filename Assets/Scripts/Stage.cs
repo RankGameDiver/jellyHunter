@@ -7,7 +7,6 @@ public class Stage : MonoBehaviour
     int stage; // 스테이지
 
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
-    public JellyStatus[] sJelly; // 모든 젤리맨 스크립트의 배열
 
     int jellyKind = 0; // 젤리 종류
 
@@ -47,13 +46,13 @@ public class Stage : MonoBehaviour
         {
             if (!gJelly[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
-                
+                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();
                 gJelly[i].SetActive(true); // 젤리맨 활성화
                 gJelly[i].transform.position = new Vector2(6.8f, -1.7f); // 젤리맨 위치를 스폰 위치로 변경
-                sJelly[i].Init(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
-                sJelly[i].MoveJelly();
+                sJelly.Init(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
+                sJelly.MoveJelly();
                 GameData.jellyNum++;
-                sJelly[i].jellyCount = GameData.jellyNum;
+                sJelly.jellyCount = GameData.jellyNum;
                 i = 5;
             }
         }

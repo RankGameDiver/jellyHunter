@@ -28,10 +28,11 @@ public class JellyStatus : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            if (stage.sJelly[i].jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)
+            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
+            if (sJelly.jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)
             {
-                stage.sJelly[i].jellyCount--;
-                stage.sJelly[i].MoveJelly();
+                sJelly.jellyCount--;
+                sJelly.MoveJelly();
             }
         }
     }
@@ -105,7 +106,7 @@ public class JellyStatus : MonoBehaviour
             isMoving = true; //움직임
             while (isMoving) //움직이는 동안
             {
-                if (transform.position.x < GameData.jellyMax.x + (jellyCount - 1) * 1.2f) //최대 x좌표에 도달했을 경우
+                if (transform.position.x < GameData.jellyMax.x * 1.2f) //최대 x좌표에 도달했을 경우
                 {
                     isMoving = false; //더 이상 움직이지 않음
                     if (transform.position.x < GameData.jellyMax.x)
