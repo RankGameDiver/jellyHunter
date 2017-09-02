@@ -70,7 +70,7 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    public void chainStartPos(int temp) // 블럭 체인 시스템 // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
+    void chainStartPos(int temp) // 블럭 체인 시스템 // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
     {
         int currentBlock = temp; // 현재 반복문에서 돌고있는 블럭
         int nextBlockNum = cBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
@@ -109,7 +109,7 @@ public class Game : MonoBehaviour
      
     }
 
-    public void chainCheck(int currentBlock, int nextBlockNum, int blockCount, bool checkRight, int temp)
+    void chainCheck(int currentBlock, int nextBlockNum, int blockCount, bool checkRight, int temp)
     {
         while (nextBlockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
@@ -136,7 +136,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void BlockNum(int temp) // 비활성화 된 블럭들의 blockNum값을 조절
+    void BlockNum(int temp) // 비활성화 된 블럭들의 blockNum값을 조절
     {
         int blockNum = cBlock[temp].blockNum; //터치된 블럭의 blockNum값
         for (int i = 0; i < 7; i++)
@@ -156,7 +156,7 @@ public class Game : MonoBehaviour
         GameData.touchBlock = null; //터치 상태 = 터치되지 않음
     }
 
-    public void UsingBlock() // 블럭이 사용되어질때
+    void UsingBlock() // 블럭이 사용되어질때
     {
         if (GameData.touchBlock != null) // 무언가 터치되었을때 실행
         {
