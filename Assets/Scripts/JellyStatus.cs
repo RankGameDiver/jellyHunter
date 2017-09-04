@@ -124,9 +124,10 @@ public class JellyStatus : MonoBehaviour
     {
         while (gameObject.activeInHierarchy)
         {
+            float tempHealth = catstatus.health;
             catstatus.health -= damage * 2 - catstatus.defend * 1.5f;
-            if (catstatus.health > 100)
-                catstatus.health = 100;
+            if (catstatus.health > tempHealth)
+                catstatus.health = tempHealth;
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
