@@ -1,9 +1,14 @@
 fileFormatVersion: 2
 guid: 46e1678e12b49c846bdcd0af22c48566
-timeCreated: 1504517829
+timeCreated: 1504520071
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_0"
+    21300002: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_1"
+    21300004: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_3"
+    21300006: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_4"
+    21300008: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_5"
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +39,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -58,9 +63,77 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_0"
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 11
+        width: 165
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_1"
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 12
+        width: 198
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_3"
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 15
+        width: 214
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uC824\uB9AC\uB9E8_\uC8FD\uC74C_\uCD5C\uC885_5"
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 19
+        width: 236
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 

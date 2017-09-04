@@ -1,9 +1,14 @@
 fileFormatVersion: 2
 guid: 4c8d3e461ca8fbf4f81347063341366c
-timeCreated: 1504517829
+timeCreated: 1504519926
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_0"
+    21300002: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_1"
+    21300004: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_2"
+    21300006: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_3"
+    21300008: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_4"
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +39,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -58,9 +63,90 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_0"
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 6
+        width: 310
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_1"
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 8
+        width: 316
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_2"
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 6
+        width: 313
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_3"
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 2
+        width: 306
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5_\uCD5C\uC885_4"
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 8
+        width: 314
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
