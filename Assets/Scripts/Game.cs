@@ -8,7 +8,6 @@ public class Game : MonoBehaviour
     public GameObject currentBlock; // 현재 생성된 블럭
 
     public CatStatus catstatus;
-    public CatAnimation catAnimation;
 
     public int chainCount = 0; //연결된 체인 개수
 
@@ -167,7 +166,6 @@ public class Game : MonoBehaviour
                 {
                     chainStartPos(i); //체인 연결 확인
                     BlockNum(i); //blockNum 조절
-                    catAnimation.animations();
                 }
             }
         }

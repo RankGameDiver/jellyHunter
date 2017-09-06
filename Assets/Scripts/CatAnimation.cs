@@ -15,24 +15,27 @@ public class CatAnimation : MonoBehaviour
 
     void Update()
     {
-
+        animations();
+        if (animator.GetBool("SkillReset") == true)
+        {
+            Skill();
+            animator.SetBool("SkillReset", false);
+        }
     }
 
-    public void Skill()
+    private void Skill()
     {
         animator.SetBool("Attack", false);
         animator.SetBool("Defend", false);
         animator.SetBool("Heal", false);
     }
 
-    public void animations()
+    IEnumerator animations()
     {
-        Debug.Log("animations");
         switch (GameData.skillKind) // skillKind = 스킬 종류 구분
         {
             case 0:
                 GameData.lastSkillKind = 0;
-                Skill();
                 break;
             case 1:
                 GameData.lastSkillKind = GameData.skillKind;
@@ -56,4 +59,5 @@ public class CatAnimation : MonoBehaviour
                 break;
         }
     }
+
 }
