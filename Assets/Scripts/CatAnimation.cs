@@ -16,11 +16,6 @@ public class CatAnimation : MonoBehaviour
     void Update()
     {
         animations();
-        if (animator.GetBool("SkillReset") == true)
-        {
-            Skill();
-            animator.SetBool("SkillReset", false);
-        }
     }
 
     private void Skill()
@@ -30,7 +25,7 @@ public class CatAnimation : MonoBehaviour
         animator.SetBool("Heal", false);
     }
 
-    IEnumerator animations()
+    private void animations()
     {
         switch (GameData.skillKind) // skillKind = 스킬 종류 구분
         {
@@ -52,8 +47,8 @@ public class CatAnimation : MonoBehaviour
             case 3:
                 GameData.lastSkillKind = GameData.skillKind;
                 animator.SetBool("Heal", true);
-                GameData.skillKind = 0;
                 catStatus.Heal();
+                GameData.skillKind = 0;
                 break;
             default:
                 break;
