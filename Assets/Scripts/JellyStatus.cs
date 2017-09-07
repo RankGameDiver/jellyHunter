@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JellyStatus : MonoBehaviour
-{
+{ // 클래스와 상속을 이용해서 다시 짤 예정
     public float health; // 체력
     public float damage; // 공격력
     public float defend; // 방어력

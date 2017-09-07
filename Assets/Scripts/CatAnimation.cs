@@ -6,23 +6,30 @@ public class CatAnimation : MonoBehaviour
 {
     private Animator animator;
 
-    public CatStatus catStatus; // 스킬 공식 적용용으로 불러옴
+    public CatStatus cat; // 스킬 공식 적용용으로 불러옴
+
+    private float catTempHealth;
 
     void Start()
     {
+        catTempHealth = cat.health;
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         animations();
-    }
+        if (cat.health <= 0)
+        {
+            animator.Play("CatDead");
+        }
 
-    private void Skill()
-    {
-        animator.SetBool("Attack", false);
-        animator.SetBool("Defend", false);
-        animator.SetBool("Heal", false);
+        if (cat.health < catTempHealth)
+        {
+            animator.Play("CatHurt");
+            catTempHealth = cat.health;
+            //Debug.Log("hurt");
+        }
     }
 
     private void animations()
@@ -34,20 +41,20 @@ public class CatAnimation : MonoBehaviour
                 break;
             case 1:
                 GameData.lastSkillKind = GameData.skillKind;
-                animator.SetBool("Attack", true);
-                catStatus.Attack();
+                animator.Play("CatAttack");
+                cat.Attack();
                 GameData.skillKind = 0;
                 break;
             case 2:
                 GameData.lastSkillKind = GameData.skillKind;
-                animator.SetBool("Defend", true);
-                catStatus.Defend();
+                animator.Play("CatDefend");
+                cat.Defend();
                 GameData.skillKind = 0;
                 break;
             case 3:
                 GameData.lastSkillKind = GameData.skillKind;
-                animator.SetBool("Heal", true);
-                catStatus.Heal();
+                animator.Play("CatHeal");
+                cat.Heal();
                 GameData.skillKind = 0;
                 break;
             default:

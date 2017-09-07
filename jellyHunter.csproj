@@ -82,7 +82,6 @@
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\JellyStatus.cs" />
     <Compile Include="Assets\Scripts\Stage.cs" />
-    <Compile Include="Assets\animationCon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -63,6 +63,7 @@ public static class GameData
         get { return _jellyMax; }
         set { _jellyMax = value; }
     }
+
     ///////////////////////////////////////////////////////////
 
 }

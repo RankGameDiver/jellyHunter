@@ -12,50 +12,77 @@ public class CatStatus : MonoBehaviour
     public Stage stage;
     public float lastTime; // 방어 적용 시간
 
-    public bool shield; // 방어 활성화 체크
+    private bool shield; // 방어 활성화 체크
+    private bool shieldAct;
 
-    public bool shieldAct;
+    private Animator animator;
+    public bool life;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         lastTime = 0;
+        life = true;
     }
 
     void Update()
     {
         if (health <= 0) // 플레이어가 죽었을 때 실행
         {
-
+            
         }
-
         Defending();
     }
 
-    public void Attack()
+    public int JellyNum(int jellyNum) // jellyNum은 찾아야 하는 젤리의 순서
     {
-        float trueDamage = (damage + (GameData.skillPower * 4));
-        for (int i = 0; i < 3; i++)
+        
+        for (int i = 0; i < 5; i++)
         {
-            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-
-            if (GameData.skillPower <= 1)
+            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>(); // 여기에 null이 들어가서 공식에 에러남
+            if (sJelly.jellyCount == jellyNum)
             {
-                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
-            }
-            else if (GameData.skillPower <= 4)
-            {
-                if (stage.gJelly[i].activeInHierarchy)
-                    sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
-            }
-            else
-            {
-                if (stage.gJelly[i].activeInHierarchy)
-                    sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+                Debug.Log("jellyNum");
+                Debug.Log("jellyNum = " + jellyNum);
+                Debug.Log("sJelly.jellyCount = " + sJelly.jellyCount);
+                return i;
             }
         }
-        
+        return 0;
+    }
+
+    public void Attack() // 현재 목표물 지정 오류
+    {
+        JellyStatus sJelly = stage.gJelly[0].GetComponent<JellyStatus>();
+        float trueDamage = (damage + (GameData.skillPower * 4));
+
+        if (GameData.skillPower >= 1)
+        {
+            if (stage.gJelly[JellyNum(1)].activeInHierarchy)
+            {
+                sJelly = stage.gJelly[JellyNum(1)].GetComponent<JellyStatus>();
+                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+            }
+        }
+        if (GameData.skillPower >= 2)
+        {
+            if (stage.gJelly[JellyNum(2)].activeInHierarchy)
+            {
+                sJelly = stage.gJelly[JellyNum(2)].GetComponent<JellyStatus>();
+                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+            }
+        }
+        if(GameData.skillPower == 5)
+        {
+            if (stage.gJelly[JellyNum(3)].activeInHierarchy)
+            {
+                sJelly = stage.gJelly[JellyNum(3)].GetComponent<JellyStatus>();
+                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+            }
+        }
+
         GameData.skillPower = 0;
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
     }
 
     public void Defending() // 방어 버프 적용중
@@ -90,7 +117,7 @@ public class CatStatus : MonoBehaviour
             shieldAct = false;
             lastTime = 0;
         }
-        Debug.Log("Defend");
+        //Debug.Log("Defend");
     }
 
     public void Heal()
@@ -98,7 +125,7 @@ public class CatStatus : MonoBehaviour
         health += (10 + GameData.skillPower * 5);
         if (health > 100)
             health = 100;
-        Debug.Log("Heal");
+        //Debug.Log("Heal");
     }
 
 }
