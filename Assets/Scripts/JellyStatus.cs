@@ -10,31 +10,67 @@ public class JellyStatus : MonoBehaviour
 
     public CatStatus catstatus;
     public Stage stage;
+    private Animator animator;
+
+    private float jellyTempHealth;
 
     public int jellyCount; // 현재 젤리의 순서
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        jellyTempHealth = health;
+    }
 
     void Update()
     {
         if (health <= 0) // 젤리맨이 죽었을 때 실행
         {
-            Death();
+            StartCoroutine(DeadLoop());
+        }
+
+        if (health < jellyTempHealth)
+        {
+            animator.Play("NJellyHurt");
+            jellyTempHealth = health;
         }
     }
 
-    public void Death()
+    IEnumerator DeadLoop()
     {
+        Debug.Log("DeadLoop");
+        yield return DeadFrame();
+        yield return new WaitForSeconds(0.3f);
+        yield return Death();
+        yield break;
+    }
+
+    IEnumerator DeadFrame() // 죽는 애니메이션 종료 후 비활성화
+    {
+        Debug.Log("DeadFram");
+        animator.Play("NJellyDead");
+        yield break;
+    }
+
+
+    IEnumerator Death()
+    {
+        Debug.Log("Death");
         gameObject.SetActive(false);
         GameData.jellyNum--;
-
+        
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
             if (sJelly.jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)
             {
                 sJelly.jellyCount--;
-                sJelly.MoveJelly();
+                if (stage.gJelly[i].activeInHierarchy)
+                    sJelly.MoveJelly();
             }
         }
+        jellyCount = 10;
+        yield break;
     }
 
     public void NomalJelly()
@@ -124,6 +160,7 @@ public class JellyStatus : MonoBehaviour
     {
         while (gameObject.activeInHierarchy)
         {
+            animator.Play("NJellyAttack");
             float tempHealth = catstatus.health;
             catstatus.health -= damage * 2 - catstatus.defend * 1.5f;
             if (catstatus.health > tempHealth)
