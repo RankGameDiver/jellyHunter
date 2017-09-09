@@ -46,16 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Block.cs" />
-     <Compile Include="Assets\Scripts\CatAnimation.cs" />
-     <Compile Include="Assets\Scripts\CatStatus.cs" />
-     <Compile Include="Assets\Scripts\Game.cs" />
-     <Compile Include="Assets\Scripts\GameData.cs" />
-     <Compile Include="Assets\Scripts\JellyStatus.cs" />
-     <Compile Include="Assets\Scripts\Stage.cs" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
+     <Compile Include="Assets\Scripts\Ingame\Block.cs" />
+     <Compile Include="Assets\Scripts\Ingame\CatAnimation.cs" />
+     <Compile Include="Assets\Scripts\Ingame\CatStatus.cs" />
+     <Compile Include="Assets\Scripts\Ingame\Game.cs" />
+     <Compile Include="Assets\Scripts\Ingame\GameData.cs" />
+     <Compile Include="Assets\Scripts\Ingame\JellyStatus.cs" />
+     <Compile Include="Assets\Scripts\Ingame\Stage.cs" />
+     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -70,9 +68,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
