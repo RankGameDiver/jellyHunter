@@ -36,7 +36,7 @@ public class Stage : MonoBehaviour
     IEnumerator FirstStageLoop() // 첫번째 스테이지
     {
         Debug.Log("1 Stage Start");
-        yield return CreateLoop(3, (int)Monster.Normal);
+        yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
         Debug.Log("2 Stage Start");
@@ -67,6 +67,7 @@ public class Stage : MonoBehaviour
                 JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();
                 gJelly[i].SetActive(true); // 젤리맨 활성화
                 gJelly[i].transform.position = new Vector2(6.8f, -0.8f); // 젤리맨 위치를 스폰 위치로 변경
+                sJelly.life = true;
                 sJelly.Init(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
                 sJelly.MoveJelly();
                 GameData.jellyNum++;

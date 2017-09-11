@@ -70,28 +70,40 @@ public class Game : MonoBehaviour
         yield break;    //코루틴 종료시키는 코드
     }
 
-    void chainStartPos(int temp) // 블럭 체인 시스템 // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
+    public int BlockNum(int blockNum) // blockNum은 찾아야 하는 블럭의 순서
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            Block block = gBlock[i].GetComponent<Block>();
+            if (block.blockNum == blockNum)
+                return i;
+        }
+        Debug.Log("BlockNum False");
+        return 0;
+    }
+
+    void ChainStartPos(int temp) // 블럭 체인 시스템 // temp는 클릭된 블럭, count는 현재 활성화된 블럭의 개수
     {
         int currentBlock = temp; // 현재 반복문에서 돌고있는 블럭
-        int nextBlockNum = sBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
-        int blockCount = GameData.blockCount; //현재 블럭 갯수
-        bool checkRight = true; //오른쪽 -> 왼쪽으로 체크
+        int blockNum = sBlock[temp].blockNum; // 터치된 블럭이 가지고 있는 blockNum값(blockNum은 배열이라 0부터 시작)
+        int blockCount = GameData.blockCount; // 현재 블럭 갯수
+        bool checkRight = true; // 오른쪽 -> 왼쪽으로 체크
 
-        while (checkRight) //체인 체크 시작 위치 조정
+        while (checkRight) // 체인 체크 시작 위치 조정
         {
-            for (int i = 0; i < 7; i++) //최대 블럭 갯수
+            for (int i = 0; i < 7; i++) // 최대 블럭 갯수
             {
-                for (int j = 0; j < 7; j++) //최대 블럭 갯수
+                for (int j = 0; j < 7; j++) // 최대 블럭 갯수
                 {
-                    if (!gBlock[j].activeInHierarchy) { } //gBlock[j]가 비활성화 상태일 때
+                    if (!gBlock[j].activeInHierarchy) { } // gBlock[j]가 비활성화 상태일 때
                     else if (gBlock[j].activeInHierarchy)
                     {
-                        if (nextBlockNum - 1 == sBlock[j].blockNum) //현재 블록 넘버와 일치할 때
+                        if (blockNum - 1 == sBlock[j].blockNum) // 현재 블록 넘버와 일치할 때
                         {
-                            if (sBlock[temp].skillNum == sBlock[j].skillNum) //체인 이어질 시
+                            if (sBlock[temp].skillNum == sBlock[j].skillNum) // 체인 이어질 시
                             {
-                                currentBlock = j; //현재 블록 변경
-                                nextBlockNum--; //nextBlockNum 감소
+                                currentBlock = j; // 현재 블록 변경
+                                blockNum--; // nextBlockNum 감소
                             }
                             else
                             {
@@ -99,27 +111,26 @@ public class Game : MonoBehaviour
                             }
                         }
                     }
-
                 }
             }
             checkRight = false; //체크 종료
         }
 
-        chainCheck(currentBlock, nextBlockNum, blockCount, checkRight, temp); //체인 체크
+        ChainCheck(currentBlock, blockNum, blockCount, temp); //체인 체크
 
     }
 
-    void chainCheck(int currentBlock, int nextBlockNum, int blockCount, bool checkRight, int temp)
+    void ChainCheck(int currentBlock, int blockNum, int blockCount, int temp)
     {
-        while (nextBlockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
+        while (blockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
             if (currentBlock >= 8) //체크 갯수 오버플로우 시
             {
                 currentBlock = 0; //0으로 초기화
-                nextBlockNum++;
+                blockNum++;
             }
 
-            if (sBlock[currentBlock].blockNum == nextBlockNum) // sBlock[i]의 활성화된 순서가 j와 같을때
+            if (sBlock[currentBlock].blockNum == blockNum) // sBlock[i]의 활성화된 순서가 j와 같을때
             {
                 if (sBlock[currentBlock].skillNum == sBlock[temp].skillNum && sBlock[currentBlock].isMoving == false) //스킬 종류 동일할 시
                 {
@@ -127,16 +138,16 @@ public class Game : MonoBehaviour
                     OffAct(currentBlock); //비활성화 함수
                 }
                 else
-                    nextBlockNum += 7; //while문 밖으로 내보냄
+                    blockNum += 7; //while문 밖으로 내보냄
                 currentBlock = 0; //0으로 초기화
-                nextBlockNum++;
+                blockNum++;
             }
             else
                 currentBlock++;
         }
     }
 
-    void BlockNum(int temp) // 비활성화 된 블럭들의 blockNum값을 조절
+    void InitBlock(int temp) // 비활성화 된 블럭들의 blockNum값을 조절
     {
         int blockNum = sBlock[temp].blockNum; //터치된 블럭의 blockNum값
         for (int i = 0; i < 7; i++)
@@ -164,8 +175,8 @@ public class Game : MonoBehaviour
             {
                 if (GameData.touchBlock == gBlock[i]) // 터치된 블럭에 닿으면 실행
                 {
-                    chainStartPos(i); //체인 연결 확인
-                    BlockNum(i); //blockNum 조절
+                    ChainStartPos(i); //체인 연결 확인
+                    InitBlock(i); //blockNum 조절
                 }
             }
         }

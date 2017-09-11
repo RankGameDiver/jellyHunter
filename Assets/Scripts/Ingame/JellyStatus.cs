@@ -16,20 +16,24 @@ public class JellyStatus : MonoBehaviour
 
     public int jellyCount; // 현재 젤리의 순서
 
+    public bool life;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         jellyTempHealth = health;
+        life = true;
     }
 
     void Update()
     {
-        if (health <= 0) // 젤리맨이 죽었을 때 실행
+        if (health <= 0 && life == true) // 젤리맨이 죽었을 때 실행
         {
             StartCoroutine(DeadLoop());
+            life = false;
         }
 
-        if (health < jellyTempHealth)
+        if (health < jellyTempHealth && health > 0)
         {
             animator.Play("NJellyHurt");
             jellyTempHealth = health;
@@ -40,7 +44,7 @@ public class JellyStatus : MonoBehaviour
     {
         Debug.Log("DeadLoop");
         yield return DeadFrame();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         yield return Death();
         yield break;
     }

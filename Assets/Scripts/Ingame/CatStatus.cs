@@ -36,7 +36,6 @@ public class CatStatus : MonoBehaviour
 
     public int JellyNum(int jellyNum) // jellyNum은 찾아야 하는 젤리의 순서
     {
-
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>(); // 여기에 null이 들어가서 공식에 에러남
