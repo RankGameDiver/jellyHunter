@@ -20,9 +20,6 @@ public class JellyStatus : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        jellyTempHealth = health;
-        life = true;
     }
 
     void Update()
@@ -38,6 +35,13 @@ public class JellyStatus : MonoBehaviour
             animator.Play("NJellyHurt");
             jellyTempHealth = health;
         }
+    }
+
+    public void Init()
+    {
+        animator = GetComponent<Animator>();
+        jellyTempHealth = health;
+        life = true;
     }
 
     IEnumerator DeadLoop()
@@ -56,13 +60,12 @@ public class JellyStatus : MonoBehaviour
         yield break;
     }
 
-
     IEnumerator Death()
     {
         Debug.Log("Death");
         gameObject.SetActive(false);
         GameData.jellyNum--;
-        
+        isMoving = false;
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
@@ -98,7 +101,7 @@ public class JellyStatus : MonoBehaviour
         defend = 20;
     }
 
-    public void Init(int temp)
+    public void SetKind(int temp)
     {
         switch (temp)
         {
@@ -141,7 +144,7 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Move()
     {
-        if (isMoving == false) //움직이고 있지 않으면
+        if (!isMoving) //움직이고 있지 않으면
         {
             isMoving = true; //움직임
             while (isMoving) //움직이는 동안
@@ -158,6 +161,7 @@ public class JellyStatus : MonoBehaviour
                 yield return null; //Update문 수행 완료시까지 대기
             }
         }
+        else { yield return null; }
     }
 
     IEnumerator Attack()
