@@ -64,11 +64,11 @@ public class Stage : MonoBehaviour
         {
             if (!gJelly[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
-                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();
-                gJelly[i].SetActive(true); // 젤리맨 활성화
+                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();     
                 gJelly[i].transform.position = new Vector2(6.8f, -0.8f); // 젤리맨 위치를 스폰 위치로 변경
-                sJelly.Init();
                 sJelly.SetKind(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
+                sJelly.Init();
+                gJelly[i].SetActive(true); // 젤리맨 활성화
                 sJelly.MoveJelly();
                 GameData.jellyNum++;
                 sJelly.jellyCount = GameData.jellyNum;

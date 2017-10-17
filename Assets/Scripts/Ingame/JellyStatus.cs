@@ -40,6 +40,7 @@ public class JellyStatus : MonoBehaviour
     public void Init()
     {
         animator = GetComponent<Animator>();
+        animator.Play("StrongJellyNormal");
         jellyTempHealth = health;
         life = true;
     }
@@ -48,7 +49,7 @@ public class JellyStatus : MonoBehaviour
     {
         Debug.Log("DeadLoop");
         yield return DeadFrame();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.201f);
         yield return Death();
         yield break;
     }
@@ -80,39 +81,21 @@ public class JellyStatus : MonoBehaviour
         yield break;
     }
 
-    public void NomalJelly()
-    {
-        health = 50;
-        damage = 8;
-        defend = 5;
-    }
-
-    public void StrongJelly()
-    {
-        health = 120;
-        damage = 15;
-        defend = 10;
-    }
-
-    public void BigJelly()
-    {
-        health = 300;
-        damage = 25;
-        defend = 20;
-    }
-
     public void SetKind(int temp)
     {
         switch (temp)
         {
             case 0:
-                NomalJelly();
+                NormalJelly normalJelly = GetComponent<NormalJelly>();
+                normalJelly.SetStat();
                 break;
             case 1:
-                StrongJelly();
+                StrongJelly strongJelly = GetComponent<StrongJelly>();
+                strongJelly.SetStat();
                 break;
             case 2:
-                BigJelly();
+                BigJelly bigJelly = GetComponent<BigJelly>();
+                bigJelly.SetStat();
                 break;
         }
     }
