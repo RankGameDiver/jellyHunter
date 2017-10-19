@@ -16,7 +16,9 @@ public class JellyStatus : MonoBehaviour
 
     public int jellyCount; // 현재 젤리의 순서
 
-    public bool life;
+    private bool life;
+
+    public int jellyKind; // 젤리 종류
 
     void Start()
     {
@@ -32,7 +34,17 @@ public class JellyStatus : MonoBehaviour
 
         if (health < jellyTempHealth && health > 0)
         {
-            animator.Play("NJellyHurt");
+            switch (jellyKind)
+            {
+                case 0:
+                    animator.Play("NJellyHurt");
+                    break;
+                case 1:
+                    animator.Play("StrongJellyHurt");
+                    break;
+                case 2:
+                    break;
+            }
             jellyTempHealth = health;
         }
     }
@@ -40,16 +52,16 @@ public class JellyStatus : MonoBehaviour
     public void Init()
     {
         animator = GetComponent<Animator>();
-        animator.Play("StrongJellyNormal");
         jellyTempHealth = health;
         life = true;
+        gameObject.SetActive(true);
     }
 
     IEnumerator DeadLoop()
     {
         Debug.Log("DeadLoop");
         yield return DeadFrame();
-        yield return new WaitForSeconds(0.201f);
+        yield return new WaitForSeconds(0.3f);
         yield return Death();
         yield break;
     }
@@ -57,7 +69,18 @@ public class JellyStatus : MonoBehaviour
     IEnumerator DeadFrame() // 죽는 애니메이션 종료 후 비활성화
     {
         Debug.Log("DeadFram");
-        animator.Play("NJellyDead");
+        switch (jellyKind)
+        {
+            case 0:
+                animator.Play("NJellyDead");
+                break;
+            case 1:
+                animator.Play("StrongJellyDead");
+                break;
+            case 2:
+                break;
+        }
+        
         yield break;
     }
 
@@ -81,9 +104,9 @@ public class JellyStatus : MonoBehaviour
         yield break;
     }
 
-    public void SetKind(int temp)
+    public void SetJelly()
     {
-        switch (temp)
+        switch (jellyKind)
         {
             case 0:
                 NormalJelly normalJelly = GetComponent<NormalJelly>();
@@ -98,10 +121,24 @@ public class JellyStatus : MonoBehaviour
                 bigJelly.SetStat();
                 break;
         }
+        Init();
+        MoveJelly();
     }
 
-    public void MoveJelly() //블럭 움직임
+    public void MoveJelly() // 젤리 움직임
     {
+        switch (jellyKind)
+        {
+            case 0:
+                animator.Play("NJellyNormal");
+                break;
+            case 1:
+                animator.Play("StrongJellyNormal");
+                break;
+            case 2:
+                break;
+        }
+        gameObject.transform.position = new Vector2(6.8f, -0.8f);
         StartCoroutine(Move()); //Move() 코루틴 실행
     }
 
@@ -151,7 +188,17 @@ public class JellyStatus : MonoBehaviour
     {
         while (gameObject.activeInHierarchy)
         {
-            animator.Play("NJellyAttack");
+            switch (jellyKind)
+            {
+                case 0:
+                    animator.Play("NJellyAttack");
+                    break;
+                case 1:
+                    animator.Play("StrongJellyAttack");
+                    break;
+                case 2:
+                    break;
+            }   
             float tempHealth = catstatus.health;
             catstatus.health -= damage * 2 - catstatus.defend * 1.5f;
             if (catstatus.health > tempHealth)

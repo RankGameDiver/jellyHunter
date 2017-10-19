@@ -10,8 +10,6 @@ public class Stage : MonoBehaviour
 
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
 
-    int jellyKind = 0; // 젤리 종류
-
     void Start()
     {
         StageKind(stage);
@@ -36,7 +34,7 @@ public class Stage : MonoBehaviour
     IEnumerator FirstStageLoop() // 첫번째 스테이지
     {
         Debug.Log("1 Stage Start");
-        yield return CreateLoop(1, (int)Monster.Normal);
+        yield return CreateLoop(1, (int)Monster.Strong);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
         Debug.Log("2 Stage Start");
@@ -53,7 +51,7 @@ public class Stage : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             yield return Create(jellyKind);
-            yield return new WaitForSeconds(3f); // 5초 대기
+            yield return new WaitForSeconds(3f); // 대기
         }
         yield break;
     }
@@ -65,11 +63,8 @@ public class Stage : MonoBehaviour
             if (!gJelly[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
                 JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();     
-                gJelly[i].transform.position = new Vector2(6.8f, -0.8f); // 젤리맨 위치를 스폰 위치로 변경
-                sJelly.SetKind(jellyKind); // 젤리맨 스크립트 초기화 (i)안에 다음에 나와야 되는 젤리의 종류를 넣어줘야함
-                sJelly.Init();
-                gJelly[i].SetActive(true); // 젤리맨 활성화
-                sJelly.MoveJelly();
+                sJelly.jellyKind = jellyKind;
+                sJelly.SetJelly();
                 GameData.jellyNum++;
                 sJelly.jellyCount = GameData.jellyNum;
                 i = 5;

@@ -16,7 +16,7 @@ public class CatStatus : MonoBehaviour
     private bool shieldAct;
 
     private Animator animator;
-    public bool life;
+    private bool life;
 
     void Start()
     {
@@ -41,7 +41,6 @@ public class CatStatus : MonoBehaviour
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>(); // 여기에 null이 들어가서 공식에 에러남
             if (sJelly.jellyCount == jellyNum)
                 return i;
-
         }
         return 0;
     }
@@ -50,28 +49,17 @@ public class CatStatus : MonoBehaviour
     {
         JellyStatus sJelly = stage.gJelly[0].GetComponent<JellyStatus>();
         float trueDamage = (damage + (GameData.skillPower * 4));
+        int length = 0; ; // 공격 범위
 
-        if (GameData.skillPower >= 1)
+        if (GameData.skillPower >= 1)      length = 1;
+        else if (GameData.skillPower >= 3) length = 2;
+        else if (GameData.skillPower == 5) length = 3;
+
+        for (int i = 1; i <= length; i++)
         {
-            if (stage.gJelly[JellyNum(1)].activeInHierarchy)
+            if (stage.gJelly[JellyNum(i)].activeInHierarchy)
             {
-                sJelly = stage.gJelly[JellyNum(1)].GetComponent<JellyStatus>();
-                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
-            }
-        }
-        if (GameData.skillPower >= 2)
-        {
-            if (stage.gJelly[JellyNum(2)].activeInHierarchy)
-            {
-                sJelly = stage.gJelly[JellyNum(2)].GetComponent<JellyStatus>();
-                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
-            }
-        }
-        if(GameData.skillPower == 5)
-        {
-            if (stage.gJelly[JellyNum(3)].activeInHierarchy)
-            {
-                sJelly = stage.gJelly[JellyNum(3)].GetComponent<JellyStatus>();
+                sJelly = stage.gJelly[JellyNum(i)].GetComponent<JellyStatus>();
                 sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
             }
         }
