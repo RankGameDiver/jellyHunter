@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class JellyStatus : MonoBehaviour
 { // 클래스와 상속을 이용해서 다시 짤 예정
-    public float health; // 체력
-    public float damage; // 공격력
-    public float defend; // 방어력
+    [SerializeField]
+    private float health; // 체력
+    private float damage; // 공격력
+    private float defend; // 방어력
 
     public CatStatus catstatus;
     public Stage stage;
     private Animator animator;
 
     private float jellyTempHealth;
-
-    public int jellyCount; // 현재 젤리의 순서
-
     private bool life;
 
+    public int jellyCount; // 현재 젤리의 순서
     public int jellyKind; // 젤리 종류
 
     void Start()
@@ -110,15 +109,15 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 NormalJelly normalJelly = GetComponent<NormalJelly>();
-                normalJelly.SetStat();
+                normalJelly.SetStatus();
                 break;
             case 1:
                 StrongJelly strongJelly = GetComponent<StrongJelly>();
-                strongJelly.SetStat();
+                strongJelly.SetStatus();
                 break;
             case 2:
                 BigJelly bigJelly = GetComponent<BigJelly>();
-                bigJelly.SetStat();
+                bigJelly.SetStatus();
                 break;
         }
         Init();
@@ -145,14 +144,8 @@ public class JellyStatus : MonoBehaviour
     private float _speed = 1.0f; //속도 지정
     public float speed
     {
-        get
-        {
-            return _speed * Time.deltaTime; //이동거리 반환
-        }
-        private set
-        {
-            _speed = value; //이동속도 변경
-        }
+        get { return _speed * Time.deltaTime; } //이동거리 반환
+        private set { _speed = value; } //이동속도 변경
     }
 
     bool _isMoving; // 블럭이 생성된 후 움직임을 체크
@@ -195,6 +188,7 @@ public class JellyStatus : MonoBehaviour
                     break;
                 case 1:
                     animator.Play("StrongJellyAttack");
+                    yield return new WaitForSeconds(0.7f);
                     break;
                 case 2:
                     break;
@@ -206,5 +200,17 @@ public class JellyStatus : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
+    }
+
+    public void SetStatus(int hp, int dmg, int def)
+    {
+        health = hp;
+        damage = dmg;
+        defend = def;
+    }
+
+    public void Attacked(float damage)
+    {
+        health -= (damage * 2 - defend * 1.5f);
     }
 }

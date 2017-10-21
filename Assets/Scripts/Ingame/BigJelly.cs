@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BigJelly : JellyStatus
+public class BigJelly : MonoBehaviour
 {
 
     // Use this for initialization
@@ -16,11 +16,9 @@ public class BigJelly : JellyStatus
 
     }
 
-    public void SetStat()
+    public void SetStatus()
     {
         JellyStatus sJelly = GetComponent<JellyStatus>();
-        sJelly.health = 300;
-        sJelly.damage = 25;
-        sJelly.defend = 20;
+        sJelly.SetStatus(300, 25, 20);
     }
 }

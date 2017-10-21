@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CatStatus : MonoBehaviour
 {
-    public float health; // 체력
-    public float damage; // 공격력
-    public float defend; // 방어력(현재 적용 수치)
-    public float def; // 기본 방어력
+    [SerializeField]
+    private float health; // 체력
+    private float damage; // 공격력
+    private float defend; // 방어력(현재 적용 수치)
+    private float def; // 기본 방어력
 
     public Stage stage;
     public float lastTime; // 방어 적용 시간
@@ -27,7 +28,7 @@ public class CatStatus : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0) // 플레이어가 죽었을 때 실행
+        if (health <= 0 && life) // 플레이어가 죽었을 때 실행
         {
             
         }
@@ -60,7 +61,7 @@ public class CatStatus : MonoBehaviour
             if (stage.gJelly[JellyNum(i)].activeInHierarchy)
             {
                 sJelly = stage.gJelly[JellyNum(i)].GetComponent<JellyStatus>();
-                sJelly.health -= (trueDamage * 2 - sJelly.defend * 1.5f);
+                sJelly.Attacked(trueDamage);
             }
         }
 

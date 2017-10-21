@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NormalJelly : JellyStatus
+public class JellyEffect : JellyStatus
 {
-
     // Use this for initialization
     void Start()
     {
@@ -15,11 +14,4 @@ public class NormalJelly : JellyStatus
     {
 
     }
-
-    public void SetStatus()
-    {
-        JellyStatus sJelly = GetComponent<JellyStatus>();
-        sJelly.SetStatus(50, 8, 5);
-    }
-
 }

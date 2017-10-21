@@ -16,11 +16,9 @@ public class StrongJelly : JellyStatus
 
     }
 
-    public void SetStat()
+    public void SetStatus()
     {
         JellyStatus sJelly = GetComponent<JellyStatus>();
-        sJelly.health = 120;
-        sJelly.damage = 15;
-        sJelly.defend = 10;
+        sJelly.SetStatus(120, 15, 10);
     }
 }
