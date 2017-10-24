@@ -6,9 +6,11 @@ public class CatStatus : MonoBehaviour
 {
     [SerializeField]
     private float health; // 체력
-    private float damage; // 공격력
-    private float defend; // 방어력(현재 적용 수치)
-    private float def; // 기본 방어력
+    [SerializeField]
+    private float damage; // 공격력    
+    [SerializeField]
+    private float defend; // 기본 방어력
+    private float truedefend;
 
     public Stage stage;
     public float lastTime; // 방어 적용 시간
@@ -21,6 +23,9 @@ public class CatStatus : MonoBehaviour
 
     void Start()
     {
+        health = 100;
+        damage = 10;
+        defend = 6;
         animator = GetComponent<Animator>();
         lastTime = 0;
         life = true;
@@ -73,7 +78,7 @@ public class CatStatus : MonoBehaviour
     {
         if (shield && !shieldAct)
         {
-            defend = def + (1 + GameData.skillPower);
+            truedefend = defend + (1 + GameData.skillPower);
             shieldAct = true;
         }
         else if (shield && shieldAct)
@@ -87,7 +92,7 @@ public class CatStatus : MonoBehaviour
         }
         else
         {
-            defend = 8;
+            truedefend = 8;
             shieldAct = false;
         }
     }
@@ -112,4 +117,7 @@ public class CatStatus : MonoBehaviour
         //Debug.Log("Heal");
     }
 
+    public void SetHealth(float hp)     { health = hp; }
+    public float GetHealth()            { return health; }
+    public float GetDefend()            { return truedefend; }
 }

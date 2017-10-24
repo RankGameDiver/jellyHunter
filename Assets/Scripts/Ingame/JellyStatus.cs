@@ -6,7 +6,9 @@ public class JellyStatus : MonoBehaviour
 { // 클래스와 상속을 이용해서 다시 짤 예정
     [SerializeField]
     private float health; // 체력
+    [SerializeField]
     private float damage; // 공격력
+    [SerializeField]
     private float defend; // 방어력
 
     public CatStatus catstatus;
@@ -29,22 +31,6 @@ public class JellyStatus : MonoBehaviour
         {
             StartCoroutine(DeadLoop());
             life = false;
-        }
-
-        if (health < jellyTempHealth && health > 0)
-        {
-            switch (jellyKind)
-            {
-                case 0:
-                    animator.Play("NJellyHurt");
-                    break;
-                case 1:
-                    animator.Play("StrongJellyHurt");
-                    break;
-                case 2:
-                    break;
-            }
-            jellyTempHealth = health;
         }
     }
 
@@ -193,10 +179,11 @@ public class JellyStatus : MonoBehaviour
                 case 2:
                     break;
             }   
-            float tempHealth = catstatus.health;
-            catstatus.health -= damage * 2 - catstatus.defend * 1.5f;
-            if (catstatus.health > tempHealth)
-                catstatus.health = tempHealth;
+            float tempHealth = catstatus.GetHealth();
+            float health = catstatus.GetHealth();
+            health -= damage * 2 - catstatus.GetDefend() * 1.5f;
+            if (health > tempHealth)    catstatus.SetHealth(tempHealth);
+            else                        catstatus.SetHealth(health);
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
@@ -211,6 +198,19 @@ public class JellyStatus : MonoBehaviour
 
     public void Attacked(float damage)
     {
+        jellyTempHealth = health;
         health -= (damage * 2 - defend * 1.5f);
+        if (health > jellyTempHealth) health = jellyTempHealth;
+        switch (jellyKind)
+        {
+            case 0:
+                animator.Play("NJellyHurt");
+                break;
+            case 1:
+                animator.Play("StrongJellyHurt");
+                break;
+            case 2:
+                break;
+        }
     }
 }

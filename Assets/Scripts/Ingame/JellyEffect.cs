@@ -3,15 +3,15 @@ using System.Collections;
 
 public class JellyEffect : JellyStatus
 {
-    // Use this for initialization
+    private Animator animator;
+
     void Start()
     {
-
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AttackEft()
     {
-
+        //animator.Play("");
     }
 }

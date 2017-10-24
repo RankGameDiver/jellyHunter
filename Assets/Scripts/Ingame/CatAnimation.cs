@@ -12,22 +12,22 @@ public class CatAnimation : MonoBehaviour
 
     void Start()
     {
-        catTempHealth = cat.health;
+        catTempHealth = cat.GetHealth();
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         animations();
-        if (cat.health <= 0)
+        if (cat.GetHealth() <= 0)
         {
             animator.Play("CatDead");
         }
 
-        if (cat.health < catTempHealth)
+        if (cat.GetHealth() < catTempHealth)
         {
             animator.Play("CatHurt");
-            catTempHealth = cat.health;
+            catTempHealth = cat.GetHealth();
             //Debug.Log("hurt");
         }
     }
