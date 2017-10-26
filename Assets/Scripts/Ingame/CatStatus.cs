@@ -17,16 +17,15 @@ public class CatStatus : MonoBehaviour
 
     private bool shield; // 방어 활성화 체크
     private bool shieldAct;
-
-    private Animator animator;
     private bool life;
+
+    public int length = 0; // 공격 범위
 
     void Start()
     {
         health = 100;
         damage = 10;
         defend = 6;
-        animator = GetComponent<Animator>();
         lastTime = 0;
         life = true;
     }
@@ -44,7 +43,7 @@ public class CatStatus : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>(); // 여기에 null이 들어가서 공식에 에러남
+            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
             if (sJelly.jellyCount == jellyNum)
                 return i;
         }
@@ -54,8 +53,7 @@ public class CatStatus : MonoBehaviour
     public void Attack() // 현재 목표물 지정 오류
     {
         JellyStatus sJelly = stage.gJelly[0].GetComponent<JellyStatus>();
-        float trueDamage = (damage + (GameData.skillPower * 4));
-        int length = 0; ; // 공격 범위
+        float trueDamage = (damage + (GameData.skillPower * 4));      
 
         if (GameData.skillPower >= 1)      length = 1;
         else if (GameData.skillPower >= 3) length = 2;

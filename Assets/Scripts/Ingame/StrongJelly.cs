@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StrongJelly : JellyStatus
+public class StrongJelly : MonoBehaviour
 {
 
     // Use this for initialization

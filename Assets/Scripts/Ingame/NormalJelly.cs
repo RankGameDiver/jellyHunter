@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NormalJelly : JellyStatus
+public class NormalJelly : MonoBehaviour
 {
 
     // Use this for initialization

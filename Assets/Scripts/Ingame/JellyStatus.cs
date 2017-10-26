@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JellyStatus : MonoBehaviour
-{ // 클래스와 상속을 이용해서 다시 짤 예정
+{
     [SerializeField]
     private float health; // 체력
     [SerializeField]
@@ -14,15 +14,18 @@ public class JellyStatus : MonoBehaviour
     public CatStatus catstatus;
     public Stage stage;
     private Animator animator;
+    private Animator effect;
 
     private float jellyTempHealth;
     private bool life;
 
     public int jellyCount; // 현재 젤리의 순서
     public int jellyKind; // 젤리 종류
+    public GameObject effectObj;
 
     void Start()
     {
+        effect = effectObj.GetComponent<Animator>();
     }
 
     void Update()
@@ -171,9 +174,11 @@ public class JellyStatus : MonoBehaviour
             {
                 case 0:
                     animator.Play("NJellyAttack");
+                    effect.Play("NJellyAttackEft");
                     break;
                 case 1:
                     animator.Play("StrongJellyAttack");
+                    effect.Play("SJellyAttackEft");
                     yield return new WaitForSeconds(0.7f);
                     break;
                 case 2:
