@@ -8,6 +8,7 @@ public class CatAnimation : MonoBehaviour
     public Animator effect;
 
     public CatStatus cat; // 스킬 공식 적용용으로 불러옴
+    public GameObject effectObj;
 
     private float catTempHealth;
 
@@ -49,7 +50,8 @@ public class CatAnimation : MonoBehaviour
                 switch (cat.length)
                 {
                     case 1:
-                        effect.Play("NCatAttack1Eft");
+                        //effect.Play("NCatAttack1Eft");
+                        effect.Play("NCatAttack2Eft");
                         break;
                     case 2:
                         effect.Play("NCatAttack2Eft");
