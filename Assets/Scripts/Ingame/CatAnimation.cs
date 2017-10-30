@@ -70,13 +70,25 @@ public class CatAnimation : MonoBehaviour
                 animator.Play("CatDefend");
                 //effect.Play("NCatDefendEft");
                 cat.Defend();
+                cat.length = 0;
                 GameData.skillKind = 0;
                 break;
             case 3:
-                GameData.lastSkillKind = GameData.skillKind;
-                animator.Play("CatHeal");
+                GameData.lastSkillKind = GameData.skillKind;           
+                switch (cat.length)
+                {
+                    case 1:
+                        animator.Play("Cat1Heal");
+                        break;
+                    case 2:
+                        animator.Play("Cat2Heal");
+                        break;
+                    default:
+                        break;
+                }
                 //effect.Play("NCatHealEft");
                 cat.Heal();
+                cat.length = 0;
                 GameData.skillKind = 0;
                 break;
             default:

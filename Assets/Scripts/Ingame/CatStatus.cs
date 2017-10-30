@@ -39,41 +39,30 @@ public class CatStatus : MonoBehaviour
         Defending();
     }
 
-    public int JellyNum(int jellyNum) // jellyNum은 찾아야 하는 젤리의 순서
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount == jellyNum)
-                return i;
-        }
-        return 0;
-    }
-
     public void Attack()
     {
-        JellyStatus sJelly = stage.gJelly[0].GetComponent<JellyStatus>();
         float trueDamage = (damage + (GameData.skillPower * 4));      
 
         if (GameData.skillPower <= 2)      length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
 
-        for (int i = 1; i <= length; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (stage.gJelly[JellyNum(i)].activeInHierarchy)
-            {
-                sJelly = stage.gJelly[JellyNum(i)].GetComponent<JellyStatus>();
+            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
+            if (sJelly.jellyCount < length && stage.gJelly[i].activeInHierarchy)
                 sJelly.Attacked(trueDamage);
-            }
         }
-
         GameData.skillPower = 0;
         //Debug.Log("Attack");
     }
 
     public void Defending() // 방어 버프 적용중
     {
+        if (GameData.skillPower <= 2) length = 1;
+        else if (GameData.skillPower <= 4) length = 2;
+        else if (GameData.skillPower == 5) length = 3;
+
         if (shield && !shieldAct)
         {
             truedefend = defend + (1 + GameData.skillPower);
@@ -92,13 +81,16 @@ public class CatStatus : MonoBehaviour
         {
             truedefend = 8;
             shieldAct = false;
-        }
+        }      
     }
 
     public void Defend() // 방어중인지 체크
     {
         if (shield == false)
+        {
             shield = true;
+            GameData.skillPower = 0;
+        }
         else
         {
             shieldAct = false;
@@ -109,9 +101,14 @@ public class CatStatus : MonoBehaviour
 
     public void Heal()
     {
+        if (GameData.skillPower <= 2) length = 1;
+        else if (GameData.skillPower <= 4) length = 2;
+        else if (GameData.skillPower == 5) length = 3;
+
         health += (10 + GameData.skillPower * 5);
         if (health > 100)
             health = 100;
+        GameData.skillPower = 0;
         //Debug.Log("Heal");
     }
 
