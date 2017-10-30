@@ -61,9 +61,11 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 animator.Play("NJellyDead");
+                effect.Play("NJellyDeadEft");
                 break;
             case 1:
                 animator.Play("StrongJellyDead");
+                effect.Play("SJellyDeadEft");
                 break;
             case 2:
                 break;
@@ -210,9 +212,11 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 animator.Play("NJellyHurt");
+                effect.Play("NJellyHurtEft");
                 break;
             case 1:
                 animator.Play("StrongJellyHurt");
+                effect.Play("SJellyHurtEft");
                 break;
             case 2:
                 break;

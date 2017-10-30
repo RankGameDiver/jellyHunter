@@ -34,7 +34,7 @@ public class CatStatus : MonoBehaviour
     {
         if (health <= 0 && life) // 플레이어가 죽었을 때 실행
         {
-            
+            life = false;
         }
         Defending();
     }
@@ -118,4 +118,5 @@ public class CatStatus : MonoBehaviour
     public void SetHealth(float hp)     { health = hp; }
     public float GetHealth()            { return health; }
     public float GetDefend()            { return truedefend; }
+    public bool GetLife()               { return life; }
 }

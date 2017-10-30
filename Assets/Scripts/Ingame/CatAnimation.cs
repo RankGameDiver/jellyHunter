@@ -21,7 +21,7 @@ public class CatAnimation : MonoBehaviour
     void Update()
     {
         animations();
-        if (cat.GetHealth() <= 0)
+        if (cat.GetHealth() <= 0 && cat.GetLife())
         {
             animator.Play("CatDead");
             effect.Play("NCatDeadEft");
@@ -50,8 +50,8 @@ public class CatAnimation : MonoBehaviour
                 switch (cat.length)
                 {
                     case 1:
-                        //effect.Play("NCatAttack1Eft");
-                        effect.Play("NCatAttack2Eft");
+                        effectObj.transform.position = new Vector3(-4.47f, -0.83f, -3.0f);
+                        effect.Play("NCatAttack1Eft");
                         break;
                     case 2:
                         effect.Play("NCatAttack2Eft");
