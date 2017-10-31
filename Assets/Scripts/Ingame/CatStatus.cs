@@ -50,7 +50,7 @@ public class CatStatus : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount < length && stage.gJelly[i].activeInHierarchy)
+            if (sJelly.jellyCount == length && stage.gJelly[i].activeInHierarchy)
                 sJelly.Attacked(trueDamage);
         }
         GameData.skillPower = 0;

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7f4069f9c92b66845a24504a88fa6cb8
-timeCreated: 1509363193
+timeCreated: 1509412900
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -87,9 +87,9 @@ TextureImporter:
       name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_01"
       rect:
         serializedVersion: 2
-        x: 498
+        x: 410
         y: 15
-        width: 324
+        width: 412
         height: 232
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -100,9 +100,9 @@ TextureImporter:
       name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_02"
       rect:
         serializedVersion: 2
-        x: 910
+        x: 835
         y: 15
-        width: 327
+        width: 402
         height: 232
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -113,9 +113,9 @@ TextureImporter:
       name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_04"
       rect:
         serializedVersion: 2
-        x: 1697
+        x: 1671
         y: 7
-        width: 368
+        width: 394
         height: 246
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -126,9 +126,9 @@ TextureImporter:
       name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_00"
       rect:
         serializedVersion: 2
-        x: 103
+        x: 27
         y: 15
-        width: 288
+        width: 364
         height: 220
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -139,9 +139,9 @@ TextureImporter:
       name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_03"
       rect:
         serializedVersion: 2
-        x: 1283
+        x: 1253
         y: 9
-        width: 370
+        width: 400
         height: 246
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -152,9 +152,9 @@ TextureImporter:
       name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_05"
       rect:
         serializedVersion: 2
-        x: 2102
+        x: 2088
         y: 4
-        width: 379
+        width: 393
         height: 249
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
