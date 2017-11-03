@@ -50,7 +50,7 @@ public class CatAnimation : MonoBehaviour
                 switch (cat.length)
                 {
                     case 1:
-                        effectObj.transform.position = new Vector3(-4.47f, -0.83f, -3.0f);
+                        //effectObj.transform.position = new Vector3(-4.47f, -0.83f, -3.0f);
                         effect.Play("NCatAttack1Eft");
                         break;
                     case 2:
@@ -62,16 +62,25 @@ public class CatAnimation : MonoBehaviour
                     default:
                         break;
                 }          
-                GameData.skillKind = 0;
-                cat.length = 0;
                 break;
             case 2:
                 GameData.lastSkillKind = GameData.skillKind;
-                cat.Defend();
+                cat.Defending();
                 animator.Play("CatDefend");
-                //effect.Play("NCatDefendEft");
-                cat.length = 0;
-                GameData.skillKind = 0;
+                switch (cat.length)
+                {
+                    case 1:
+                        effect.Play("NCatDefend1Eft");
+                        break;
+                    case 2:
+                        effect.Play("NCatDefend2Eft");
+                        break;
+                    case 3:
+                        effect.Play("NCatDefend3Eft");
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 3:
                 GameData.lastSkillKind = GameData.skillKind;           
@@ -86,15 +95,19 @@ public class CatAnimation : MonoBehaviour
                         animator.Play("Cat2Heal");
                         effect.Play("NCatHeal2Eft");
                         break;
+                    case 3:
+                        animator.Play("Cat2Heal");
+                        effect.Play("NCatHeal2Eft");
+                        break;
                     default:
                         break;
                 }
-                cat.length = 0;
-                GameData.skillKind = 0;
                 break;
             default:
                 break;
         }
+        cat.length = 0;
+        GameData.skillKind = 0;
     }
 
 }
