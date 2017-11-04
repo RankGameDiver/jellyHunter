@@ -170,6 +170,7 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Attack()
     {
+        Debug.Log("Jelly->Cat Attack!");
         while (gameObject.activeInHierarchy)
         {
             switch (jellyKind)
@@ -188,9 +189,11 @@ public class JellyStatus : MonoBehaviour
             }   
             float tempHealth = catstatus.GetHealth();
             float health = catstatus.GetHealth();
+            Debug.Log("Before cHealth: " + health);
             health -= damage * 2 - catstatus.GetDefend() * 1.5f;
             if (health > tempHealth)    catstatus.SetHealth(tempHealth);
             else                        catstatus.SetHealth(health);
+            Debug.Log("After cHealth: " + health);
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
@@ -205,9 +208,12 @@ public class JellyStatus : MonoBehaviour
 
     public void Attacked(float damage)
     {
+        Debug.Log("Jelly Attacked!");
         jellyTempHealth = health;
+        Debug.Log("Before jHealth: " + health);
         health -= (damage * 2 - defend * 1.5f);
         if (health > jellyTempHealth) health = jellyTempHealth;
+        Debug.Log("After jHealth: " + health);
         switch (jellyKind)
         {
             case 0:

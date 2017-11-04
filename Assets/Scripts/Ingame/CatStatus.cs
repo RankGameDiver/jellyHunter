@@ -41,11 +41,17 @@ public class CatStatus : MonoBehaviour
 
     public void Attack()
     {
-        float trueDamage = (damage + (GameData.skillPower * 4));      
+        Debug.Log("Cat->Jelly Attack! Chain: "+GameData.skillPower);
 
         if (GameData.skillPower <= 2)      length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
+
+        Debug.Log("Length: " + length);
+
+        float trueDamage = (damage + (GameData.skillPower * (3 + length)));
+
+        Debug.Log("trueDamage: " + trueDamage);
 
         for (int i = 0; i < 5; i++)
         {
@@ -59,6 +65,7 @@ public class CatStatus : MonoBehaviour
 
     public void Defending() // 방어 버프 적용중
     {
+        Debug.Log("Defend! Chain: " + GameData.skillPower);
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
@@ -67,6 +74,7 @@ public class CatStatus : MonoBehaviour
         {
             truedefend = defend + (1 + GameData.skillPower);
             shieldAct = true;
+            Debug.Log("isShieldActive: " + shieldAct);
         }
         else if (shield && shieldAct)
         {
@@ -75,12 +83,14 @@ public class CatStatus : MonoBehaviour
             {
                 shield = false;
                 lastTime = 0;
+                Debug.Log("isShieldActive: " + shieldAct);
             }
         }
         else
         {
             truedefend = 8;
             shieldAct = false;
+            Debug.Log("isShieldActive: " + shieldAct);
         }      
     }
 
@@ -101,6 +111,7 @@ public class CatStatus : MonoBehaviour
 
     public void Heal()
     {
+        Debug.Log("Heal! Chain: " + GameData.skillPower);
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
