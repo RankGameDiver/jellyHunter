@@ -65,16 +65,16 @@ public class CatStatus : MonoBehaviour
 
     public void Defending() // 방어 버프 적용중
     {
-        Debug.Log("Defend! Chain: " + GameData.skillPower);
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
+
+        bool tempShieldAct = shieldAct;
 
         if (shield && !shieldAct)
         {
             truedefend = defend + (1 + GameData.skillPower);
             shieldAct = true;
-            Debug.Log("isShieldActive: " + shieldAct);
         }
         else if (shield && shieldAct)
         {
@@ -83,19 +83,24 @@ public class CatStatus : MonoBehaviour
             {
                 shield = false;
                 lastTime = 0;
-                Debug.Log("isShieldActive: " + shieldAct);
             }
         }
         else
         {
             truedefend = 8;
             shieldAct = false;
-            Debug.Log("isShieldActive: " + shieldAct);
         }      
+
+        if(tempShieldAct!=shieldAct)
+        {
+            Debug.Log("Shield Act Changed!");
+            Debug.Log("isShieldActive: " + shieldAct);
+        }
     }
 
     public void Defend() // 방어중인지 체크
     {
+        Debug.Log("Defend! Chain: " + GameData.skillPower);
         if (shield == false)
         {
             shield = true;
@@ -112,6 +117,7 @@ public class CatStatus : MonoBehaviour
     public void Heal()
     {
         Debug.Log("Heal! Chain: " + GameData.skillPower);
+        Debug.Log("Before cHealth: " + health);
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
@@ -120,6 +126,7 @@ public class CatStatus : MonoBehaviour
         if (health > 100)
             health = 100;
         GameData.skillPower = 0;
+        Debug.Log("After cHealth: " + health);
         //Debug.Log("Heal");
     }
 
