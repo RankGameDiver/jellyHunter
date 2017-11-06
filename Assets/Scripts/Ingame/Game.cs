@@ -78,7 +78,6 @@ public class Game : MonoBehaviour
             if (block.blockNum == blockNum)
                 return i;
         }
-        Debug.Log("BlockNum False");
         return 0;
     }
 
