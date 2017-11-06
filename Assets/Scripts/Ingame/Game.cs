@@ -115,9 +115,7 @@ public class Game : MonoBehaviour
             }
             checkRight = false; //체크 종료
         }
-
         ChainCheck(currentBlock, blockNum, blockCount, temp); //체인 체크
-
     }
 
     void ChainCheck(int currentBlock, int blockNum, int blockCount, int temp)

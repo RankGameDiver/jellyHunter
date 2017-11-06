@@ -10,6 +10,7 @@ public class CatStatus : MonoBehaviour
     private float damage; // 공격력    
     [SerializeField]
     private float defend; // 기본 방어력
+    [SerializeField]
     private float truedefend;
 
     public Stage stage;
@@ -25,7 +26,7 @@ public class CatStatus : MonoBehaviour
     {
         health = 100;
         damage = 10;
-        defend = 6;
+        defend = 5;
         lastTime = 0;
         life = true;
     }
@@ -49,14 +50,14 @@ public class CatStatus : MonoBehaviour
 
         Debug.Log("Length: " + length);
 
-        float trueDamage = (damage + (GameData.skillPower * (3 + length)));
+        float trueDamage = damage * GameData.skillPower;
 
         Debug.Log("trueDamage: " + trueDamage);
 
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount == length && stage.gJelly[i].activeInHierarchy)
+            if (sJelly.jellyCount <= length && stage.gJelly[i].activeInHierarchy)
                 sJelly.Attacked(trueDamage);
         }
         GameData.skillPower = 0;
@@ -64,17 +65,14 @@ public class CatStatus : MonoBehaviour
     }
 
     public void Defending() // 방어 버프 적용중
-    {
-        if (GameData.skillPower <= 2) length = 1;
-        else if (GameData.skillPower <= 4) length = 2;
-        else if (GameData.skillPower == 5) length = 3;
-
+    { 
         bool tempShieldAct = shieldAct;
 
         if (shield && !shieldAct)
         {
-            truedefend = defend + (1 + GameData.skillPower);
+            truedefend = defend + GameData.skillPower * 5;
             shieldAct = true;
+            GameData.skillPower = 0;
         }
         else if (shield && shieldAct)
         {
@@ -82,14 +80,15 @@ public class CatStatus : MonoBehaviour
             if (lastTime >= 5.0f)
             {
                 shield = false;
+                shieldAct = false;
                 lastTime = 0;
+                truedefend = defend;
             }
         }
         else
         {
-            truedefend = 8;
-            shieldAct = false;
-        }      
+            truedefend = defend;
+        }    
 
         if(tempShieldAct!=shieldAct)
         {
@@ -98,19 +97,23 @@ public class CatStatus : MonoBehaviour
         }
     }
 
-    public void Defend() // 방어중인지 체크
+    public void Defend() // 방어 버프 활성화
     {
         Debug.Log("Defend! Chain: " + GameData.skillPower);
+
+        if (GameData.skillPower <= 2) length = 1;
+        else if (GameData.skillPower <= 4) length = 2;
+        else if (GameData.skillPower == 5) length = 3;
+
         if (shield == false)
         {
             shield = true;
-            GameData.skillPower = 0;
         }
         else
         {
             shieldAct = false;
             lastTime = 0;
-        }
+        }       
         //Debug.Log("Defend");
     }
 
@@ -122,7 +125,7 @@ public class CatStatus : MonoBehaviour
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
 
-        health += (10 + GameData.skillPower * 5);
+        health += GameData.skillPower * 5 * length;
         if (health > 100)
             health = 100;
         GameData.skillPower = 0;

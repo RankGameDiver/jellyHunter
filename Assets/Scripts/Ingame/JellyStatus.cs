@@ -186,11 +186,11 @@ public class JellyStatus : MonoBehaviour
                     break;
                 case 2:
                     break;
-            }   
+            }
             float tempHealth = catstatus.GetHealth();
             float health = catstatus.GetHealth();
             Debug.Log("Before cHealth: " + health);
-            health -= damage * 2 - catstatus.GetDefend() * 1.5f;
+            health -= damage * (1 - catstatus.GetDefend() / 100);
             if (health > tempHealth)    catstatus.SetHealth(tempHealth);
             else                        catstatus.SetHealth(health);
             Debug.Log("After cHealth: " + health);
@@ -211,7 +211,7 @@ public class JellyStatus : MonoBehaviour
         Debug.Log("Jelly Attacked!");
         jellyTempHealth = health;
         Debug.Log("Before jHealth: " + health);
-        health -= (damage * 2 - defend * 1.5f);
+        health -= damage * (1 - defend / 100);
         if (health > jellyTempHealth) health = jellyTempHealth;
         Debug.Log("After jHealth: " + health);
         switch (jellyKind)

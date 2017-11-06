@@ -21,7 +21,7 @@ public class CatAnimation : MonoBehaviour
     void Update()
     {
         animations();
-        if (cat.GetHealth() <= 0 && cat.GetLife())
+        if (!cat.GetLife())
         {
             animator.Play("CatDead");
             effect.Play("NCatDeadEft");
@@ -65,7 +65,7 @@ public class CatAnimation : MonoBehaviour
                 break;
             case 2:
                 GameData.lastSkillKind = GameData.skillKind;
-                cat.Defending();
+                cat.Defend();
                 animator.Play("CatDefend");
                 switch (cat.length)
                 {
