@@ -20,29 +20,56 @@ public class Stage : MonoBehaviour
         switch (stage)
         {
             case 1:
-                StartCoroutine(FirstStageLoop());
+                StartCoroutine(Stage1());
                 break;
             case 2:
-
+                StartCoroutine(Stage2());
                 break;
             case 3:
-
+                StartCoroutine(Stage3());
                 break;
         }
     }
 
-    IEnumerator FirstStageLoop() // 첫번째 스테이지
+    IEnumerator Stage1() // 첫번째 스테이지
     {
-        Debug.Log("1 Stage Start");
-        yield return CreateLoop(1, (int)Monster.Strong);
+        yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
-        Debug.Log("2 Stage Start");
+
         yield return CreateLoop(3, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
-        Debug.Log("3 Stage Start");
+
         yield return CreateLoop(5, (int)Monster.Normal);
+        yield break;
+    }
+
+    IEnumerator Stage2()
+    {
+        yield return CreateLoop(3, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        yield return new WaitForSeconds(5f);
+
+        yield return CreateLoop(4, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        yield return new WaitForSeconds(5f);
+
+        yield return CreateLoop(1, (int)Monster.Strong);
+        yield break;
+    }
+
+    IEnumerator Stage3()
+    {
+        yield return CreateLoop(3, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        yield return new WaitForSeconds(5f);
+
+        yield return CreateLoop(5, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        yield return new WaitForSeconds(5f);
+
+        yield return CreateLoop(1, (int)Monster.Big);
         yield break;
     }
 
