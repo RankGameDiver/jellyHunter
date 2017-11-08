@@ -32,8 +32,8 @@ public class JellyStatus : MonoBehaviour
     {
         if (health <= 0 && life == true) // 젤리맨이 죽었을 때 실행
         {
-            StartCoroutine(DeadLoop());
             life = false;
+            StartCoroutine(DeadLoop());
         }
     }
 
@@ -49,7 +49,7 @@ public class JellyStatus : MonoBehaviour
     {
         Debug.Log("DeadLoop");
         yield return DeadFrame();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1.0f);
         yield return Death();
         yield break;
     }
@@ -70,25 +70,20 @@ public class JellyStatus : MonoBehaviour
             case 2:
                 break;
         }
-        
         yield break;
     }
 
     IEnumerator Death()
     {
         Debug.Log("Death");
+        effect.Play("temp");
         gameObject.SetActive(false);
         GameData.jellyNum--;
         isMoving = false;
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)
-            {
-                sJelly.jellyCount--;
-                if (stage.gJelly[i].activeInHierarchy)
-                    sJelly.MoveJelly();
-            }
+            if (sJelly.jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)  sJelly.jellyCount--;
         }
         jellyCount = 10;
         yield break;
@@ -148,7 +143,7 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Move()
     {
-        if (!isMoving) //움직이고 있지 않으면
+        if (!isMoving && life) //움직이고 있지 않으면
         {
             isMoving = true; //움직임
             while (isMoving) //움직이는 동안

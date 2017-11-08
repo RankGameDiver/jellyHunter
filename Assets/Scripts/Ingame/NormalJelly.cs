@@ -19,7 +19,7 @@ public class NormalJelly : MonoBehaviour
     public void SetStatus()
     {
         JellyStatus sJelly = GetComponent<JellyStatus>();
-        sJelly.SetStatus(50, 8, 5);
+        sJelly.SetStatus(50, 5, 5);
     }
 
 }

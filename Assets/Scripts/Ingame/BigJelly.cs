@@ -19,6 +19,6 @@ public class BigJelly : MonoBehaviour
     public void SetStatus()
     {
         JellyStatus sJelly = GetComponent<JellyStatus>();
-        sJelly.SetStatus(300, 25, 20);
+        sJelly.SetStatus(300, 20, 20);
     }
 }

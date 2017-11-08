@@ -42,7 +42,7 @@ public class CatStatus : MonoBehaviour
 
     public void Attack()
     {
-        if (GameData.skillPower <= 2)      length = 1;
+        if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
 
