@@ -24,7 +24,7 @@ public class CatStatus : MonoBehaviour
 
     void Start()
     {
-        health = 100;
+        health = 200;
         damage = 10;
         defend = 5;
         lastTime = 0;
@@ -69,7 +69,7 @@ public class CatStatus : MonoBehaviour
         else if (shield && shieldAct)
         {
             lastTime += Time.deltaTime;
-            if (lastTime >= 5.0f)
+            if (lastTime >= 10.0f)
             {
                 shield = false;
                 shieldAct = false;
@@ -107,9 +107,9 @@ public class CatStatus : MonoBehaviour
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
 
-        health += GameData.skillPower * 5 * length;
-        if (health > 100)
-            health = 100;
+        health += GameData.skillPower * 10 * length;
+        if (health > 200)
+            health = 200;
         GameData.skillPower = 0;
         //Debug.Log("Heal");
     }

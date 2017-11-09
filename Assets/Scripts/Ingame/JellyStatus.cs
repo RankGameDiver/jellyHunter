@@ -68,6 +68,8 @@ public class JellyStatus : MonoBehaviour
                 effect.Play("SJellyDeadEft");
                 break;
             case 2:
+                animator.Play("BJellyDead");
+                effect.Play("BJellyDeadEft");
                 break;
         }
         yield break;
@@ -76,7 +78,17 @@ public class JellyStatus : MonoBehaviour
     IEnumerator Death()
     {
         Debug.Log("Death");
-        effect.Play("temp");
+        if (jellyKind == 2)
+        {
+            animator.Play("BJellyDeadRun");
+            effect.Play("BJellyDead2Eft");
+            while (transform.position.x <= 12.0f) //움직이는 동안
+            {
+                transform.Translate((Vector2.left * speed).normalized / 40.0f); //블럭 이동
+            }
+        }
+        else
+            effect.Play("temp");           
         gameObject.SetActive(false);
         GameData.jellyNum--;
         isMoving = false;
@@ -116,14 +128,17 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 animator.Play("NJellyNormal");
+                gameObject.transform.position = new Vector2(6.8f, -0.8f);
                 break;
             case 1:
                 animator.Play("StrongJellyNormal");
+                gameObject.transform.position = new Vector2(6.8f, -0.8f);
                 break;
             case 2:
+                animator.Play("BJellyNormal");
+                gameObject.transform.position = new Vector2(7.16f, 0.51f);
                 break;
-        }
-        gameObject.transform.position = new Vector2(6.8f, -0.8f);
+        }   
         StartCoroutine(Move()); //Move() 코루틴 실행
     }
 
@@ -151,10 +166,12 @@ public class JellyStatus : MonoBehaviour
                 if (transform.position.x < GameData.jellyMax.x * 1.2f) //최대 x좌표에 도달했을 경우
                 {
                     isMoving = false; //더 이상 움직이지 않음
-                    if (transform.position.x < GameData.jellyMax.x)
-                    {
-                        StartCoroutine(Attack());
-                    }
+                    StartCoroutine(Attack());
+                }
+                else if (transform.position.x < 5.88f && jellyKind == 2)
+                {
+                    isMoving = false;
+                    StartCoroutine(Attack());
                 }
                 transform.Translate((Vector2.left * speed).normalized / 40.0f); //블럭 이동
                 yield return null; //Update문 수행 완료시까지 대기
@@ -165,7 +182,7 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Attack()
     {
-        while (gameObject.activeInHierarchy)
+        while (life)
         {
             switch (jellyKind)
             {
@@ -176,9 +193,11 @@ public class JellyStatus : MonoBehaviour
                 case 1:
                     animator.Play("StrongJellyAttack");
                     effect.Play("SJellyAttackEft");
-                    yield return new WaitForSeconds(0.7f);
+                    yield return new WaitForSeconds(0.7f); // 젤리 공격 애니메이션과 고양이 피격 타이밍 조절
                     break;
                 case 2:
+                    animator.Play("BJellyAttack");
+                    effect.Play("BJellyAttackEft");
                     break;
             }
             float tempHealth = catstatus.GetHealth();
@@ -214,6 +233,8 @@ public class JellyStatus : MonoBehaviour
                 effect.Play("SJellyHurtEft");
                 break;
             case 2:
+                animator.Play("BJellyHurt");
+                effect.Play("BJellyHurt2Eft");
                 break;
         }
     }
