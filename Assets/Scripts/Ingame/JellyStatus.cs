@@ -80,12 +80,15 @@ public class JellyStatus : MonoBehaviour
         Debug.Log("Death");
         if (jellyKind == 2)
         {
+            transform.position = new Vector2(transform.position.x, -0.63f);
             animator.Play("BJellyDeadRun");
-            effect.Play("BJellyDead2Eft");
-            while (transform.position.x <= 12.0f) //움직이는 동안
+            for (int i = 0; i < 50; i++)
             {
-                transform.Translate((Vector2.left * speed).normalized / 40.0f); //블럭 이동
+                transform.Translate((Vector2.right * speed).normalized / 10.0f);
+                yield return new WaitForSeconds(0.1f);
             }
+            yield return new WaitForSeconds(5.0f);
+            effect.Play("temp");
         }
         else
             effect.Play("temp");           
@@ -200,11 +203,7 @@ public class JellyStatus : MonoBehaviour
                     effect.Play("BJellyAttackEft");
                     break;
             }
-            float tempHealth = catstatus.GetHealth();
-            float health = catstatus.GetHealth();
-            health -= damage * (1 - catstatus.GetDefend() / 100);
-            if (health > tempHealth)    catstatus.SetHealth(tempHealth);
-            else                        catstatus.SetHealth(health);
+            catstatus.Attacked(damage);
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
@@ -217,10 +216,10 @@ public class JellyStatus : MonoBehaviour
         defend = def;
     }
 
-    public void Attacked(float damage)
+    public void Attacked(float m_damage)
     {
         jellyTempHealth = health;
-        health -= damage * (1 - defend / 100);
+        health -= m_damage * (1 - defend / 100);
         if (health > jellyTempHealth) health = jellyTempHealth;
         switch (jellyKind)
         {

@@ -14,7 +14,6 @@ public class CatAnimation : MonoBehaviour
 
     void Start()
     {
-        catTempHealth = cat.GetHealth();
         animator = GetComponent<Animator>();
     }
 
@@ -25,14 +24,6 @@ public class CatAnimation : MonoBehaviour
         {
             animator.Play("CatDead");
             effect.Play("NCatDeadEft");
-        }
-
-        if (cat.GetHealth() < catTempHealth)
-        {
-            animator.Play("CatHurt");
-            effect.Play("NCatHurtEft");
-            catTempHealth = cat.GetHealth();
-            //Debug.Log("hurt");
         }
     }
 
@@ -108,6 +99,12 @@ public class CatAnimation : MonoBehaviour
         }
         cat.length = 0;
         GameData.skillKind = 0;
+    }
+
+    public void Attacked()
+    {
+        animator.Play("CatHurt");
+        effect.Play("NCatHurtEft");
     }
 
 }

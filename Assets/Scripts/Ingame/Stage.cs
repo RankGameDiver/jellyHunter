@@ -33,7 +33,7 @@ public class Stage : MonoBehaviour
 
     IEnumerator Stage1() // 첫번째 스테이지
     {
-        yield return CreateLoop(1, (int)Monster.Big);
+        yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
 

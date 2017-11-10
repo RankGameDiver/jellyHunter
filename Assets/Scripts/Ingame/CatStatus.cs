@@ -14,11 +14,14 @@ public class CatStatus : MonoBehaviour
     private float truedefend;
 
     public Stage stage;
+    public CatAnimation catAnimation;
     public float lastTime; // 방어 적용 시간
 
     private bool shield; // 방어 활성화 체크
     private bool shieldAct;
-    private bool life;
+    private bool life; // 생명
+
+    private float catTempHealth;
 
     public int length = 0; // 공격 범위
 
@@ -114,8 +117,15 @@ public class CatStatus : MonoBehaviour
         //Debug.Log("Heal");
     }
 
+    public void Attacked(float m_damage)
+    {
+        catTempHealth = health;
+        health -= m_damage * (1 - defend / 100);
+        if (health > catTempHealth) health = catTempHealth;
+        catAnimation.Attacked();
+    }
+
     public void SetHealth(float hp)     { health = hp; }
-    public float GetHealth()            { return health; }
     public float GetDefend()            { return truedefend; }
     public bool GetLife()               { return life; }
 }
