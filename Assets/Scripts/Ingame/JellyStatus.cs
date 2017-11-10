@@ -82,10 +82,7 @@ public class JellyStatus : MonoBehaviour
         {
             animator.Play("BJellyDeadRun");
             effect.Play("BJellyDead2Eft");
-            while (transform.position.x <= 12.0f) //움직이는 동안
-            {
-                transform.Translate((Vector2.left * speed).normalized / 40.0f); //블럭 이동
-            }
+            yield return new WaitForSeconds(1.0f);
         }
         else
             effect.Play("temp");           
