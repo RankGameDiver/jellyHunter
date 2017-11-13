@@ -55,7 +55,7 @@ public class Block : MonoBehaviour
             isMoving = true; //움직임
             while (isMoving) //움직이는 동안
             {
-                if (transform.position.x > GameData.maxPos.x - blockNum * 2.0f) //최대 x좌표에 도달했을 경우
+                if (transform.position.x > GameData.maxPos.x - blockNum * 1.7f) //최대 x좌표에 도달했을 경우
                 {
                     isMoving = false; //더 이상 움직이지 않음
                 }

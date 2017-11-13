@@ -16,10 +16,7 @@ public class BackGround : MonoBehaviour {
 	void Update ()
     {
         Vector2 thisOffset = thisMaterial.mainTextureOffset;
-        Debug.Log(thisOffset);
         thisOffset = new Vector2(thisMaterial.mainTextureOffset.x + Time.deltaTime * ScrollSpeed, 0);
-        Debug.Log(thisOffset);
         thisMaterial.mainTextureOffset = thisOffset;
-        Debug.Log(thisMaterial.mainTextureOffset);
     }
 }

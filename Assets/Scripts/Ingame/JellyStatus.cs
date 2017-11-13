@@ -131,11 +131,11 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 animator.Play("NJellyNormal");
-                gameObject.transform.position = new Vector2(6.8f, -0.8f);
+                gameObject.transform.position = new Vector2(6.8f, -1.9f);
                 break;
             case 1:
                 animator.Play("StrongJellyNormal");
-                gameObject.transform.position = new Vector2(6.8f, -0.8f);
+                gameObject.transform.position = new Vector2(6.8f, -1.9f);
                 break;
             case 2:
                 animator.Play("BJellyNormal");
