@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7f4069f9c92b66845a24504a88fa6cb8
-timeCreated: 1509412900
+timeCreated: 1510559533
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,12 @@ TextureImporter:
     21300006: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_00"
     21300008: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_03"
     21300010: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_05"
+    21300012: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_0"
+    21300014: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_1"
+    21300016: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_2"
+    21300018: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_3"
+    21300020: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_4"
+    21300022: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_5"
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -84,80 +90,80 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_01"
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_0"
       rect:
         serializedVersion: 2
-        x: 410
-        y: 15
-        width: 412
-        height: 232
+        x: 0
+        y: 0
+        width: 415
+        height: 262
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_02"
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_1"
       rect:
         serializedVersion: 2
-        x: 835
-        y: 15
-        width: 402
-        height: 232
+        x: 415
+        y: 0
+        width: 415
+        height: 262
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_04"
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_2"
       rect:
         serializedVersion: 2
-        x: 1671
-        y: 7
-        width: 394
-        height: 246
+        x: 830
+        y: 0
+        width: 415
+        height: 262
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_00"
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_3"
       rect:
         serializedVersion: 2
-        x: 27
-        y: 15
-        width: 364
-        height: 220
+        x: 1245
+        y: 0
+        width: 415
+        height: 262
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_03"
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_4"
       rect:
         serializedVersion: 2
-        x: 1253
-        y: 9
-        width: 400
-        height: 246
+        x: 1660
+        y: 0
+        width: 415
+        height: 262
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_05"
+      name: "\uACE0\uC591\uC774_\uD68C\uBCF5 \uC911_\uC544\uB798_\uBAA8\uC158(\uD3C4)_5"
       rect:
         serializedVersion: 2
-        x: 2088
-        y: 4
-        width: 393
-        height: 249
+        x: 2075
+        y: 0
+        width: 415
+        height: 262
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

@@ -47,7 +47,6 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator DeadLoop()
     {
-        Debug.Log("DeadLoop");
         yield return DeadFrame();
         yield return new WaitForSeconds(1.0f);
         yield return Death();
@@ -56,7 +55,6 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator DeadFrame() // 죽는 애니메이션 종료 후 비활성화
     {
-        Debug.Log("DeadFram");
         switch (jellyKind)
         {
             case 0:
@@ -77,7 +75,6 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Death()
     {
-        Debug.Log("Death");
         if (jellyKind == 2)
         {
             transform.position = new Vector2(transform.position.x, -0.63f);
@@ -139,7 +136,7 @@ public class JellyStatus : MonoBehaviour
                 break;
             case 2:
                 animator.Play("BJellyNormal");
-                gameObject.transform.position = new Vector2(7.16f, 0.51f);
+                gameObject.transform.position = new Vector2(9.13f, -0.71f);
                 break;
         }   
         StartCoroutine(Move()); //Move() 코루틴 실행
@@ -171,7 +168,7 @@ public class JellyStatus : MonoBehaviour
                     isMoving = false; //더 이상 움직이지 않음
                     StartCoroutine(Attack());
                 }
-                else if (transform.position.x < 5.88f && jellyKind == 2)
+                else if (transform.position.x < 3.84f && jellyKind == 2)
                 {
                     isMoving = false;
                     StartCoroutine(Attack());
