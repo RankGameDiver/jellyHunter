@@ -12,6 +12,6 @@ public class ButtonManager : MonoBehaviour {
 
 	public void StageSelect()
     {
-        SceneManager.LoadScene("Ingame");
+        SceneManager.LoadScene("StageSelect");
     }
 }

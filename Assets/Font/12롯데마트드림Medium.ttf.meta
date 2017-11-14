@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c525f0a2e5afe1e488a6ce2b29b25f94
+timeCreated: 1510623612
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 12LotteMartDreamMedium
+  fontNames:
+  - 12LotteMartDreamMedium
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

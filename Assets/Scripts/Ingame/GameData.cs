@@ -66,4 +66,13 @@ public static class GameData
 
     ///////////////////////////////////////////////////////////
 
+    /////////////////////스테이지////////////////////////
+
+    public static int _StageNum = 0;
+
+    public static int StageNum
+    {
+        get { return _StageNum; }
+        set { _StageNum = value; }
+    }
 }

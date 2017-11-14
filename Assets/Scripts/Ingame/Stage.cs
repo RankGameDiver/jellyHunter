@@ -1,24 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Stage : MonoBehaviour
 {
     enum Monster { Normal, Strong, Big };
 
-    int stage = 1; // 스테이지
-
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
 
     void Start()
     {
-        StageKind(stage);
+        StageKind();
     }
 
-    void StageKind(int stage) // 단계별 스테이지
+    private void Update()
     {
-        switch (stage)
+        if (Application.platform == RuntimePlatform.Android)
         {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("Main");
+            }
+        }
+    }
+
+    void StageKind() // 단계별 스테이지
+    {
+        switch (GameData.StageNum)
+        {
+            case 0:
+                SceneManager.LoadScene("Tutorial");
+                break;
             case 1:
                 StartCoroutine(Stage1());
                 break;
