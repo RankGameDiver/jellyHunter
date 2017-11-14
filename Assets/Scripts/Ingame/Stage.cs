@@ -57,6 +57,8 @@ public class Stage : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         yield return CreateLoop(5, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        GameClear.SetActive(true);
         yield break;
     }
 
@@ -71,6 +73,8 @@ public class Stage : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         yield return CreateLoop(1, (int)Monster.Strong);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        GameClear.SetActive(true);
         yield break;
     }
 
@@ -85,6 +89,8 @@ public class Stage : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         yield return CreateLoop(1, (int)Monster.Big);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        GameClear.SetActive(true);
         yield break;
     }
 

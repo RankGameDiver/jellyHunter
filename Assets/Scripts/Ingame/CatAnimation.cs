@@ -10,6 +10,8 @@ public class CatAnimation : MonoBehaviour
     public CatStatus cat; // 스킬 공식 적용용으로 불러옴
     public GameObject effectObj;
 
+    public GameObject GameOver;
+
     private float catTempHealth;
 
     void Start()
@@ -24,6 +26,8 @@ public class CatAnimation : MonoBehaviour
         {
             animator.Play("CatDead");
             effect.Play("NCatDeadEft");
+            new WaitForSeconds(1.0f);
+            GameOver.SetActive(true);
         }
     }
 

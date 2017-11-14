@@ -17,6 +17,6 @@ public class ClearManager : MonoBehaviour {
 
     public void Back()
     {
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("Main");
     }
 }
