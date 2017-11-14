@@ -24,6 +24,13 @@ public class StageSelect : MonoBehaviour {
     public void Switched(int stageNum)
     {
         GameData.StageNum = stageNum;
-        SceneManager.LoadScene("Ingame");
+        if(stageNum==0)
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
+        else
+        {
+            SceneManager.LoadScene("Ingame");
+        }
     }
 }

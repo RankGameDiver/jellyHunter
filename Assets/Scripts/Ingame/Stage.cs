@@ -31,9 +31,6 @@ public class Stage : MonoBehaviour
     {
         switch (GameData.StageNum)
         {
-            case 0:
-                SceneManager.LoadScene("Tutorial");
-                break;
             case 1:
                 StartCoroutine(Stage1());
                 break;
