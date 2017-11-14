@@ -48,7 +48,7 @@ public class Game : MonoBehaviour
         while (true)
         {
             yield return Create(); //* //블럭 생성 코루틴 실행
-            yield return new WaitForSeconds(0.8f); //0.5초 대기
+            yield return new WaitForSeconds(0.5f); //0.5초 대기
         }
     }
 

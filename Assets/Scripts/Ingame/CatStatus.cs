@@ -17,6 +17,8 @@ public class CatStatus : MonoBehaviour
     public CatAnimation catAnimation;
     public float lastTime; // 방어 적용 시간
 
+    public GameObject GameOver;
+
     private bool shield; // 방어 활성화 체크
     private bool shieldAct;
     private bool life; // 생명
@@ -123,6 +125,11 @@ public class CatStatus : MonoBehaviour
         health -= m_damage * (1 - defend / 100);
         if (health > catTempHealth) health = catTempHealth;
         catAnimation.Attacked();
+
+        if(health<=0)
+        {
+            GameOver.SetActive(true);
+        }
     }
 
     public void SetHealth(float hp)     { health = hp; }

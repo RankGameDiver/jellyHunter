@@ -9,6 +9,8 @@ public class Stage : MonoBehaviour
 
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
 
+    public GameObject GameClear;
+
     void Start()
     {
         StageKind();
