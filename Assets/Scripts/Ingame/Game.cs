@@ -90,6 +90,7 @@ public class Game : MonoBehaviour
 
         while (checkRight) // 체인 체크 시작 위치 조정
         {
+            int limit = 0;
             for (int i = 0; i < 7; i++) // 최대 블럭 갯수
             {
                 for (int j = 0; j < 7; j++) // 최대 블럭 갯수
@@ -99,10 +100,11 @@ public class Game : MonoBehaviour
                     {
                         if (blockNum - 1 == sBlock[j].blockNum) // 현재 블록 넘버와 일치할 때
                         {
-                            if (sBlock[temp].skillNum == sBlock[j].skillNum) // 체인 이어질 시
+                            if (sBlock[temp].skillNum == sBlock[j].skillNum && limit < 4) // 체인 이어질 시
                             {
                                 currentBlock = j; // 현재 블록 변경
                                 blockNum--; // nextBlockNum 감소
+                                limit++;
                             }
                             else
                             {
@@ -176,6 +178,16 @@ public class Game : MonoBehaviour
                     InitBlock(i); //blockNum 조절
                 }
             }
+        }
+    }
+
+    public void SetBlock() // 모든 블럭을 비활성화및 초기화
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            OffAct(i);
+            GameData.skillKind = 0;
+            GameData.blockCount = 0;
         }
     }
 

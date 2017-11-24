@@ -9,7 +9,8 @@ public class Stage : MonoBehaviour
 
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
 
-    public GameObject GameClear;
+    public GameObject gameClear;
+    public Game game;
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class Stage : MonoBehaviour
 
     IEnumerator Stage1() // 첫번째 스테이지
     {
+        game.SetBlock();
         yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
@@ -55,12 +57,13 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(5, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
-        GameClear.SetActive(true);
+        gameClear.SetActive(true);
         yield break;
     }
 
     IEnumerator Stage2()
     {
+        game.SetBlock();
         yield return CreateLoop(3, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
@@ -71,12 +74,13 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Strong);
         yield return new WaitUntil(() => { return CheckAct(); });
-        GameClear.SetActive(true);
+        gameClear.SetActive(true);
         yield break;
     }
 
     IEnumerator Stage3()
     {
+        game.SetBlock();
         yield return CreateLoop(3, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(5f);
@@ -87,7 +91,7 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Big);
         yield return new WaitUntil(() => { return CheckAct(); });
-        GameClear.SetActive(true);
+        gameClear.SetActive(true);
         yield break;
     }
 

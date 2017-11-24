@@ -68,6 +68,8 @@ public class Block : MonoBehaviour
     private void OnMouseDown() //클릭되었을 시
     {
         GameData.touchBlock = gameObject; //블럭 터치됨
+        if (GameData.blockCount < 0)
+            GameData.blockCount = 0;
     }
 
 }
