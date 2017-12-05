@@ -90,6 +90,8 @@
     <Compile Include="Assets\Scripts\Ingame\StrongJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\TimeScale.cs" />
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
+    <Compile Include="Assets\Scripts\Main\CanvasManager.cs" />
+    <Compile Include="Assets\Scripts\Main\UImanager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelect.cs" />
     <Compile Include="Assets\Scripts\Tutorial\ChangeScene.cs" />
   </ItemGroup>
