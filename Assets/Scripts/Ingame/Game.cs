@@ -28,7 +28,7 @@ public class Game : MonoBehaviour
             if (!gBlock[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
                 gBlock[i].SetActive(true); //블럭 활성화
-                gBlock[i].transform.position = (GameData.spawnPos); //블럭 위치를 스폰 위치로 변경
+                gBlock[i].transform.position = GameData.spawnPos; //블럭 위치를 스폰 위치로 변경
                 currentBlock = gBlock[i]; //현재 블럭으로 지정
                 sBlock[i].Init(); //블럭 스크립트 초기화
                 return;

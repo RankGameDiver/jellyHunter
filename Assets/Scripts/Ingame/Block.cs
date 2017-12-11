@@ -18,7 +18,7 @@ public class Block : MonoBehaviour
         blockSprite = GetComponent<SpriteRenderer>(); //렌더러 컴포넌트 받아옴
         blockSprite.sprite = skillImg[index]; //인덱스에 따른 스킬 이미지 받아옴
         skillNum = index; //스킬 종류 적용
-        Vector2 pos = GameData.spawnPos; //위치=스폰 위치
+        Vector2 pos = GameData.spawnPos; // 스폰 위치 설정
         blockNum = GameData.blockCount; //현재 소환된 블럭 개수에 따라 블럭 번호 결정
         GameData.blockCount++; //블럭 개수 증가
     }
@@ -55,7 +55,7 @@ public class Block : MonoBehaviour
             isMoving = true; //움직임
             while (isMoving) //움직이는 동안
             {
-                if (transform.position.x > GameData.maxPos.x - blockNum * 1.7f) //최대 x좌표에 도달했을 경우
+                if (transform.position.x > GameData.maxPos.x - blockNum * 1.7200f) //최대 x좌표에 도달했을 경우
                 {
                     isMoving = false; //더 이상 움직이지 않음
                 }
