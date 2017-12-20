@@ -223,6 +223,9 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\Plugin\LitJson.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ingame\BackGround.cs" />
@@ -241,8 +244,10 @@
     <Compile Include="Assets\Scripts\Ingame\TimeScale.cs" />
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
     <Compile Include="Assets\Scripts\Main\CanvasManager.cs" />
+    <Compile Include="Assets\Scripts\Main\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\Main\UImanager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelect.cs" />
+    <Compile Include="Assets\Scripts\StageSelect\StageUIManager.cs" />
     <Compile Include="Assets\Scripts\Tutorial\ChangeScene.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
