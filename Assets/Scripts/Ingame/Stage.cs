@@ -30,6 +30,7 @@ public class Stage : MonoBehaviour
 
     void StageKind() // 단계별 스테이지
     {
+        ScoreManager.score = 0;
         switch (GameData.StageNum)
         {
             case 1:

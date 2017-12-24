@@ -162,6 +162,7 @@ public class Game : MonoBehaviour
             }
         }
         GameData.skillPower = chainCount; //체인 갯수
+        ScoreManager.PlusChainScore(chainCount);
         chainCount = 0; //체인 카운트 초기화
         GameData.touchBlock = null; //터치 상태 = 터치되지 않음
     }

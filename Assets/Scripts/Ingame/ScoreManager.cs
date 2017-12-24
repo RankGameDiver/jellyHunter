@@ -12,6 +12,8 @@ public class ScoreManager : MonoBehaviour
     public Text myText;
     static string scoreStr;
 
+    private static float timeNow =0;
+
     // Use this for initialization
     void Start()
     {
@@ -21,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeNow = timeNow + Time.deltaTime;
         if (prevScore != score)
         {
             scoreStr = " " + score;
@@ -59,8 +62,8 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public static void TimeBonus(int timePassed)
+    public static void TimeBonus()
     {
-        score += 5000 * (10 - (timePassed / 30));
+        score += 5000 * (10 - ((int)timeNow / 30));
     }
 }

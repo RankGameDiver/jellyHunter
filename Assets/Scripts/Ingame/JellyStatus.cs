@@ -75,6 +75,7 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Death()
     {
+        ScoreManager.PlusDefeatScore(jellyKind + 1);
         if (jellyKind == 2)
         {
             transform.position = new Vector2(transform.position.x, -0.63f);

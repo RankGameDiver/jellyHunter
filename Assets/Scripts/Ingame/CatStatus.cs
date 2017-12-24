@@ -5,7 +5,7 @@ using UnityEngine;
 public class CatStatus : MonoBehaviour
 {
     [SerializeField]
-    private float health; // 체력
+    private static float health; // 체력
     [SerializeField]
     private float damage; // 공격력    
     [SerializeField]
@@ -132,6 +132,7 @@ public class CatStatus : MonoBehaviour
         }
     }
 
+    public static float GetHealth() { return health; }
     public void SetHealth(float hp)     { health = hp; }
     public float GetDefend()            { return truedefend; }
     public bool GetLife()               { return life; }
