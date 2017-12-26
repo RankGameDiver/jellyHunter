@@ -75,4 +75,11 @@ public static class GameData
         get { return _StageNum; }
         set { _StageNum = value; }
     }
+
+
+    ///////////////////////////////// 저장할 데이터
+
+
+
+    ////////////////////////////////
 }
