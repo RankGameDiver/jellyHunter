@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ScoreText : MonoBehaviour {
 
-    public ScoreManager score;
     Text scoreT;
 
 	void Awake () {
@@ -16,5 +15,4 @@ public class ScoreText : MonoBehaviour {
 	void Update () {
         scoreT.text = ScoreManager.score.ToString();
 	}
-
 }
