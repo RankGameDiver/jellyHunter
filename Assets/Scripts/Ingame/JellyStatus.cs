@@ -21,6 +21,9 @@ public class JellyStatus : MonoBehaviour
 
     public int jellyCount; // 현재 젤리의 순서
     public int jellyKind; // 젤리 종류
+
+    public static int JKind;
+    public static float JHealth;
     public GameObject effectObj;
 
     void Start()
@@ -30,6 +33,8 @@ public class JellyStatus : MonoBehaviour
 
     void Update()
     {
+        JKind = jellyKind;
+        JHealth = health;
         if (health <= 0 && life == true) // 젤리맨이 죽었을 때 실행
         {
             life = false;
@@ -129,11 +134,11 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 animator.Play("NJellyNormal");
-                gameObject.transform.position = new Vector2(6.8f, -1.9f);
+                gameObject.transform.position = new Vector2(7.5f, -1.9f);
                 break;
             case 1:
                 animator.Play("StrongJellyNormal");
-                gameObject.transform.position = new Vector2(6.8f, -1.9f);
+                gameObject.transform.position = new Vector2(7.5f, -1.9f);
                 break;
             case 2:
                 animator.Play("BJellyNormal");
