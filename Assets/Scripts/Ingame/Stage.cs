@@ -31,6 +31,7 @@ public class Stage : MonoBehaviour
     void StageKind() // 단계별 스테이지
     {
         ScoreManager.score = 0;
+        ScoreManager.money = 0;
         switch (GameData.StageNum)
         {
             case 1:
@@ -58,6 +59,8 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(5, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
+        ScoreManager.TimeBonus();
+        GameData.Money += ScoreManager.money;
         gameClear.SetActive(true);
         yield break;
     }
@@ -75,6 +78,8 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Strong);
         yield return new WaitUntil(() => { return CheckAct(); });
+        ScoreManager.TimeBonus();
+        GameData.Money += ScoreManager.money;
         gameClear.SetActive(true);
         yield break;
     }
@@ -92,6 +97,8 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Big);
         yield return new WaitUntil(() => { return CheckAct(); });
+        ScoreManager.TimeBonus();
+        GameData.Money += ScoreManager.money;
         gameClear.SetActive(true);
         yield break;
     }

@@ -7,7 +7,7 @@ public class ClearManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        Money();
 	}
 	
 	// Update is called once per frame
@@ -18,5 +18,10 @@ public class ClearManager : MonoBehaviour {
     public void Back()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    private void Money()
+    {
+
     }
 }

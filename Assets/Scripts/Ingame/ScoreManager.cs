@@ -12,7 +12,9 @@ public class ScoreManager : MonoBehaviour
     public Text myText;
     static string scoreStr;
 
-    private static float timeNow =0;
+    private static float timeNow = 0;
+
+    public static int money = 0;
 
     // Use this for initialization
     void Start()
@@ -27,15 +29,9 @@ public class ScoreManager : MonoBehaviour
         if (prevScore != score)
         {
             scoreStr = " " + score;
-            PrintScore();
             Debug.Log(score);
         }
         prevScore = score;
-    }
-
-    public static void PrintScore()
-    {
- //       myText.GetComponent<Text>().text = scoreStr;
     }
 
     public static void PlusChainScore(int chain)
@@ -62,8 +58,13 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    private static void PlusMoney()
+    {
+        money = score / 100;
+    }
+
     public static void TimeBonus()
     {
-        score += 5000 * (10 - ((int)timeNow / 30));
+        money += 50 * (10 - ((int)timeNow / 30));
     }
 }

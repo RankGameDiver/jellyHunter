@@ -75,4 +75,17 @@ public static class GameData
         get { return _StageNum; }
         set { _StageNum = value; }
     }
+
+    /////////////세이브할 데이터////////////////
+
+    public static int _Money;
+    
+    public static int Money
+    {
+        get { return _Money; }
+        set { _Money = value; }
+    }
+
+    ////////////////////////////////////////////
+
 }
