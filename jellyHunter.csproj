@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Ingame\HpBar.cs" />
     <Compile Include="Assets\Scripts\Ingame\JellyHpBar.cs" />
     <Compile Include="Assets\Scripts\Ingame\JellyStatus.cs" />
+    <Compile Include="Assets\Scripts\Ingame\MoneyText.cs" />
     <Compile Include="Assets\Scripts\Ingame\NormalJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreText.cs" />

@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     private static float timeNow = 0;
 
     public static int money = 0;
+    public static int moneyPlus = 0;
 
     // Use this for initialization
     void Start()
@@ -37,6 +38,7 @@ public class ScoreManager : MonoBehaviour
     public static void PlusChainScore(int chain)
     {
         score += (chain * 75) * chain;
+        PlusMoney();
     }
 
     public static void PlusDefeatScore(int monsterKind)
@@ -45,22 +47,27 @@ public class ScoreManager : MonoBehaviour
         {
             case 0: // 웨이브 통과
                 score += 5000;
+                moneyPlus += 50;
                 break;
             case 1: // 잡몹
                 score += 3000;
+                moneyPlus += 30;
                 break;
             case 2: // 중보스
                 score += 10000;
+                moneyPlus += 100;
                 break;
             case 3: // 최종보스
                 score += 20000;
+                moneyPlus += 200;
                 break;
         }
+        PlusMoney();
     }
 
     private static void PlusMoney()
     {
-        money = score / 100;
+        money = score / 100 + moneyPlus;
     }
 
     public static void TimeBonus()
