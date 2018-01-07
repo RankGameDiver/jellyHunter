@@ -15,6 +15,6 @@ public class MainUIText : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        moneyT.text = ScoreManager.money.ToString();
+        moneyT.text = GameData.Money.ToString();
     }
 }
