@@ -265,6 +265,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets/Plugin/LitJson.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Administrator/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -314,6 +317,7 @@
     <Compile Include="Assets\Scripts\Ingame\TimeScale.cs" />
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
     <Compile Include="Assets\Scripts\Main\CanvasManager.cs" />
+    <Compile Include="Assets\Scripts\Main\Data.cs" />
     <Compile Include="Assets\Scripts\Main\MainUIText.cs" />
     <Compile Include="Assets\Scripts\Main\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\Main\UImanager.cs" />
