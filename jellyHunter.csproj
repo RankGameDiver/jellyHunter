@@ -308,6 +308,7 @@
     <Compile Include="Assets\Scripts\Ingame\HpBar.cs" />
     <Compile Include="Assets\Scripts\Ingame\JellyHpBar.cs" />
     <Compile Include="Assets\Scripts\Ingame\JellyStatus.cs" />
+    <Compile Include="Assets\Scripts\Ingame\MoneyText.cs" />
     <Compile Include="Assets\Scripts\Ingame\NormalJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreText.cs" />
@@ -317,6 +318,10 @@
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
     <Compile Include="Assets\Scripts\Main\CanvasManager.cs" />
     <Compile Include="Assets\Scripts\Main\Data.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Assets\Scripts\Main\MainUIText.cs" />
+>>>>>>> master
     <Compile Include="Assets\Scripts\Main\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\Main\UImanager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelect.cs" />

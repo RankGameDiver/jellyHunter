@@ -32,6 +32,7 @@ public class Stage : MonoBehaviour
     {
         ScoreManager.score = 0;
         ScoreManager.money = 0;
+        ScoreManager.moneyPlus = 0;
         switch (GameData.StageNum)
         {
             case 1:
