@@ -11,15 +11,17 @@ public class JellyHpBar : MonoBehaviour {
     private int maxHP;
     private int JKind;
 
-    private void Awake()
-    {
-        if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); }
-    }
+    //private void Awake()
+    //{
+    //    if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); Debug.Log("HEY!"); }
+    //    else { this.gameObject.SetActive(false); Debug.Log("Bye!"); }
+    //}
 
     // Use this for initialization
     void Start ()
     {
-        if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); }
+        if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); Debug.Log("HEY!"); }
+        else { this.gameObject.SetActive(false); Debug.Log("Bye!"); }
         switch (JellyStatus.JKind)
         {
             case 0:
@@ -38,7 +40,6 @@ public class JellyHpBar : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); }
         HP.value = JellyStatus.JHealth / maxHP;
         HP.transform.position = HeadUpPos.transform.position;
     }

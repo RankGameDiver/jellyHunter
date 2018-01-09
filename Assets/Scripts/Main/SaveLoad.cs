@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LitJson;
+//using LitJson;
 using System.IO;
 
 public class SaveLoad : MonoBehaviour
@@ -34,3 +35,5 @@ public class SaveLoad : MonoBehaviour
         GameData._Money = (int)data[0]["money"];
     }
 }
+ 
+*/
