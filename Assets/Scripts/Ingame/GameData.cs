@@ -18,28 +18,16 @@ public static class GameData
 
     public static Vector2 spawnPos
     {
-        get
-        {
-            return _spawnPos; //스폰 좌표 반환
-        }
-        private set
-        {
-            _spawnPos = value; //스폰 좌표 변경
-        }
+        get{ return _spawnPos; } //스폰 좌표 반환        
+        set{ _spawnPos = value; }//스폰 좌표 변경
     }
 
-    public static Vector2 _maxPos = new Vector2(maxXPos, maxYPos); //최대 이동 좌표
+    private static Vector2 _maxPos = new Vector2(maxXPos, maxYPos); //최대 이동 좌표
 
     public static Vector2 maxPos
     {
-        get
-        {
-            return _maxPos; //최대 이동 좌표 반환
-        }
-        private set
-        {
-            _maxPos = value; //최대 이동 좌표 변경
-        }
+        get { return _maxPos; }//최대 이동 좌표 반환
+        set { _maxPos = value; }//최대 이동 좌표 변경
     }
 
     public const int blockKinds = 3; // 블럭의 종류
@@ -57,7 +45,7 @@ public static class GameData
     const float jellyMaxX = -1.5f;
     const float jellyMaxY = 0.0f;
 
-    public static Vector2 _jellyMax = new Vector2(jellyMaxX, jellyMaxY);
+    private static Vector2 _jellyMax = new Vector2(jellyMaxX, jellyMaxY);
     public static Vector2 jellyMax
     {
         get { return _jellyMax; }
@@ -68,7 +56,7 @@ public static class GameData
 
     /////////////////////스테이지////////////////////////
 
-    public static int _StageNum = 0;
+    private static int _StageNum = 0;
 
     public static int StageNum
     {
@@ -78,12 +66,39 @@ public static class GameData
 
     /////////////세이브할 데이터////////////////
 
-    public static int _Money;
-    
+    private static int _Money = 0;
     public static int Money
     {
         get { return _Money; }
         set { _Money = value; }
+    }
+
+    private static int _StageT = 0;
+    public static int StageT
+    {
+        get{ return _StageT; }
+        set{ _StageT = value; }
+    }
+
+    private static int _Stage1 = 0;
+    public static int Stage1
+    {
+        get { return _Stage1; }
+        set { _Stage1 = value; }
+    }
+
+    private static int _Stage2 = 0;
+    public static int Stage2
+    {
+        get { return _Stage2; }
+        set { _Stage2 = value; }
+    }
+
+    private static int _Stage3 = 0;
+    public static int Stage3
+    {
+        get { return _Stage3; }
+        set { _Stage3 = value; }
     }
 
     ////////////////////////////////////////////

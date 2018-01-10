@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Stage : MonoBehaviour
@@ -12,12 +13,20 @@ public class Stage : MonoBehaviour
     public GameObject gameClear;
     public Game game;
 
+    public Image[] StarImg;
+    public int starCount;
+    private float alpha = 0;
+
     void Start()
     {
         StageKind();
+        for (int i = 0; i < 3; i++)
+        {
+            StarImg[i].color = new Color(1, 1, 1, alpha);
+        }
     }
 
-    private void Update()
+    void Update()
     {
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -25,6 +34,61 @@ public class Stage : MonoBehaviour
             {
                 SceneManager.LoadScene("Main");
             }
+        }
+
+        if (gameClear.activeInHierarchy)
+        {
+            StarFadeIn();
+        }
+    }
+
+    private void StarFadeIn()
+    {   
+        if (StarImg[0].color.a < 1 && ScoreManager.score > 1000) // 20000
+        {
+            starCount = 1;
+            alpha += 0.02f;
+            StarImg[0].color = new Color(1, 1, 1, alpha);
+        }
+        else if (StarImg[1].color.a < 1 && ScoreManager.score > 2000)
+        {
+            starCount = 2;
+            alpha += 0.02f;
+            StarImg[1].color = new Color(1, 1, 1, alpha);
+        }
+        else if (StarImg[2].color.a < 1 && ScoreManager.score > 3000)
+        {
+            starCount = 3;
+            alpha += 0.02f;
+            StarImg[2].color = new Color(1, 1, 1, alpha);
+        }
+
+        if (alpha > 1)
+            alpha = 0;
+
+        switch (GameData.StageNum)
+        {
+            case 1:
+                GameData.Stage1 += starCount;
+                if (GameData.Stage1 > 3)
+                {
+                    GameData.Stage1 = 3;
+                }
+                break;
+            case 2:
+                GameData.Stage2 += starCount;
+                if (GameData.Stage2 > 3)
+                {
+                    GameData.Stage2 = 3;
+                }
+                break;
+            case 3:
+                GameData.Stage3 += starCount;
+                if (GameData.Stage3 > 3)
+                {
+                    GameData.Stage3 = 3;
+                }
+                break;
         }
     }
 

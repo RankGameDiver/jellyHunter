@@ -8,17 +8,16 @@ public class SaveLoad : MonoBehaviour
 {
     [SerializeField]
     private List<Data> S_Data = new List<Data>();
-    private List<Data> L_Data = new List<Data>();
 
     void Start()
     {
         Load();
-        Debug.Log("LoadData");
     }
 
     public void Save()
     {
-        S_Data.Add(new Data(GameData.Money));
+        S_Data.Clear();
+        S_Data.Add(new Data(GameData.Money, GameData.StageT, GameData.Stage1, GameData.Stage2, GameData.Stage3));
         JsonData charData = JsonMapper.ToJson(S_Data);
         File.WriteAllText(Application.dataPath + "/Data/SaveData.json", charData.ToString());
     }
@@ -32,6 +31,6 @@ public class SaveLoad : MonoBehaviour
 
     public void GetData(JsonData data)
     {
-        GameData._Money = (int)data[0]["money"];
+        GameData.Money = (int)data[0]["money"];
     }
 }

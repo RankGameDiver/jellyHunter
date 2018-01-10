@@ -30,7 +30,6 @@ public class ScoreManager : MonoBehaviour
         if (prevScore != score)
         {
             scoreStr = " " + score;
-            Debug.Log(score);
         }
         prevScore = score;
     }

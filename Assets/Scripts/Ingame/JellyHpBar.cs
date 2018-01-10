@@ -20,8 +20,16 @@ public class JellyHpBar : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); Debug.Log("HEY!"); }
-        else { this.gameObject.SetActive(false); Debug.Log("Bye!"); }
+        if (Jelly.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+            Debug.Log("HEY!");
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Bye!");
+        }
         switch (JellyStatus.JKind)
         {
             case 0:
