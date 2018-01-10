@@ -36,7 +36,8 @@ public class Stage : MonoBehaviour
         switch (GameData.StageNum)
         {
             case 1:
-                StartCoroutine(Stage1());
+                StartCoroutine(TestStage());
+                //StartCoroutine(Stage1());
                 break;
             case 2:
                 StartCoroutine(Stage2());
@@ -45,6 +46,17 @@ public class Stage : MonoBehaviour
                 StartCoroutine(Stage3());
                 break;
         }
+    }
+
+    IEnumerator TestStage() // 첫번째 스테이지
+    {
+        game.SetBlock();
+        yield return CreateLoop(1, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        ScoreManager.TimeBonus();
+        GameData.Money += ScoreManager.money;
+        gameClear.SetActive(true);
+        yield break;
     }
 
     IEnumerator Stage1() // 첫번째 스테이지

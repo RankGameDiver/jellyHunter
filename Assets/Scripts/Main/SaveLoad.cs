@@ -1,8 +1,7 @@
-﻿/*
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using LitJson;
+using LitJson;
 using System.IO;
 
 public class SaveLoad : MonoBehaviour
@@ -13,19 +12,20 @@ public class SaveLoad : MonoBehaviour
 
     void Start()
     {
-        //Load();
+        Load();
+        Debug.Log("LoadData");
     }
 
     public void Save()
     {
+        S_Data.Add(new Data(GameData.Money));
         JsonData charData = JsonMapper.ToJson(S_Data);
-        File.WriteAllText(Application.dataPath + "/Resources/SaveData.json", charData.ToString());
-        //S_Data.Add(new Data(GameData._Money));
+        File.WriteAllText(Application.dataPath + "/Data/SaveData.json", charData.ToString());
     }
 
     public void Load()
     {
-        string L_sData = File.ReadAllText(Application.dataPath + "/Resources/SaveData.json");
+        string L_sData = File.ReadAllText(Application.dataPath + "/Data/SaveData.json");
         JsonData charData = JsonMapper.ToObject(L_sData);
         GetData(charData);
     }
@@ -35,5 +35,3 @@ public class SaveLoad : MonoBehaviour
         GameData._Money = (int)data[0]["money"];
     }
 }
- 
-*/
