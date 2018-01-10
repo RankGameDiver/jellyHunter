@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Ingame\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreText.cs" />
     <Compile Include="Assets\Scripts\Ingame\Stage.cs" />
+    <Compile Include="Assets\Scripts\Ingame\StarFadeEffect.cs" />
     <Compile Include="Assets\Scripts\Ingame\StrongJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\TimeScale.cs" />
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
