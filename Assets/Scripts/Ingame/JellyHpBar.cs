@@ -3,52 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class JellyHpBar : MonoBehaviour {
-
-    public Slider HP;
-    public GameObject HeadUpPos;
-    public GameObject Jelly;
+public class JellyHpBar : MonoBehaviour
+{
+    public JellyStatus jelly;
+    private Slider HP;
+    private RectTransform pos;
     private int maxHP;
-    private int JKind;
 
-    //private void Awake()
-    //{
-    //    if (Jelly.activeInHierarchy) { this.gameObject.SetActive(true); Debug.Log("HEY!"); }
-    //    else { this.gameObject.SetActive(false); Debug.Log("Bye!"); }
-    //}
-
-    // Use this for initialization
     void Start ()
     {
-        if (Jelly.activeInHierarchy)
-        {
-            gameObject.SetActive(true);
-            Debug.Log("HEY!");
-        }
-        else
-        {
-            gameObject.SetActive(false);
-            Debug.Log("Bye!");
-        }
-        switch (JellyStatus.JKind)
+        HP = GetComponent<Slider>();
+        pos = GetComponent<RectTransform>();
+        switch (jelly.jellyKind)
         {
             case 0:
                 maxHP = 50;
+                pos.anchoredPosition = new Vector2(0.2f, 1.2f);
                 break;
             case 1:
                 maxHP = 120;
+                pos.anchoredPosition = new Vector2(0.2f, 1.2f);
                 break;
             case 2:
                 maxHP = 250;
+                pos.anchoredPosition = new Vector2(0, 0.7f);
                 break;
         }
 		
 	}
 
-    // Update is called once per frame
     void Update()
     {
-        HP.value = JellyStatus.JHealth / maxHP;
-        HP.transform.position = HeadUpPos.transform.position;
+        HP.value = jelly.GetHealth() / maxHP;
     }
 }

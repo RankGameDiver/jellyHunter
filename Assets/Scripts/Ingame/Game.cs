@@ -21,7 +21,7 @@ public class Game : MonoBehaviour
         UsingBlock(); //블럭 상태 변화 확인
     }
 
-    public void OnAct() // 오브젝트 활성화
+    public void OnAct() // 블럭 활성화
     {
         for (int i = 0; i < GameData.blockAmount; i++) //블럭 갯수만큼 실행
         {

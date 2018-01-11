@@ -42,7 +42,7 @@ public static class GameData
 
     public static int jellyNum = 0; // 한 스테이지에서 나온 젤리맨 갯수 카운팅
 
-    const float jellyMaxX = -1.5f;
+    const float jellyMaxX = -1300.0f;
     const float jellyMaxY = 0.0f;
 
     private static Vector2 _jellyMax = new Vector2(jellyMaxX, jellyMaxY);

@@ -5,17 +5,15 @@ using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour {
 
-    public Slider HP;
-    public GameObject HeadUpPos;
+    private Slider HP;
 
+    void Start()
+    {
+        HP = GetComponent<Slider>();
+    }
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         HP.value = CatStatus.GetHealth() / 200;
-        HP.transform.position = HeadUpPos.transform.position;
 	}
 }

@@ -145,13 +145,13 @@ public class Stage : MonoBehaviour
     IEnumerator Stage2()
     {
         game.SetBlock();
-        yield return CreateLoop(3, (int)Monster.Normal);
-        yield return new WaitUntil(() => { return CheckAct(); });
-        yield return new WaitForSeconds(5f);
+        //yield return CreateLoop(3, (int)Monster.Normal);
+        //yield return new WaitUntil(() => { return CheckAct(); });
+        //yield return new WaitForSeconds(5f);
 
-        yield return CreateLoop(4, (int)Monster.Normal);
-        yield return new WaitUntil(() => { return CheckAct(); });
-        yield return new WaitForSeconds(5f);
+        //yield return CreateLoop(4, (int)Monster.Normal);
+        //yield return new WaitUntil(() => { return CheckAct(); });
+        //yield return new WaitForSeconds(5f);
 
         yield return CreateLoop(1, (int)Monster.Strong);
         yield return new WaitUntil(() => { return CheckAct(); });
@@ -164,13 +164,13 @@ public class Stage : MonoBehaviour
     IEnumerator Stage3()
     {
         game.SetBlock();
-        yield return CreateLoop(3, (int)Monster.Normal);
-        yield return new WaitUntil(() => { return CheckAct(); });
-        yield return new WaitForSeconds(5f);
+        //yield return CreateLoop(3, (int)Monster.Normal);
+        //yield return new WaitUntil(() => { return CheckAct(); });
+        //yield return new WaitForSeconds(5f);
 
-        yield return CreateLoop(5, (int)Monster.Normal);
-        yield return new WaitUntil(() => { return CheckAct(); });
-        yield return new WaitForSeconds(5f);
+        //yield return CreateLoop(5, (int)Monster.Normal);
+        //yield return new WaitUntil(() => { return CheckAct(); });
+        //yield return new WaitForSeconds(5f);
 
         yield return CreateLoop(1, (int)Monster.Big);
         yield return new WaitUntil(() => { return CheckAct(); });
