@@ -32,5 +32,9 @@ public class SaveLoad : MonoBehaviour
     public void GetData(JsonData data)
     {
         GameData.Money = (int)data[0]["money"];
+        GameData.StageT = (int)data[0]["stageT"];
+        GameData.Stage1 = (int)data[0]["stage1"];
+        GameData.Stage2 = (int)data[0]["stage2"];
+        GameData.Stage3 = (int)data[0]["stage3"];
     }
 }
