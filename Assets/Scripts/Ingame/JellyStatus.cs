@@ -62,16 +62,13 @@ public class JellyStatus : MonoBehaviour
         switch (jellyKind)
         {
             case 0:
-                NormalJelly normalJelly = GetComponent<NormalJelly>();
-                normalJelly.SetStatus();
+                SetStatus(50, 5, 0); // Normal Jelly
                 break;
             case 1:
-                StrongJelly strongJelly = GetComponent<StrongJelly>();
-                strongJelly.SetStatus();
+                SetStatus(120, 10, 5); // Strong Jelly
                 break;
             case 2:
-                BigJelly bigJelly = GetComponent<BigJelly>();
-                bigJelly.SetStatus();
+                SetStatus(250, 20, 10); // Big Jelly
                 break;
         }
         Init();

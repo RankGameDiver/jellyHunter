@@ -298,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ingame\BackGround.cs" />
-    <Compile Include="Assets\Scripts\Ingame\BigJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\Block.cs" />
     <Compile Include="Assets\Scripts\Ingame\CatAnimation.cs" />
     <Compile Include="Assets\Scripts\Ingame\CatStatus.cs" />
@@ -309,11 +308,9 @@
     <Compile Include="Assets\Scripts\Ingame\JellyHpBar.cs" />
     <Compile Include="Assets\Scripts\Ingame\JellyStatus.cs" />
     <Compile Include="Assets\Scripts\Ingame\MoneyText.cs" />
-    <Compile Include="Assets\Scripts\Ingame\NormalJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Ingame\ScoreText.cs" />
     <Compile Include="Assets\Scripts\Ingame\Stage.cs" />
-    <Compile Include="Assets\Scripts\Ingame\StrongJelly.cs" />
     <Compile Include="Assets\Scripts\Ingame\TimeScale.cs" />
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
     <Compile Include="Assets\Scripts\Main\CanvasManager.cs" />
