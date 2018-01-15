@@ -317,6 +317,7 @@
     <Compile Include="Assets\Scripts\Main\Data.cs" />
     <Compile Include="Assets\Scripts\Main\MainUIText.cs" />
     <Compile Include="Assets\Scripts\Main\SaveLoad.cs" />
+    <Compile Include="Assets\Scripts\Main\Shop.cs" />
     <Compile Include="Assets\Scripts\Main\UImanager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelect.cs" />
     <Compile Include="Assets\Scripts\Tutorial\ChangeScene.cs" />
