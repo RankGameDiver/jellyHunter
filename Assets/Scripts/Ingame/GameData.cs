@@ -101,6 +101,14 @@ public static class GameData
         set { _Stage3 = value; }
     }
 
-    ////////////////////////////////////////////
+    /////////////아이템 적용////////////////////
+
+    public static bool attackUp;
+    public static bool defendUp;
+    public static bool healUp;
+    public static bool moneyUp;
+    public static bool hpUp;
+
+    ///////////////////////////////////////////
 
 }
