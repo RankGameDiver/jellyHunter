@@ -25,6 +25,11 @@ public class StageSelect : MonoBehaviour
         }
     }
 
+    public void Back()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
     public void ChangeStar()
     {
         stageImg[0].sprite = stageNum[GameData.StageT];

@@ -43,7 +43,7 @@ public class Stage : MonoBehaviour
     }
 
     private void StarFadeIn()
-    {   
+    {
         if (StarImg[0].color.a < 1 && ScoreManager.score > 1000) // 20000
         {
             starCount = 1;
@@ -117,9 +117,7 @@ public class Stage : MonoBehaviour
         game.SetBlock();
         yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
-        ScoreManager.TimeBonus();
-        GameData.Money += ScoreManager.money;
-        gameClear.SetActive(true);
+        StageClear();
         yield break;
     }
 
@@ -136,9 +134,7 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(5, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
-        ScoreManager.TimeBonus();
-        GameData.Money += ScoreManager.money;
-        gameClear.SetActive(true);
+        StageClear();
         yield break;
     }
 
@@ -155,9 +151,7 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Strong);
         yield return new WaitUntil(() => { return CheckAct(); });
-        ScoreManager.TimeBonus();
-        GameData.Money += ScoreManager.money;
-        gameClear.SetActive(true);
+        StageClear();
         yield break;
     }
 
@@ -174,9 +168,7 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Big);
         yield return new WaitUntil(() => { return CheckAct(); });
-        ScoreManager.TimeBonus();
-        GameData.Money += ScoreManager.money;
-        gameClear.SetActive(true);
+        StageClear();
         yield break;
     }
 
@@ -196,7 +188,7 @@ public class Stage : MonoBehaviour
         {
             if (!gJelly[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
-                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();     
+                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();
                 sJelly.jellyKind = jellyKind;
                 sJelly.SetJelly();
                 GameData.jellyNum++;
@@ -216,5 +208,20 @@ public class Stage : MonoBehaviour
             else { }
         }
         return true;
+    }
+
+    private void StageClear()
+    {
+        ScoreManager.TimeBonus();
+        if (GameData.moneyUp)
+            GameData.Money += ScoreManager.money + (ScoreManager.money / 2);
+        else
+            GameData.Money += ScoreManager.money;
+        gameClear.SetActive(true);
+        GameData.attackUp = false;
+        GameData.defendUp = false;
+        GameData.healUp = false;
+        GameData.moneyUp = false;
+        GameData.hpUp = false;
     }
 }

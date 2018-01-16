@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HpBar : MonoBehaviour {
 
     private Slider HP;
+    public CatStatus catStatus;
 
     void Start()
     {
@@ -14,6 +15,6 @@ public class HpBar : MonoBehaviour {
 
 	void Update ()
     {
-        HP.value = CatStatus.GetHealth() / 200;
+        HP.value = catStatus.GetHealth() / catStatus.GetMaxHP();
 	}
 }

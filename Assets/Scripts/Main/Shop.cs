@@ -15,6 +15,14 @@ public class Shop : MonoBehaviour
     {
         shopPos = GetComponent<RectTransform>();
         shopPos.anchoredPosition = new Vector3(0, 0, 100);
+        for (int i = 0; i < 2; i++)
+        {
+            AttackUp();
+            DefendUp();
+            HealUp();
+            MoneyUp();
+            HealthUp();
+        }
     }
 
     public void ShopResetPos()

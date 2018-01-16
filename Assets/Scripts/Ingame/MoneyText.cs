@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MoneyText : MonoBehaviour
 {
-
     Text moneyT;
 
     void Awake()

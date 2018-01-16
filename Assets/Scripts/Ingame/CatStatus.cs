@@ -5,8 +5,8 @@ using UnityEngine;
 public class CatStatus : MonoBehaviour
 {
     [SerializeField]
-    private static float health; // 체력
-    [SerializeField]
+    private float maxHealth;
+    private float health; // 체력
     private float damage; // 공격력    
     [SerializeField]
     private float defend; // 기본 방어력
@@ -29,7 +29,11 @@ public class CatStatus : MonoBehaviour
 
     void Start()
     {
-        health = 200;
+        if (GameData.hpUp)
+            maxHealth = 220;
+        else
+            maxHealth = 200;
+        health = maxHealth;
         damage = 10;
         defend = 5;
         lastTime = 0;
@@ -47,6 +51,9 @@ public class CatStatus : MonoBehaviour
 
     public void Attack()
     {
+        if (GameData.attackUp)
+            GameData.skillPower += 1;
+
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
@@ -90,6 +97,9 @@ public class CatStatus : MonoBehaviour
 
     public void Defend() // 방어 버프 활성화
     {
+        if (GameData.defendUp)
+            GameData.skillPower += 1;
+
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
@@ -108,13 +118,16 @@ public class CatStatus : MonoBehaviour
 
     public void Heal()
     {
+        if (GameData.healUp)
+            GameData.skillPower += 1;
+
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else if (GameData.skillPower == 5) length = 3;
 
         health += GameData.skillPower * 10 * length;
-        if (health > 200)
-            health = 200;
+        if (health > maxHealth)
+            health = maxHealth;
         GameData.skillPower = 0;
         //Debug.Log("Heal");
     }
@@ -132,7 +145,8 @@ public class CatStatus : MonoBehaviour
         }
     }
 
-    public static float GetHealth() { return health; }
+    public float GetHealth()            { return health; }
+    public float GetMaxHP()             { return maxHealth; }
     public void SetHealth(float hp)     { health = hp; }
     public float GetDefend()            { return truedefend; }
     public bool GetLife()               { return life; }
