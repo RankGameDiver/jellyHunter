@@ -526,19 +526,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scene
+    - Assets/Resources/UI/Main
   m_ViewMode: 1
   m_StartGridSize: 65
   m_LastFolders:
-  - Assets/Scene
+  - Assets/Resources/UI/Main
   m_LastFoldersGridSize: 65
   m_LastProjectPath: "D:\\Games\\\uD3EC\uD2B8\uD3F4\uB9AC\uC624\\jellyHunter"
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 06280000
-    m_LastClickedID: 10246
-    m_ExpandedIDs: 000000009427000004280000782800008a280000c22800003e29000042290000162b0000522d000000ca9a3bffffff7f
+    m_SelectedIDs: 9e270000
+    m_LastClickedID: 10142
+    m_ExpandedIDs: 000000009427000004280000782800008a280000c0280000c22800003e29000042290000162b0000522d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -708,7 +708,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 6a39ffff6a3affff763bffffd288ffff128bfffffe90ffff84a3fffff4efffff9efbffff00000000062e00004c2e0000422f0000f8370000004300001e450000
+    m_ExpandedIDs: 9efbffff00000000d02b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
