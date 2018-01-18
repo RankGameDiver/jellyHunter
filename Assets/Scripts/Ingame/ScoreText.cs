@@ -7,12 +7,13 @@ public class ScoreText : MonoBehaviour {
 
     Text scoreT;
 
-	void Awake () {
+	void Awake ()
+    {
         scoreT = GetComponent<Text>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update ()
+    {
         scoreT.text = ScoreManager.score.ToString();
     }
 }
