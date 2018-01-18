@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayCount : MonoBehaviour
 {
     public Text timeT;
+    public Sprite[] lifeWinImg;
+    public SpriteRenderer lifeWindow;
     private int cooldown;
     private string systemTime;
     private int hour;
@@ -14,6 +16,13 @@ public class PlayCount : MonoBehaviour
 
     void Update()
     {
+        //if (GameData.PlayingCount < 5)
+        //    timeSet();
+        LifeBar();
+    }
+
+    public void timeSet()
+    {
         hour = System.DateTime.Now.Hour;
         min = System.DateTime.Now.Minute;
         sec = System.DateTime.Now.Second;
@@ -21,6 +30,10 @@ public class PlayCount : MonoBehaviour
         timeT.text = systemTime;
     }
 
+    public void LifeBar()
+    {
+        lifeWindow.sprite = lifeWinImg[GameData.PlayingCount];
+    }
 
     public void GameStart()
     {

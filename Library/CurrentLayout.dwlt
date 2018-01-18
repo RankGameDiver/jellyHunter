@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 707, y: 471}
   m_MaxSize: {x: 18002, y: 14021}
   vertical: 0
-  controlID: 112
+  controlID: 110
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 471}
   m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
-  controlID: 93
+  controlID: 91
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -274,10 +274,10 @@ MonoBehaviour:
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
-    m_HBaseRangeMin: -960
-    m_HBaseRangeMax: 960
-    m_VBaseRangeMin: -540
-    m_VBaseRangeMax: 540
+    m_HBaseRangeMin: -360
+    m_HBaseRangeMax: 360
+    m_VBaseRangeMin: -640
+    m_VBaseRangeMax: 640
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -296,7 +296,7 @@ MonoBehaviour:
       y: 17
       width: 1058
       height: 510
-    m_Scale: {x: 0.4722222, y: 0.4722222}
+    m_Scale: {x: 0.3984375, y: 0.3984375}
     m_Translation: {x: 529, y: 255}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -304,12 +304,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1120.2354
-      y: -540
-      width: 2240.4707
-      height: 1080
+      x: -1327.6863
+      y: -640
+      width: 2655.3726
+      height: 1280
     m_MinimalGUI: 1
-  m_defaultScale: 0.4722222
+  m_defaultScale: 0.3984375
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
   m_LastWindowPixelSize: {x: 1058, y: 527}
@@ -349,9 +349,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.05140245, y: 0.2947706, z: -9.475266}
+    m_Target: {x: -0.8889995, y: 0.36027032, z: -9.4609375}
     speed: 2
-    m_Value: {x: 0.05140245, y: 0.2947706, z: -9.475266}
+    m_Value: {x: -0.8889995, y: 0.36027032, z: -9.4609375}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -379,9 +379,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 14.705001
+    m_Target: 13.303026
     speed: 2
-    m_Value: 14.705001
+    m_Value: 13.303026
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -526,19 +526,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scene
+    - Assets/Resources/UI/Main
   m_ViewMode: 1
   m_StartGridSize: 65
   m_LastFolders:
-  - Assets/Scene
+  - Assets/Resources/UI/Main
   m_LastFoldersGridSize: 65
   m_LastProjectPath: "D:\\Games\\\uD3EC\uD2B8\uD3F4\uB9AC\uC624\\jellyHunter"
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 10280000
-    m_LastClickedID: 10256
-    m_ExpandedIDs: 00000000962700000e2800008228000094280000ce280000d0280000502900006c2a0000282b0000742d000000ca9a3bffffff7f
+    m_SelectedIDs: a0270000
+    m_LastClickedID: 10144
+    m_ExpandedIDs: 00000000962700000e2800008228000090280000ca280000cc280000482900004c290000702a0000302b0000802d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -566,7 +566,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000962700000e2800008228000094280000ce280000d028000050290000282b0000742d0000
+    m_ExpandedIDs: 00000000962700000e2800008228000090280000ca280000cc2800004c290000702a0000302b0000802d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,9 +706,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 02910000
-    m_LastClickedID: 37122
-    m_ExpandedIDs: 388dfbffa292fbffdefefbfffefffbff0201fcfff401fcff5238fcffe03cfcff9c4afcff244bfcff7067fcff2a6afcff2a6bfcff368bfcff688cfcff2a93fcff5a94fcffa6bcfdffe0bdfdffd6befdff4014feffe623feffa837feffd439feff9efbffff00000000b62b0000d22b0000e82b0000162c00003a2c0000a02c0000443700003c3a00009a3a0000d446000040470000184800003a5f00001a690000886d00001c790000aa810000ee81000046910000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 9efbffff00000000f42b0000222c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

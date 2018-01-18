@@ -100,7 +100,12 @@ public static class GameData
         set { _Stage3 = value; }
     }
 
-    private static int playCount;
+    private static int _PlayingCount = 5;
+    public static int PlayingCount
+    {
+        get { return _PlayingCount; }
+        set { _PlayingCount = value; }
+    }
 
     /////////////아이템 적용////////////////////
 
