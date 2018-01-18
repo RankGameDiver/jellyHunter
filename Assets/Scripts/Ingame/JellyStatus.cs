@@ -88,15 +88,15 @@ public class JellyStatus : MonoBehaviour
         {
             case 0:
                 animator.Play("NJellyNormal");
-                pos.anchoredPosition = new Vector2(170, -307);
+                pos.anchoredPosition = new Vector2(170, -219); 
                 break;
             case 1:
                 animator.Play("StrongJellyNormal");
-                pos.anchoredPosition = new Vector2(170, -274);
+                pos.anchoredPosition = new Vector2(170, -171); 
                 break;
             case 2:
                 animator.Play("BJellyNormal");
-                pos.anchoredPosition = new Vector2(380, -123);
+                pos.anchoredPosition = new Vector2(380, -28); 
                 break;
         }
         StartCoroutine(Move()); //Move() 코루틴 실행
@@ -140,8 +140,8 @@ public class JellyStatus : MonoBehaviour
                 case 1:
                     animator.Play("StrongJellyAttack");
                     effect.Play("SJellyAttackEft");
-                    catstatus.Attacked(damage);
                     yield return new WaitForSeconds(0.7f); // 젤리 공격 애니메이션과 고양이 피격 타이밍 조절
+                    catstatus.Attacked(damage);
                     break;
                 case 2:
                     animator.Play("BJellyAttack");

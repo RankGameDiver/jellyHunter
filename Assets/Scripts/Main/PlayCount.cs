@@ -17,12 +17,12 @@ public class PlayCount : MonoBehaviour
         hour = System.DateTime.Now.Hour;
         min = System.DateTime.Now.Minute;
         sec = System.DateTime.Now.Second;
-        systemTime = hour.ToString() + min.ToString() + sec.ToString();
-        //systemTime = string.Format("{0,-10} {1,-10:N0}", );
-        timeT.text = System.DateTime.Now.TimeOfDay.ToString();
+        systemTime = hour.ToString() + ":" + min.ToString() + ":" + sec.ToString();
+        timeT.text = systemTime;
     }
 
-    public void timeSet()
+
+    public void GameStart()
     {
 
     }

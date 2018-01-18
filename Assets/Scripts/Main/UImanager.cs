@@ -32,15 +32,15 @@ public class UImanager : MonoBehaviour
         shop = GameObject.Find("Shop");
         stageSelect = GameObject.Find("StageSelect");
 
-        window[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1750, -138);
-        window[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1194, -135);
-        window[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(-439, -124);
+        //window[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1750, -138);
+        //window[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1194, -135);
+        //window[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(-439, -124);
 
-        button[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1534, -134);
-        button[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1002, -134);
-        button[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(-104, -134);
+        //button[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1534, -134);
+        //button[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-1002, -134);
+        //button[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(-104, -134);
 
-        shop.GetComponent<RectTransform>().anchoredPosition = new Vector2(488, -96);
-        stageSelect.GetComponent<RectTransform>().anchoredPosition = new Vector2(-255, 384);
+        //shop.GetComponent<RectTransform>().anchoredPosition = new Vector2(488, -96);
+        //stageSelect.GetComponent<RectTransform>().anchoredPosition = new Vector2(-255, 384);
     }
 }

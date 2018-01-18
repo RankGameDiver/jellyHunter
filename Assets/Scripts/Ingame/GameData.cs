@@ -100,6 +100,8 @@ public static class GameData
         set { _Stage3 = value; }
     }
 
+    private static int playCount;
+
     /////////////아이템 적용////////////////////
 
     public static bool attackUp;
