@@ -107,6 +107,27 @@ public static class GameData
         set { _PlayingCount = value; }
     }
 
+    private static int _LifeHour = 0;
+    public static int LifeHour
+    {
+        get { return _LifeHour; }
+        set { _LifeHour = value; }
+    }
+
+    private static int _LifeMin = 0;
+    public static int LifeMin
+    {
+        get { return _LifeMin; }
+        set { _LifeMin = value; }
+    }
+
+    private static int _LifeSec = 0;
+    public static int LifeSec
+    {
+        get { return _LifeSec; }
+        set { _LifeSec = value; }
+    }
+
     /////////////아이템 적용////////////////////
 
     public static bool attackUp;

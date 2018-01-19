@@ -49,13 +49,24 @@ public class StageSelect : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Ingame");
+                GameStart();
                 GameData.PlayingCount -= 1;
+                SceneManager.LoadScene("Ingame");
             }
         }
         else
         {
             Debug.Log("No Life!!");
+        }
+    }
+
+    public void GameStart()
+    {
+        if (GameData.LifeHour == 0 && GameData.LifeMin == 0 && GameData.LifeSec == 0)
+        {
+            GameData.LifeHour = System.DateTime.Now.Hour;
+            GameData.LifeMin = System.DateTime.Now.Minute;
+            GameData.LifeSec = System.DateTime.Now.Second;
         }
     }
 }
