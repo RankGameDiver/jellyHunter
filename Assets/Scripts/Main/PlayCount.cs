@@ -20,19 +20,8 @@ public class PlayCount : MonoBehaviour
     void Update()
     {
         if (sec != System.DateTime.Now.Second && GameData.PlayingCount < 5)
-        {       
-            if (coolsec == 0)
-            {
-                if (coolmin == 0)
-                    coolmin = 29;
-                else
-                    coolmin--;
-                coolsec = 59;
-            }
-            else
-            {
-                coolsec--;
-            }
+        {
+            CoolTime();
             timeSet();
             lifeCharge();
         }
@@ -41,6 +30,16 @@ public class PlayCount : MonoBehaviour
         sec = System.DateTime.Now.Second;
 
         LifeBar();
+    }
+
+    public void CoolTime()
+    {
+        coolmin = GameData.LifeMin - System.DateTime.Now.Minute;
+        if (coolmin < 0)
+            coolmin += 1;
+        coolsec = GameData.LifeSec - System.DateTime.Now.Second;
+        if (coolsec < 0)
+            coolsec += 60;
     }
 
     public void timeSet()
@@ -88,23 +87,22 @@ public class PlayCount : MonoBehaviour
             if (GameData.LifeSec == sec)
             {
                 GameData.PlayingCount++;
-                if (GameData.PlayingCount == 5)
-                {
-                    timeT.text = "";
-                    coolmin = 30;
-                    coolsec = 0;
-                    GameData.LifeHour = 0;
-                    GameData.LifeMin = 0;
-                    GameData.LifeSec = 0;
-                }
                 GameData.LifeMin += 1;
-                saveLoad.Save();
                 if (GameData.LifeMin <= 60)
                 {
                     GameData.LifeMin = 0;
                     GameData.LifeHour++;
                 }
+                if (GameData.PlayingCount == 5)
+                {
+                    timeT.text = "";
+                    GameData.LifeHour = 0;
+                    GameData.LifeMin = 0;
+                    GameData.LifeSec = 0;
+                }
+                saveLoad.Save();
             }
         }
     }
+
 }

@@ -11,7 +11,8 @@ public class SaveLoad : MonoBehaviour
 
     void Start()
     {
-        //Load();
+        Application.runInBackground = true;
+        Load();
     }
 
     public void Save()

@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     private static int prevScore = 0;
 
     public Text myText;
-    static string scoreStr;
+    //static string scoreStr;
 
     private static float timeNow = 0;
 
@@ -29,7 +29,7 @@ public class ScoreManager : MonoBehaviour
         timeNow = timeNow + Time.deltaTime;
         if (prevScore != score)
         {
-            scoreStr = " " + score;
+            //scoreStr = " " + score;
         }
         prevScore = score;
     }
