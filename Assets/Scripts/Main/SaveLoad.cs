@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LitJson;
 using System.IO;
+/*
+using LitJson;
 
 public class SaveLoad : MonoBehaviour
 {
@@ -44,3 +46,5 @@ public class SaveLoad : MonoBehaviour
         GameData.LifeSec = (int)data[0]["lifeSec"];
     }
 }
+
+ */

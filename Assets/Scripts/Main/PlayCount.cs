@@ -15,7 +15,7 @@ public class PlayCount : MonoBehaviour
     private int coolmin;
     private int coolsec;
 
-    public SaveLoad saveLoad;
+ //   public SaveLoad saveLoad;
 
     void Update()
     {
@@ -100,7 +100,7 @@ public class PlayCount : MonoBehaviour
                     GameData.LifeMin = 0;
                     GameData.LifeSec = 0;
                 }
-                saveLoad.Save();
+ //               saveLoad.Save();
             }
         }
     }
