@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     void Start()
     {
         shopPos = GetComponent<RectTransform>();
-        shopPos.anchoredPosition = new Vector3(0, 0, 100);
+        //shopPos.anchoredPosition = new Vector3(-25, -200, 100);
         for (int i = 0; i < 2; i++)
         {
             AttackUp();
@@ -27,7 +27,7 @@ public class Shop : MonoBehaviour
 
     public void ShopResetPos()
     {
-        mask.anchoredPosition = new Vector3(1175, -100, 0);
+        //mask.anchoredPosition = new Vector3(1175, -100, 0);
     }
 
     public void AttackUp()
