@@ -9,8 +9,6 @@ public class Shop : MonoBehaviour
     public RectTransform mask;
     public GameObject[] Item;
 
-
-
     void Start()
     {
         shopPos = GetComponent<RectTransform>();

@@ -17,6 +17,23 @@ public class PlayCount : MonoBehaviour
 
     public SaveLoad saveLoad;
 
+    void Start()
+    {
+        CoolTime();
+        if (coolmin < 0)
+        {
+            GameData.LifeMin -= coolmin;
+            GameData.PlayingCount -= coolmin;
+            if (GameData.PlayingCount > 5)
+            {
+                GameData.PlayingCount = 5;
+                GameData.LifeHour = 0;
+                GameData.LifeMin = 0;
+                GameData.LifeSec = 0;
+            }
+        }
+    }
+
     void Update()
     {
         if (sec != System.DateTime.Now.Second && GameData.PlayingCount < 5)
@@ -28,13 +45,13 @@ public class PlayCount : MonoBehaviour
         hour = System.DateTime.Now.Hour;
         min = System.DateTime.Now.Minute;
         sec = System.DateTime.Now.Second;
-
         LifeBar();
     }
 
     public void CoolTime()
     {
         coolmin = GameData.LifeMin - System.DateTime.Now.Minute;
+        
         if (coolmin < 0)
             coolmin += 1;
         coolsec = GameData.LifeSec - System.DateTime.Now.Second;
@@ -88,7 +105,7 @@ public class PlayCount : MonoBehaviour
             {
                 GameData.PlayingCount++;
                 GameData.LifeMin += 1;
-                if (GameData.LifeMin <= 60)
+                if (GameData.LifeMin >= 60)
                 {
                     GameData.LifeMin = 0;
                     GameData.LifeHour++;
