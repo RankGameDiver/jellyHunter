@@ -5,16 +5,13 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     private int itemKind;
-    private RectTransform shopPos;
+    private RectTransform shopPos { get { return GetComponent<RectTransform>(); } }
     public RectTransform mask;
     public GameObject[] Item;
 
-
-
     void Start()
     {
-        shopPos = GetComponent<RectTransform>();
-        shopPos.anchoredPosition = new Vector3(0, 0, 100);
+        //shopPos.anchoredPosition = new Vector3(-25, -200, 100);
         for (int i = 0; i < 2; i++)
         {
             AttackUp();
@@ -27,7 +24,7 @@ public class Shop : MonoBehaviour
 
     public void ShopResetPos()
     {
-        mask.anchoredPosition = new Vector3(1175, -100, 0);
+        //mask.anchoredPosition = new Vector3(1175, -100, 0);
     }
 
     public void AttackUp()
