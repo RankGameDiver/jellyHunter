@@ -26,9 +26,16 @@ public class SaveLoad : MonoBehaviour
 
     public void Load()
     {
-        string L_sData = File.ReadAllText(Application.dataPath + "/Data/SaveData.json");
-        JsonData charData = JsonMapper.ToObject(L_sData);
-        GetData(charData);
+        string L_sData = null;
+        if (File.Exists("/Data/SaveData.json"))
+        {
+            L_sData = File.ReadAllText(Application.dataPath + "/Data/SaveData.json");
+            JsonData charData = JsonMapper.ToObject(L_sData);
+            GetData(charData);
+        }           
+        else
+            Save();
+
     }
 
     public void GetData(JsonData data)

@@ -13,8 +13,8 @@ public class JellyStatus : MonoBehaviour
 
     public CatStatus catstatus;
     public Stage stage;
-    private Animator animator;
-    private Animator effect;
+    private Animator animator { get { return GetComponent<Animator>(); } }
+    private Animator effect { get { return effectObj.GetComponent<Animator>(); } }
 
     private float jellyTempHealth;
     private bool life;
@@ -22,8 +22,10 @@ public class JellyStatus : MonoBehaviour
     public int jellyCount; // 현재 젤리의 순서
     public int jellyKind; // 젤리 종류
 
-    public RectTransform pos;
+    public RectTransform pos { get{return GetComponent<RectTransform>(); } }
     public GameObject effectObj;
+
+    public GameObject hpBar;
 
     private float _speed = 1.0f; //속도 지정
     public float speed
@@ -33,12 +35,6 @@ public class JellyStatus : MonoBehaviour
     }
 
     public bool isMoving; // 젤리가 생성된 후 움직임을 체크
-
-    void Start()
-    {
-        effect = effectObj.GetComponent<Animator>();
-        pos = GetComponent<RectTransform>();
-    }
 
     void Update()
     {
@@ -51,7 +47,8 @@ public class JellyStatus : MonoBehaviour
 
     public void Init()
     {
-        animator = GetComponent<Animator>();
+        if (!hpBar.activeInHierarchy)
+            hpBar.SetActive(true);
         jellyTempHealth = health;
         life = true;
         gameObject.SetActive(true);
@@ -212,8 +209,9 @@ public class JellyStatus : MonoBehaviour
         ScoreManager.PlusDefeatScore(jellyKind + 1);
         if (jellyKind == 2)
         {
-            pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, -307);
+            pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, -219);
             animator.Play("BJellyDeadRun");
+            hpBar.SetActive(false);
             for (int i = 0; i < 50; i++)
             {
                 pos.Translate((Vector2.right * speed).normalized / 10.0f);
