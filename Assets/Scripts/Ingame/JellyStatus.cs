@@ -221,7 +221,10 @@ public class JellyStatus : MonoBehaviour
             effect.Play("temp");
         }
         else
-            effect.Play("temp");           
+        {
+            hpBar.SetActive(false);
+            effect.Play("temp");
+        }
         gameObject.SetActive(false);
         GameData.jellyNum--;
         isMoving = false;

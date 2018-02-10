@@ -40,16 +40,20 @@ public class StageSelect : MonoBehaviour
 
     public void StageIn(int stageNum)
     {
+        GameData.StageNum = stageNum;
+    }
+
+    public void GameStart()
+    {
         if (GameData.PlayingCount > 0)
         {
-            GameData.StageNum = stageNum;
-            if (stageNum == 0)
+            if (GameData.StageNum == 0)
             {
                 SceneManager.LoadScene("Tutorial");
             }
             else
             {
-                GameStart();
+                TimeSet();
                 GameData.PlayingCount -= 1;
                 SceneManager.LoadScene("Ingame");
             }
@@ -60,7 +64,7 @@ public class StageSelect : MonoBehaviour
         }
     }
 
-    public void GameStart()
+    public void TimeSet()
     {
         if (GameData.LifeHour == 0 && GameData.LifeMin == 0 && GameData.LifeSec == 0)
         {

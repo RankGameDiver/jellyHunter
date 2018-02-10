@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using LitJson;
-using System.IO;
 
 public class SaveLoad : MonoBehaviour
 {
@@ -11,7 +11,6 @@ public class SaveLoad : MonoBehaviour
 
     void Start()
     {
-        Application.runInBackground = true;
         Load();
     }
 
@@ -27,14 +26,16 @@ public class SaveLoad : MonoBehaviour
     public void Load()
     {
         string L_sData = null;
-        if (File.Exists("/Data/SaveData.json"))
+        if (File.Exists(Application.dataPath + "/Data/SaveData.json"))
         {
             L_sData = File.ReadAllText(Application.dataPath + "/Data/SaveData.json");
             JsonData charData = JsonMapper.ToObject(L_sData);
             GetData(charData);
-        }           
+        }
         else
+        {
             Save();
+        }
 
     }
 
