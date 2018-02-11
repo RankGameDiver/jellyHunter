@@ -55,6 +55,7 @@ public class StageSelect : MonoBehaviour
             {
                 TimeSet();
                 GameData.PlayingCount -= 1;
+                Debug.Log(GameData.PlayingCount);
                 SceneManager.LoadScene("Ingame");
             }
         }
