@@ -50,7 +50,7 @@ public static class GameData
         set { _Money = value; }
     }
 
-    private static int _StageT = 0;
+    private static int _StageT = 1;
     public static int StageT
     {
         get{ return _StageT; }

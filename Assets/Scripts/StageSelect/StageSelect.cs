@@ -38,11 +38,6 @@ public class StageSelect : MonoBehaviour
         stageImg[3].sprite = stageNum[GameData.Stage3];
     }
 
-    public void StageIn(int stageNum)
-    {
-        GameData.StageNum = stageNum;
-    }
-
     public void GameStart()
     {
         if (GameData.PlayingCount > 0)

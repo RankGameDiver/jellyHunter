@@ -46,19 +46,19 @@ public class Stage : MonoBehaviour
     {
         if (StarImg[0].color.a < 1 && ScoreManager.score > 1000) // 20000
         {
-            starCount = 1;
+            starCount = 2;
             alpha += 0.02f;
             StarImg[0].color = new Color(1, 1, 1, alpha);
         }
         else if (StarImg[1].color.a < 1 && ScoreManager.score > 2000)
         {
-            starCount = 2;
+            starCount = 3;
             alpha += 0.02f;
             StarImg[1].color = new Color(1, 1, 1, alpha);
         }
         else if (StarImg[2].color.a < 1 && ScoreManager.score > 3000)
         {
-            starCount = 3;
+            starCount = 4;
             alpha += 0.02f;
             StarImg[2].color = new Color(1, 1, 1, alpha);
         }
@@ -69,25 +69,19 @@ public class Stage : MonoBehaviour
         switch (GameData.StageNum)
         {
             case 1:
-                GameData.Stage1 += starCount;
-                if (GameData.Stage1 > 3)
-                {
-                    GameData.Stage1 = 3;
-                }
+                GameData.Stage1 = starCount;
+                if (GameData.Stage2 == 0)
+                    GameData.Stage2 = 1;
                 break;
             case 2:
-                GameData.Stage2 += starCount;
-                if (GameData.Stage2 > 3)
-                {
-                    GameData.Stage2 = 3;
-                }
+                GameData.Stage2 = starCount;
+                if (GameData.Stage2 == 0)
+                    GameData.Stage3 = 1;
                 break;
             case 3:
-                GameData.Stage3 += starCount;
-                if (GameData.Stage3 > 3)
-                {
-                    GameData.Stage3 = 3;
-                }
+                GameData.Stage3 = starCount;
+                if (GameData.Stage2 == 0) { }
+                //GameData.Stage4 = 1;
                 break;
         }
     }

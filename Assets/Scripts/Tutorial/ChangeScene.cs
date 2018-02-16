@@ -8,6 +8,8 @@ public class ChangeScene : MonoBehaviour {
     public void IsClicked()
     {
         SceneManager.LoadScene("StageSelect");
-        GameData.StageT = 3;
+        GameData.StageT = 4;
+        if (GameData.Stage1 == 0)
+            GameData.Stage1 = 1;
     }
 }
