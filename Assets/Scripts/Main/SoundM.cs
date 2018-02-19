@@ -24,4 +24,9 @@ public class SoundM : MonoBehaviour
     {
         source.PlayOneShot(sound[0]);
     }
+
+    public void PlaySound(int temp)
+    {
+        source.PlayOneShot(sound[temp]);
+    }
 }

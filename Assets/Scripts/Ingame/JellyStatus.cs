@@ -15,6 +15,7 @@ public class JellyStatus : MonoBehaviour
     public Stage stage;
     private Animator animator { get { return GetComponent<Animator>(); } }
     private Animator effect { get { return effectObj.GetComponent<Animator>(); } }
+    private SoundM soundM { get { return GetComponent<SoundM>(); } }
 
     private float jellyTempHealth;
     private bool life;
@@ -119,6 +120,7 @@ public class JellyStatus : MonoBehaviour
                 pos.Translate((Vector2.left * speed).normalized / 40.0f);
                 yield return null; //Update문 수행 완료시까지 대기
             }
+            soundM.PlaySound(jellyKind * 2);
         }
         else { yield return null; }
     }
@@ -143,9 +145,10 @@ public class JellyStatus : MonoBehaviour
                 case 2:
                     animator.Play("BJellyAttack");
                     effect.Play("BJellyAttackEft");
-                    catstatus.Attacked(damage);
+                    catstatus.Attacked(damage);                   
                     break;
             }
+            soundM.PlaySound(jellyKind * 2 + 1);
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
@@ -215,7 +218,6 @@ public class JellyStatus : MonoBehaviour
             for (int i = 0; i < 50; i++)
             {
                 pos.Translate((Vector2.right * speed).normalized / 10.0f);
-                //transform.Translate((Vector2.right * speed).normalized / 10.0f);
                 yield return new WaitForSeconds(0.1f);
             }
             effect.Play("temp");

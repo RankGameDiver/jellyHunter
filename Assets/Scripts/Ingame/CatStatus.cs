@@ -16,6 +16,7 @@ public class CatStatus : MonoBehaviour
     public Stage stage;
     public CatAnimation catAnimation;
     public float lastTime; // 방어 적용 시간
+    private SoundM soundM { get { return GetComponent<SoundM>(); } }
 
     public GameObject GameOver;
 

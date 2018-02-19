@@ -28,7 +28,6 @@ public class Game : MonoBehaviour
             if (!gBlock[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
             {
                 gBlock[i].SetActive(true); //블럭 활성화
-                //gBlock[i].transform.position = GameData.spawnPos; //블럭 위치를 스폰 위치로 변경
                 gBlock[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
                 currentBlock = gBlock[i]; //현재 블럭으로 지정
                 sBlock[i].Init(); //블럭 스크립트 초기화
@@ -178,6 +177,7 @@ public class Game : MonoBehaviour
                 {
                     ChainStartPos(i); //체인 연결 확인
                     InitBlock(i); //blockNum 조절
+                    sBlock[i].BlockTouchSound();
                 }
             }
         }
