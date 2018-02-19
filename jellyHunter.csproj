@@ -313,12 +313,12 @@
     <Compile Include="Assets\Scripts\Ingame\Stage.cs" />
     <Compile Include="Assets\Scripts\Ingame\TimeScale.cs" />
     <Compile Include="Assets\Scripts\Main\ButtonManager.cs" />
-    <Compile Include="Assets\Scripts\Main\ButtonSound.cs" />
     <Compile Include="Assets\Scripts\Main\CanvasManager.cs" />
     <Compile Include="Assets\Scripts\Main\Data.cs" />
     <Compile Include="Assets\Scripts\Main\MainUIText.cs" />
     <Compile Include="Assets\Scripts\Main\PlayCount.cs" />
     <Compile Include="Assets\Scripts\Main\SaveLoad.cs" />
+    <Compile Include="Assets\Scripts\Main\SoundM.cs" />
     <Compile Include="Assets\Scripts\Main\UImanager.cs" />
     <Compile Include="Assets\Scripts\StageSelect\Shop.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageButton.cs" />

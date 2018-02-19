@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonManager : MonoBehaviour {
-
-    public void Shop()
-    {
-        Debug.Log("Shop!");
-    }
-
+public class ButtonManager : MonoBehaviour
+{
 	public void StageSelect()
     {
         SceneManager.LoadScene("StageSelect");
