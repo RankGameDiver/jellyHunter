@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class Block : MonoBehaviour
 {
     public Sprite[] skillImg; //스킬 이미지
-    private Image blockImg { get { return GetComponent<Image>(); } }
+    private Image blockImg { get { return gameObject.GetComponent<Image>(); } }
     private RectTransform blockPos { get { return GetComponent<RectTransform>(); } }
-    private SoundM soundM { get { return GetComponent<SoundM>(); } }
 
     public int skillNum; // 스킬 종류
     public int blockNum; // 활성화 상태일 때 블럭의 순서
@@ -64,11 +63,6 @@ public class Block : MonoBehaviour
         GameData.touchBlock = gameObject; //블럭 터치됨
         if (GameData.blockCount < 0)
             GameData.blockCount = 0;
-    }
-
-    public void BlockTouchSound()
-    {
-        soundM.PlaySound(GameData.skillPower - 1);
     }
 
 }

@@ -5,8 +5,11 @@ public class Game : MonoBehaviour
 {
     public GameObject[] gBlock; // 모든 블럭의 배열
     public Block[] sBlock; // 모든 블럭 스크립트의 배열
+    [HideInInspector]
     public GameObject currentBlock; // 현재 생성된 블럭
+    public SoundM soundM;
 
+    [HideInInspector]
     public CatStatus catstatus;
 
     public int chainCount = 0; //연결된 체인 개수
@@ -162,6 +165,7 @@ public class Game : MonoBehaviour
             }
         }
         GameData.skillPower = chainCount; //체인 갯수
+        soundM.PlaySound(chainCount);
         ScoreManager.PlusChainScore(chainCount);
         chainCount = 0; //체인 카운트 초기화
         GameData.touchBlock = null; //터치 상태 = 터치되지 않음
@@ -177,7 +181,6 @@ public class Game : MonoBehaviour
                 {
                     ChainStartPos(i); //체인 연결 확인
                     InitBlock(i); //blockNum 조절
-                    sBlock[i].BlockTouchSound();
                 }
             }
         }

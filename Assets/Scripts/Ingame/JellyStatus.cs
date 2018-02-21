@@ -13,9 +13,10 @@ public class JellyStatus : MonoBehaviour
 
     public CatStatus catstatus;
     public Stage stage;
-    private Animator animator { get { return GetComponent<Animator>(); } }
+    private Animator animator { get { return gameObject.GetComponent<Animator>(); } }
     private Animator effect { get { return effectObj.GetComponent<Animator>(); } }
-    private SoundM soundM { get { return GetComponent<SoundM>(); } }
+    private SoundM soundM { get { return gameObject.GetComponent<SoundM>(); } }
+    public SoundM eftSound;
 
     private float jellyTempHealth;
     private bool life;
@@ -23,7 +24,7 @@ public class JellyStatus : MonoBehaviour
     public int jellyCount; // 현재 젤리의 순서
     public int jellyKind; // 젤리 종류
 
-    public RectTransform pos { get{return GetComponent<RectTransform>(); } }
+    public RectTransform pos { get{return gameObject.GetComponent<RectTransform>(); } }
     public GameObject effectObj;
 
     public GameObject hpBar;
@@ -105,6 +106,7 @@ public class JellyStatus : MonoBehaviour
         if (!isMoving && life) //움직이고 있지 않으면
         {
             isMoving = true; //움직임
+            soundM.SetSoundClip(jellyKind);
             while (isMoving) //움직이는 동안
             {
                 if (pos.anchoredPosition.x < GameData.jellyMax.x) //최대 x좌표에 도달했을 경우
@@ -117,10 +119,9 @@ public class JellyStatus : MonoBehaviour
                     isMoving = false;
                     StartCoroutine(Attack());
                 }
-                pos.Translate((Vector2.left * speed).normalized / 40.0f);
+                pos.Translate((Vector2.left * speed).normalized / 40.0f);              
                 yield return null; //Update문 수행 완료시까지 대기
             }
-            soundM.PlaySound(jellyKind * 2);
         }
         else { yield return null; }
     }
@@ -145,10 +146,10 @@ public class JellyStatus : MonoBehaviour
                 case 2:
                     animator.Play("BJellyAttack");
                     effect.Play("BJellyAttackEft");
-                    catstatus.Attacked(damage);                   
+                    catstatus.Attacked(damage);
                     break;
             }
-            soundM.PlaySound(jellyKind * 2 + 1);
+            eftSound.PlaySound(jellyKind);
             yield return new WaitForSeconds(3.0f);
         }
         yield break;

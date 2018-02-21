@@ -7,8 +7,8 @@ public class SoundM : MonoBehaviour
 {
     public AudioClip[] sound;
 
-    private Button button { get { return GetComponent<Button>(); } }
-    private AudioSource source { get { return GetComponent<AudioSource>(); } }
+    private Button button { get { return gameObject.GetComponent<Button>(); } }
+    private AudioSource source { get { return gameObject.GetComponent<AudioSource>(); } }
 
     void Start()
     {
@@ -28,5 +28,16 @@ public class SoundM : MonoBehaviour
     public void PlaySound(int temp)
     {
         source.PlayOneShot(sound[temp]);
+    }
+
+    public void SetSoundClip(int temp)
+    {
+        source.clip = sound[temp];
+        source.Play();
+    }
+
+    public void StopSound()
+    {
+        source.Stop();
     }
 }
