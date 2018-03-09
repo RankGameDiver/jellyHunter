@@ -36,6 +36,7 @@ public class StageSelect : MonoBehaviour
         stageImg[1].sprite = stageNum[GameData.Stage1];
         stageImg[2].sprite = stageNum[GameData.Stage2];
         stageImg[3].sprite = stageNum[GameData.Stage3];
+        stageImg[4].sprite = stageNum[GameData.ExStage];
     }
 
     public void GameStart()
@@ -48,10 +49,61 @@ public class StageSelect : MonoBehaviour
             }
             else
             {
-                TimeSet();
-                GameData.PlayingCount -= 1;
-                Debug.Log(GameData.PlayingCount);
-                SceneManager.LoadScene("Ingame");
+                switch (GameData.StageNum)
+                {
+                    case 1:
+                        if (GameData.Stage1 > 0)
+                        {
+                            TimeSet();
+                            GameData.PlayingCount -= 1;
+                            Debug.Log(GameData.PlayingCount);
+                            SceneManager.LoadScene("Ingame");
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("Main");
+                        }
+                        break;
+                    case 2:
+                        if (GameData.Stage2 > 0)
+                        {
+                            TimeSet();
+                            GameData.PlayingCount -= 1;
+                            Debug.Log(GameData.PlayingCount);
+                            SceneManager.LoadScene("Ingame");
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("Main");
+                        }
+                        break;
+                    case 3:
+                        if (GameData.Stage3 > 0)
+                        {
+                            TimeSet();
+                            GameData.PlayingCount -= 1;
+                            Debug.Log(GameData.PlayingCount);
+                            SceneManager.LoadScene("Ingame");
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("Main");
+                        }
+                        break;
+                    case 4:
+                        if (GameData.ExStage > 0)
+                        {
+                            TimeSet();
+                            GameData.PlayingCount -= 1;
+                            Debug.Log(GameData.PlayingCount);
+                            SceneManager.LoadScene("Ingame");
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("Main");
+                        }
+                        break;
+                }
             }
         }
         else

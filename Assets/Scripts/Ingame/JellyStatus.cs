@@ -49,6 +49,7 @@ public class JellyStatus : MonoBehaviour
 
     public void Init()
     {
+        hpBar.GetComponent<JellyHpBar>().SetHpBar();
         if (!hpBar.activeInHierarchy)
             hpBar.SetActive(true);
         jellyTempHealth = health;

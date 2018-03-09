@@ -46,6 +46,7 @@ public class SaveLoad : MonoBehaviour
         GameData.Stage1 = (int)data[0]["stage1"];
         GameData.Stage2 = (int)data[0]["stage2"];
         GameData.Stage3 = (int)data[0]["stage3"];
+        GameData.ExStage = (int)data[0]["ExStage"];
         GameData.PlayingCount = (int)data[0]["playingCount"];
         GameData.LifeHour = (int)data[0]["lifeHour"];
         GameData.LifeMin = (int)data[0]["lifeMin"];

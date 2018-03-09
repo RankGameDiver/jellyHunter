@@ -81,7 +81,7 @@ public class Stage : MonoBehaviour
             case 3:
                 GameData.Stage3 = starCount;
                 if (GameData.Stage2 == 0) { }
-                //GameData.Stage4 = 1;
+                GameData.ExStage = 1;
                 break;
         }
     }
@@ -102,6 +102,9 @@ public class Stage : MonoBehaviour
                 break;
             case 3:
                 StartCoroutine(Stage3());
+                break;
+            case 4:
+                StartCoroutine(ExStage());
                 break;
         }
     }
@@ -162,6 +165,19 @@ public class Stage : MonoBehaviour
 
         yield return CreateLoop(1, (int)Monster.Big);
         yield return new WaitUntil(() => { return CheckAct(); });
+        StageClear();
+        yield break;
+    }
+
+    IEnumerator ExStage()
+    {
+        game.SetBlock();
+        for (int i = 0; i < 5; i++)
+        {
+            yield return CreateLoop(i, Random.Range(0, 3));
+            yield return new WaitUntil(() => { return CheckAct(); });
+            yield return new WaitForSeconds(5f);
+        }
         StageClear();
         yield break;
     }

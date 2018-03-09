@@ -78,6 +78,13 @@ public static class GameData
         set { _Stage3 = value; }
     }
 
+    private static int _ExStage = 0;
+    public static int ExStage
+    {
+        get { return _ExStage; }
+        set { _ExStage = value; }
+    }
+
     private static int _PlayingCount = 5;
     public static int PlayingCount
     {

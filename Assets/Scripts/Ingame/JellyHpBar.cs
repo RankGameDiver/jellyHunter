@@ -10,7 +10,7 @@ public class JellyHpBar : MonoBehaviour
     private RectTransform pos;
     private int maxHP;
 
-    void Start ()
+    public void SetHpBar ()
     {
         HP = GetComponent<Slider>();
         pos = GetComponent<RectTransform>();
