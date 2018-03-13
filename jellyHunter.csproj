@@ -301,7 +301,6 @@
     <Compile Include="Assets\Scripts\Ingame\Block.cs" />
     <Compile Include="Assets\Scripts\Ingame\CatAnimation.cs" />
     <Compile Include="Assets\Scripts\Ingame\CatStatus.cs" />
-    <Compile Include="Assets\Scripts\Ingame\ClearManager.cs" />
     <Compile Include="Assets\Scripts\Ingame\Game.cs" />
     <Compile Include="Assets\Scripts\Ingame\GameData.cs" />
     <Compile Include="Assets\Scripts\Ingame\HpBar.cs" />

@@ -12,18 +12,19 @@ public class Stage : MonoBehaviour
 
     public GameObject gameClear;
     public Game game;
+    public GameObject[] button;
 
     public Image[] StarImg;
     public int starCount;
     private float alpha = 0;
 
+    private int exLv = 1;
+
     void Start()
     {
         StageKind();
         for (int i = 0; i < 3; i++)
-        {
             StarImg[i].color = new Color(1, 1, 1, alpha);
-        }
     }
 
     void Update()
@@ -31,15 +32,11 @@ public class Stage : MonoBehaviour
         if (Application.platform == RuntimePlatform.Android)
         {
             if (Input.GetKey(KeyCode.Escape))
-            {
                 SceneManager.LoadScene("Main");
-            }
         }
 
         if (gameClear.activeInHierarchy)
-        {
             StarFadeIn();
-        }
     }
 
     private void StarFadeIn()
@@ -86,6 +83,17 @@ public class Stage : MonoBehaviour
         }
     }
 
+    bool CheckAct() // 현재 활성화된 젤리가 있으면 false를 반환 아니면 true 반환
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (gJelly[i].activeInHierarchy)
+                return false;
+            else { }
+        }
+        return true;
+    }
+
     void StageKind() // 단계별 스테이지
     {
         ScoreManager.score = 0;
@@ -109,6 +117,33 @@ public class Stage : MonoBehaviour
         }
     }
 
+    IEnumerator Create(int jellyKind) // 젤리 생성
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (!gJelly[i].activeInHierarchy)
+            {
+                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();
+                sJelly.jellyKind = jellyKind;
+                sJelly.SetJelly();
+                GameData.jellyNum++;
+                sJelly.jellyCount = GameData.jellyNum;
+                i = 5;
+            }
+        }
+        yield break;
+    }
+
+    IEnumerator CreateLoop(int num, int jellyKind) // 젤리 생성 루프 (num은 소환하는 횟수)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            yield return Create(jellyKind);
+            yield return new WaitForSeconds(3f); // 대기
+        }
+        yield break;
+    }
+
     IEnumerator TestStage() // 첫번째 스테이지
     {
         game.SetBlock();
@@ -123,11 +158,11 @@ public class Stage : MonoBehaviour
         game.SetBlock();
         yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         yield return CreateLoop(3, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         yield return CreateLoop(5, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
@@ -140,11 +175,11 @@ public class Stage : MonoBehaviour
         game.SetBlock();
         //yield return CreateLoop(3, (int)Monster.Normal);
         //yield return new WaitUntil(() => { return CheckAct(); });
-        //yield return new WaitForSeconds(5f);
+        //yield return new WaitForSeconds(3f);
 
         //yield return CreateLoop(4, (int)Monster.Normal);
         //yield return new WaitUntil(() => { return CheckAct(); });
-        //yield return new WaitForSeconds(5f);
+        //yield return new WaitForSeconds(3f);
 
         yield return CreateLoop(1, (int)Monster.Strong);
         yield return new WaitUntil(() => { return CheckAct(); });
@@ -157,11 +192,11 @@ public class Stage : MonoBehaviour
         game.SetBlock();
         //yield return CreateLoop(3, (int)Monster.Normal);
         //yield return new WaitUntil(() => { return CheckAct(); });
-        //yield return new WaitForSeconds(5f);
+        //yield return new WaitForSeconds(3f);
 
         //yield return CreateLoop(5, (int)Monster.Normal);
         //yield return new WaitUntil(() => { return CheckAct(); });
-        //yield return new WaitForSeconds(5f);
+        //yield return new WaitForSeconds(3f);
 
         yield return CreateLoop(1, (int)Monster.Big);
         yield return new WaitUntil(() => { return CheckAct(); });
@@ -172,52 +207,40 @@ public class Stage : MonoBehaviour
     IEnumerator ExStage()
     {
         game.SetBlock();
-        for (int i = 0; i < 5; i++)
-        {
-            yield return CreateLoop(i, Random.Range(0, 3));
-            yield return new WaitUntil(() => { return CheckAct(); });
-            yield return new WaitForSeconds(5f);
-        }
+        yield return CreateLoop(3, (int)Monster.Normal);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        yield return new WaitForSeconds(3f);
+
+        yield return CreateLoop(3, (int)Monster.Normal);
+        yield return CreateLoop(1, (int)Monster.Strong);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        yield return new WaitForSeconds(3f);
+
+        yield return CreateLoop(3, (int)Monster.Strong);
+        yield return CreateLoop(1, (int)Monster.Big);
+        yield return new WaitUntil(() => { return CheckAct(); });
+        ExClear();
+    }
+
+    public void ExClear()
+    {
+        button[0].SetActive(true);
+        button[1].SetActive(true);
+    }
+
+    public void ExNext() // temp는 회차
+    {
+        button[0].SetActive(false);
+        button[1].SetActive(false);
+        exLv++;
+        StartCoroutine(ExStage());
+    }
+
+    public void ExEnd()
+    {
+        button[0].SetActive(false);
+        button[1].SetActive(false);
         StageClear();
-        yield break;
-    }
-
-    IEnumerator CreateLoop(int num, int jellyKind) // 젤리 생성 루프 (num은 소환하는 횟수)
-    {
-        for (int i = 0; i < num; i++)
-        {
-            yield return Create(jellyKind);
-            yield return new WaitForSeconds(3f); // 대기
-        }
-        yield break;
-    }
-
-    IEnumerator Create(int jellyKind) // 생성
-    {
-        for (int i = 0; i < 5; i++) //블럭 갯수만큼 실행
-        {
-            if (!gJelly[i].activeInHierarchy) //현재 블럭이 활성화 상태가 아니라면
-            {
-                JellyStatus sJelly = gJelly[i].GetComponent<JellyStatus>();
-                sJelly.jellyKind = jellyKind;
-                sJelly.SetJelly();
-                GameData.jellyNum++;
-                sJelly.jellyCount = GameData.jellyNum;
-                i = 5;
-            }
-        }
-        yield break;
-    }
-
-    bool CheckAct() // 현재 활성화된 젤리가 있으면 false를 반환 아니면 true 반환
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (gJelly[i].activeInHierarchy)
-                return false;
-            else { }
-        }
-        return true;
     }
 
     private void StageClear()
@@ -233,5 +256,6 @@ public class Stage : MonoBehaviour
         GameData.healUp = false;
         GameData.moneyUp = false;
         GameData.hpUp = false;
+        exLv = 1;
     }
 }
