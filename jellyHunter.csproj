@@ -292,11 +292,18 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
-    <Reference Include="LitJson">
-      <HintPath>Assets\Plugin\LitJson.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugin\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\Plugin\LitJson\JsonData.cs" />
+    <Compile Include="Assets\Plugin\LitJson\JsonException.cs" />
+    <Compile Include="Assets\Plugin\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\Plugin\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\Plugin\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\Plugin\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Plugin\LitJson\Lexer.cs" />
+    <Compile Include="Assets\Plugin\LitJson\Netstandard15Polyfill.cs" />
+    <Compile Include="Assets\Plugin\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Scripts\Ingame\BackGround.cs" />
     <Compile Include="Assets\Scripts\Ingame\Block.cs" />
     <Compile Include="Assets\Scripts\Ingame\CatAnimation.cs" />
