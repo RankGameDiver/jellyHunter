@@ -18,7 +18,7 @@ public class SaveLoad : MonoBehaviour
     {
         S_Data.Clear();
         S_Data.Add(new Data(GameData.Money, GameData.StageT, GameData.Stage1, GameData.Stage2, GameData.Stage3,
-                            GameData.PlayingCount, GameData.LifeHour, GameData.LifeMin, GameData.LifeSec));
+                            GameData.ExStage, GameData.PlayingCount, GameData.LifeHour, GameData.LifeMin, GameData.LifeSec));
         JsonData charData = JsonMapper.ToJson(S_Data);
         File.WriteAllText(Application.dataPath + "/Data/SaveData.json", charData.ToString());
     }
@@ -30,9 +30,7 @@ public class SaveLoad : MonoBehaviour
         {
             L_sData = File.ReadAllText(Application.dataPath + "/Data/SaveData.json");
             // Debug.Log(L_sData);
-            JsonData charData = JsonMapper.ToObject(L_sData); // string 형식이 아니라 다른 방식으로 불러오게 변환
-            JsonMapper.ToObject(L_sData);
-            
+            JsonData charData = JsonMapper.ToObject(L_sData); // string 형식이 아니라 다른 방식으로 불러오게 변환         
             GetData(charData);
         }
         else
@@ -49,7 +47,7 @@ public class SaveLoad : MonoBehaviour
         GameData.Stage1 = (int)data[0]["stage1"];
         GameData.Stage2 = (int)data[0]["stage2"];
         GameData.Stage3 = (int)data[0]["stage3"];
-        GameData.ExStage = (int)data[0]["ExStage"];
+        GameData.ExStage = (int)data[0]["exStage"];
         GameData.PlayingCount = (int)data[0]["playingCount"];
         GameData.LifeHour = (int)data[0]["lifeHour"];
         GameData.LifeMin = (int)data[0]["lifeMin"];
