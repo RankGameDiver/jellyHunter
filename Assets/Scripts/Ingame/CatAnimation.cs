@@ -40,7 +40,7 @@ public class CatAnimation : MonoBehaviour
                 break;
             case 1:
                 GameData.lastSkillKind = GameData.skillKind;
-                cat.Attack();
+                cat.BasicAttack();
                 animator.Play("CatAttack");
                 switch (cat.length)
                 {

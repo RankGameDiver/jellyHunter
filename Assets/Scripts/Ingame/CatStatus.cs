@@ -50,7 +50,7 @@ public class CatStatus : MonoBehaviour
         Defending();
     }
 
-    public void Attack()
+    public void BasicAttack()
     {
         if (GameData.attackUp)
             GameData.skillPower += 1;
@@ -65,7 +65,7 @@ public class CatStatus : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount <= length && stage.gJelly[i].activeInHierarchy)
+            if (sJelly.jellyCount <= 1 && stage.gJelly[i].activeInHierarchy)
                 sJelly.Attacked(trueDamage);
         }
         GameData.skillPower = 0;
@@ -141,7 +141,7 @@ public class CatStatus : MonoBehaviour
         if (health > catTempHealth) health = catTempHealth;
         catAnimation.Attacked();
 
-        if(health<=0)
+        if (health <= 0)
         {
             GameOver.SetActive(true);
         }
