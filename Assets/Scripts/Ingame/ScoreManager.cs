@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-
     public static int score = 0;
     private static int prevScore = 0;
 
@@ -17,13 +16,11 @@ public class ScoreManager : MonoBehaviour
     public static int money = 0;
     public static int moneyPlus = 0;
 
-    // Use this for initialization
     void Start()
     {
         myText = GetComponent<Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timeNow = timeNow + Time.deltaTime;

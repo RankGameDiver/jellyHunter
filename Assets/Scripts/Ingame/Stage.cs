@@ -72,12 +72,12 @@ public class Stage : MonoBehaviour
                 break;
             case 2:
                 GameData.Stage2 = starCount;
-                if (GameData.Stage2 == 0)
+                if (GameData.Stage3 == 0)
                     GameData.Stage3 = 1;
                 break;
             case 3:
                 GameData.Stage3 = starCount;
-                if (GameData.Stage2 == 0) { }
+                if (GameData.ExStage == 0) { }
                 GameData.ExStage = 1;
                 break;
         }
