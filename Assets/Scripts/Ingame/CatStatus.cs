@@ -57,7 +57,8 @@ public class CatStatus : MonoBehaviour
 
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
-        else if (GameData.skillPower == 5) length = 3;
+        else length = 3;
+        //length = 1;
 
         float trueDamage = damage * GameData.skillPower + (length * GameData.skillPower * damage / 5 * 2);
 

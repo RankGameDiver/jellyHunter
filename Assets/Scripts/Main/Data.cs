@@ -14,7 +14,8 @@ public class Data
     public int lifeMin;
     public int lifeSec;
 
-    public Data(int _money, int _stageT, int _stage1, int _stage2, int _stage3, int _exStage, int _playingCount, int _lifeHour, int _lifeMin, int _lifeSec)
+    public Data(int _money = 0, int _stageT = 0, int _stage1 = 0, int _stage2 = 0, int _stage3 = 0, 
+        int _exStage = 0, int _playingCount = 0, int _lifeHour = 0, int _lifeMin = 0, int _lifeSec = 0)
     {
         money = _money;
         stageT = _stageT;

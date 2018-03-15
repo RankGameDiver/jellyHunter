@@ -14,7 +14,7 @@ public class Block : MonoBehaviour
     private int blockNum; // 활성화 상태일 때 블럭의 순서
     public int blockArr; // 블럭 배열 순서
 
-    private float speed = 1.0f; //속도 지정
+    //private float speed = 1.0f; //속도 지정
     private bool isMoving; // 블럭이 생성된 후 움직임을 체크
 
     public void Init()
