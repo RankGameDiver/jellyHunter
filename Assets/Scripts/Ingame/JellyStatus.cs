@@ -11,6 +11,8 @@ public class JellyStatus : MonoBehaviour
     [SerializeField]
     private float defend; // 방어력
 
+    enum Monster { Normal, Strong, Big, Bomb };
+
     public CatStatus catstatus;
     public Stage stage;
     private Animator animator { get { return gameObject.GetComponent<Animator>(); } }
@@ -61,14 +63,17 @@ public class JellyStatus : MonoBehaviour
     {
         switch (jellyKind)
         {
-            case 0:
+            case (int)Monster.Normal:
                 SetStatus(50, 5, 0); // Normal Jelly
                 break;
-            case 1:
+            case (int)Monster.Strong:
                 SetStatus(120, 10, 5); // Strong Jelly
                 break;
-            case 2:
+            case (int)Monster.Big:
                 SetStatus(250, 20, 10); // Big Jelly
+                break;
+            case (int)Monster.Bomb:
+                SetStatus(75, 15, 0);
                 break;
         }
         Init();
@@ -86,18 +91,23 @@ public class JellyStatus : MonoBehaviour
     {
         switch (jellyKind)
         {
-            case 0:
+            case (int)Monster.Normal:
                 animator.Play("NJellyNormal");
                 pos.anchoredPosition = new Vector2(170, -219); 
                 break;
-            case 1:
+            case (int)Monster.Strong:
                 animator.Play("StrongJellyNormal");
                 pos.anchoredPosition = new Vector2(170, -171); 
                 break;
-            case 2:
+            case (int)Monster.Big:
                 animator.Play("BJellyNormal");
                 pos.anchoredPosition = new Vector2(380, -28); 
                 break;
+            case (int)Monster.Bomb:
+                animator.Play("BombJellyNormal");
+                pos.anchoredPosition = new Vector2(170,- 170); // 아마 수정 필요
+                break;
+                
         }
         StartCoroutine(Move()); //Move() 코루틴 실행
     }
@@ -115,7 +125,7 @@ public class JellyStatus : MonoBehaviour
                     isMoving = false; //더 이상 움직이지 않음
                     StartCoroutine(Attack());
                 }
-                else if (pos.anchoredPosition.x < -452.0f && jellyKind == 2)
+                else if (pos.anchoredPosition.x < -452.0f && jellyKind == (int)Monster.Big)
                 {
                     isMoving = false;
                     StartCoroutine(Attack());
@@ -133,22 +143,28 @@ public class JellyStatus : MonoBehaviour
         {
             switch (jellyKind)
             {
-                case 0:
+                case (int)Monster.Normal:
                     animator.Play("NJellyAttack");
                     effect.Play("NJellyAttackEft");
                     catstatus.Attacked(damage);
                     break;
-                case 1:
+                case (int)Monster.Strong:
                     animator.Play("StrongJellyAttack");
                     effect.Play("SJellyAttackEft");
                     yield return new WaitForSeconds(0.7f); // 젤리 공격 애니메이션과 고양이 피격 타이밍 조절
                     catstatus.Attacked(damage);
                     break;
-                case 2:
+                case (int)Monster.Big:
                     animator.Play("BJellyAttack");
                     effect.Play("BJellyAttackEft");
                     catstatus.Attacked(damage);
                     break;
+                case (int)Monster.Bomb:
+                    animator.Play("BombJellyAttack");
+                    //effect.Play("BombJellyAttackEft");
+                    catstatus.Attacked(damage);
+                    break;
+
             }
             eftSound.PlaySound(jellyKind);
             yield return new WaitForSeconds(3.0f);
@@ -165,17 +181,21 @@ public class JellyStatus : MonoBehaviour
         {
             switch (jellyKind)
             {
-                case 0:
+                case (int)Monster.Normal:
                     animator.Play("NJellyHurt");
                     effect.Play("NJellyHurtEft");
                     break;
-                case 1:
+                case (int)Monster.Strong:
                     animator.Play("StrongJellyHurt");
                     effect.Play("SJellyHurtEft");
                     break;
-                case 2:
+                case (int)Monster.Big:
                     animator.Play("BJellyHurt");
                     effect.Play("BJellyHurt2Eft");
+                    break;
+                case (int)Monster.Bomb:
+                    animator.Play("BombJellyHurt");
+                    //effect.Play("BombJellyHurtEft");
                     break;
             }
         }
@@ -193,17 +213,21 @@ public class JellyStatus : MonoBehaviour
     {
         switch (jellyKind)
         {
-            case 0:
+            case (int)Monster.Normal:
                 animator.Play("NJellyDead");
                 effect.Play("NJellyDeadEft");
                 break;
-            case 1:
+            case (int)Monster.Strong:
                 animator.Play("StrongJellyDead");
                 effect.Play("SJellyDeadEft");
                 break;
-            case 2:
+            case (int)Monster.Big:
                 animator.Play("BJellyDead");
                 effect.Play("BJellyDeadEft");
+                break;
+            case (int)Monster.Bomb:
+                animator.Play("BombJellyDead");
+                //effect.Play("BombJellyDeadEft");
                 break;
         }
         yield break;
@@ -212,7 +236,7 @@ public class JellyStatus : MonoBehaviour
     IEnumerator Death()
     {
         ScoreManager.PlusDefeatScore(jellyKind + 1);
-        if (jellyKind == 2)
+        if (jellyKind == (int)Monster.Big)
         {
             pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, -219);
             animator.Play("BJellyDeadRun");

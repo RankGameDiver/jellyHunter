@@ -8,8 +8,7 @@ public class ScoreManager : MonoBehaviour
     public static int score = 0;
     private static int prevScore = 0;
 
-    public Text myText;
-    //static string scoreStr;
+    private Text myText;
 
     private static float timeNow = 0;
 
@@ -24,10 +23,6 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         timeNow = timeNow + Time.deltaTime;
-        if (prevScore != score)
-        {
-            //scoreStr = " " + score;
-        }
         prevScore = score;
     }
 

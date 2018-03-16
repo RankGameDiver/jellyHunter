@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Stage : MonoBehaviour
 {
-    enum Monster { Normal, Strong, Big };
+    enum Monster { Normal, Strong, Big, Bomb };
 
     public GameObject[] gJelly; // 모든 젤리맨 게임오브젝트 배열
 
@@ -79,6 +79,9 @@ public class Stage : MonoBehaviour
                 GameData.Stage3 = starCount;
                 if (GameData.ExStage == 0) { }
                 GameData.ExStage = 1;
+                break;
+            case 4:
+                GameData.ExStage = 4;
                 break;
         }
     }

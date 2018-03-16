@@ -58,7 +58,6 @@ public class CatStatus : MonoBehaviour
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
         else length = 3;
-        //length = 1;
 
         float trueDamage = damage * GameData.skillPower + (length * GameData.skillPower * damage / 5 * 2);
 
@@ -69,7 +68,6 @@ public class CatStatus : MonoBehaviour
                 sJelly.Attacked(trueDamage);
         }
         GameData.skillPower = 0;
-        //Debug.Log("Attack");
     }
 
     public void Defending() // 방어 버프 적용중
@@ -104,7 +102,7 @@ public class CatStatus : MonoBehaviour
 
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
-        else if (GameData.skillPower == 5) length = 3;
+        else length = 3;
 
         if (shield == false)
         {
@@ -125,7 +123,7 @@ public class CatStatus : MonoBehaviour
 
         if (GameData.skillPower <= 2) length = 1;
         else if (GameData.skillPower <= 4) length = 2;
-        else if (GameData.skillPower == 5) length = 3;
+        else length = 3;
 
         health += GameData.skillPower * 10 * length;
         if (health > maxHealth)
