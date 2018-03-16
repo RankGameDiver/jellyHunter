@@ -150,7 +150,7 @@ public class Stage : MonoBehaviour
     IEnumerator TestStage() // 첫번째 스테이지
     {
         game.SetBlock();
-        yield return CreateLoop(1, (int)Monster.Normal);
+        yield return CreateLoop(1, (int)Monster.Bomb);
         yield return new WaitUntil(() => { return CheckAct(); });
         StageClear();
         yield break;

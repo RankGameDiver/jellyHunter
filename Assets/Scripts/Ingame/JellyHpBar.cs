@@ -28,6 +28,10 @@ public class JellyHpBar : MonoBehaviour
                 maxHP = 250;
                 pos.anchoredPosition = new Vector2(0, 0.7f);
                 break;
+            case 3:
+                maxHP = 75;
+                pos.anchoredPosition = new Vector2(0.2f, 1.2f);
+                break;
         }
 		
 	}
