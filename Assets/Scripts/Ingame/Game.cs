@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     [HideInInspector]
     public GameObject currentBlock; // 현재 생성된 블럭
     public SoundM soundM;
+    public GameObject[] gJelly;
 
     [HideInInspector]
     public CatStatus catstatus;
@@ -173,6 +174,15 @@ public class Game : MonoBehaviour
 
     public void Back()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            gJelly[i].SetActive(false);
+        }
+        GameData.attackUp = false;
+        GameData.defendUp = false;
+        GameData.healUp = false;
+        GameData.moneyUp = false;
+        GameData.hpUp = false;
         SceneManager.LoadScene("Main");
     }
 }
