@@ -66,22 +66,26 @@ public class Stage : MonoBehaviour
         switch (GameData.StageNum)
         {
             case 1:
-                GameData.Stage1 = starCount;
+                if(starCount > GameData.Stage1)
+                    GameData.Stage1 = starCount;
                 if (GameData.Stage2 == 0)
                     GameData.Stage2 = 1;
                 break;
             case 2:
-                GameData.Stage2 = starCount;
+                if (starCount > GameData.Stage2)
+                    GameData.Stage2 = starCount;
                 if (GameData.Stage3 == 0)
                     GameData.Stage3 = 1;
                 break;
             case 3:
-                GameData.Stage3 = starCount;
+                if (starCount > GameData.Stage3)
+                    GameData.Stage3 = starCount;
                 if (GameData.ExStage == 0) { }
                 GameData.ExStage = 1;
                 break;
             case 4:
-                GameData.ExStage = 4;
+                if (starCount > GameData.ExStage)
+                    GameData.ExStage = 4;
                 break;
         }
     }
@@ -102,6 +106,10 @@ public class Stage : MonoBehaviour
         ScoreManager.score = 0;
         ScoreManager.money = 0;
         ScoreManager.moneyPlus = 0;
+
+        game.SetBlock();
+        game.SetJelly();
+
         switch (GameData.StageNum)
         {
             case 1:
@@ -149,7 +157,6 @@ public class Stage : MonoBehaviour
 
     IEnumerator TestStage() // 첫번째 스테이지
     {
-        game.SetBlock();
         yield return CreateLoop(1, (int)Monster.Bomb);
         yield return new WaitUntil(() => { return CheckAct(); });
         StageClear();
@@ -157,8 +164,7 @@ public class Stage : MonoBehaviour
     }
 
     IEnumerator Stage1() // 첫번째 스테이지
-    {
-        game.SetBlock();
+    { 
         yield return CreateLoop(1, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(3f);
@@ -175,7 +181,6 @@ public class Stage : MonoBehaviour
 
     IEnumerator Stage2()
     {
-        game.SetBlock();
         //yield return CreateLoop(3, (int)Monster.Normal);
         //yield return new WaitUntil(() => { return CheckAct(); });
         //yield return new WaitForSeconds(3f);
@@ -192,7 +197,6 @@ public class Stage : MonoBehaviour
 
     IEnumerator Stage3()
     {
-        game.SetBlock();
         //yield return CreateLoop(3, (int)Monster.Normal);
         //yield return new WaitUntil(() => { return CheckAct(); });
         //yield return new WaitForSeconds(3f);
@@ -209,7 +213,6 @@ public class Stage : MonoBehaviour
 
     IEnumerator ExStage()
     {
-        game.SetBlock();
         yield return CreateLoop(3, (int)Monster.Normal);
         yield return new WaitUntil(() => { return CheckAct(); });
         yield return new WaitForSeconds(3f);

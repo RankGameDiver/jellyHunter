@@ -167,17 +167,23 @@ public class Game : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             OffAct(i);
-            GameData.skillKind = 0;
-            GameData.blockCount = 0;
         }
+        GameData.skillKind = 0;
+        GameData.blockCount = 0;
     }
 
-    public void Back()
+    public void SetJelly() // 모든 젤리들을 비활성화 및 초기화
     {
         for (int i = 0; i < 5; i++)
         {
             gJelly[i].SetActive(false);
+            gJelly[i].GetComponent<JellyStatus>().jellyCount = 0;
         }
+        GameData.jellyNum = 0;
+    }
+
+    public void Back()
+    {
         GameData.attackUp = false;
         GameData.defendUp = false;
         GameData.healUp = false;
