@@ -18,7 +18,7 @@ public class SaveLoad : MonoBehaviour
     {
         S_Data.Clear();
         S_Data.Add(new Data(GameData.Money, GameData.StageT, GameData.Stage1, GameData.Stage2, GameData.Stage3,
-                            GameData.ExStage, GameData.PlayingCount, GameData.LifeHour, GameData.LifeMin, GameData.LifeSec));
+                            GameData.ExStage, GameData.PlayingCount, GameData.sTime));
         JsonData charData = JsonMapper.ToJson(S_Data);
         File.WriteAllText(Application.dataPath + "/Data/SaveData.json", charData.ToString());
     }
@@ -49,8 +49,6 @@ public class SaveLoad : MonoBehaviour
         GameData.Stage3 = (int)data[0]["stage3"];
         GameData.ExStage = (int)data[0]["exStage"];
         GameData.PlayingCount = (int)data[0]["playingCount"];
-        GameData.LifeHour = (int)data[0]["lifeHour"];
-        GameData.LifeMin = (int)data[0]["lifeMin"];
-        GameData.LifeSec = (int)data[0]["lifeSec"];
+        GameData.sTime = (int)data[0]["sTime"];
     }
 }

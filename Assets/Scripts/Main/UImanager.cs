@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UImanager : MonoBehaviour
 {
@@ -26,5 +27,10 @@ public class UImanager : MonoBehaviour
         button[0] = GameObject.Find("diaButton");
         button[1] = GameObject.Find("jellyButton");
         button[2] = GameObject.Find("lifeButton");
+    }
+
+    public void StageSelect()
+    {
+        SceneManager.LoadScene("StageSelect");
     }
 }

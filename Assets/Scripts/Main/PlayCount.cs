@@ -12,6 +12,8 @@ public class PlayCount : MonoBehaviour
     private int hour;
     private int min;
     private int sec;
+    private string sTime; // 저장된 시간
+    private string nTime; // 현재 시간
     private int coolmin;
     private int coolsec;
 
@@ -19,18 +21,33 @@ public class PlayCount : MonoBehaviour
 
     void Start()
     {
-        CoolTime();
+        //CoolTime();
         hour = System.DateTime.Now.Hour;
         min = System.DateTime.Now.Minute;
         sec = System.DateTime.Now.Second;
+        sTime = FixTimeStr(System.DateTime.Now.Year) + FixTimeStr(System.DateTime.Now.Month) + FixTimeStr(System.DateTime.Now.Day)
+                + FixTimeStr(System.DateTime.Now.Hour) + FixTimeStr(System.DateTime.Now.Minute) + FixTimeStr(System.DateTime.Now.Second);
+
+        nTime = FixTimeStr(System.DateTime.Now.Year) + FixTimeStr(System.DateTime.Now.Month) + FixTimeStr(System.DateTime.Now.Day)
+                + FixTimeStr(System.DateTime.Now.Hour) + FixTimeStr(System.DateTime.Now.Minute) + FixTimeStr(System.DateTime.Now.Second);
+
+        Debug.Log(sTime);
         LifeStart();
+    }
+
+    private string FixTimeStr(int temp)
+    {
+        if (temp < 10)
+            return 0 + temp.ToString();
+        else
+            return temp.ToString();
     }
 
     void Update()
     {
         if (sec != System.DateTime.Now.Second && GameData.PlayingCount < 5)
         {
-            CoolTime();
+            //CoolTime();
             TimeSet();
             LifeCharge();
         }
@@ -40,16 +57,16 @@ public class PlayCount : MonoBehaviour
         LifeBar();
     }
 
-    public void CoolTime()
-    {
-        coolmin = GameData.LifeMin - min;
+    //public void CoolTime() // 화면에 표시
+    //{
+    //    coolmin = GameData.LifeMin - min;
         
-        if (coolmin < 0)
-            coolmin += 1;
-        coolsec = GameData.LifeSec - sec;
-        if (coolsec < 0)
-            coolsec += 60;
-    }
+    //    if (coolmin < 0)
+    //        coolmin += 1;
+    //    coolsec = GameData.LifeSec - sec;
+    //    if (coolsec < 0)
+    //        coolsec += 60;
+    //}
 
     public void TimeSet()
     {
@@ -91,7 +108,7 @@ public class PlayCount : MonoBehaviour
 
     public void LifeCharge() // 테스트용 1분
     {
-        if (GameData.LifeMin < min || GameData.LifeHour < hour)
+        /*if (GameData.LifeMin < min || GameData.LifeHour < hour)
         {
             if (GameData.LifeSec == sec)
             {
@@ -113,36 +130,63 @@ public class PlayCount : MonoBehaviour
                 GameData.LifeMin = System.DateTime.Now.Minute;
                 saveLoad.Save();
             }
+        }*/
+
+        int _sTime = int.Parse(sTime);
+        int _nTime = int.Parse(nTime);
+
+        if (_sTime + 3000 < _nTime)
+        {
+            if (GameData.PlayingCount == 5)
+            {
+                timeT.text = "";
+                sTime = "";
+            }
+            else
+            {
+                _sTime += 3000;
+                GameData.PlayingCount++;
+                saveLoad.Save();
+            }
         }
     }
 
     private void LifeStart()
     {
-        if (GameData.LifeHour < hour)
-        {
-            GameData.PlayingCount += (min + 60) - GameData.LifeMin;
-            GameData.LifeHour = System.DateTime.Now.Hour;
-            GameData.LifeMin = System.DateTime.Now.Minute;
-            Debug.Log("LifeStart Hour");
-        }
-        else if (GameData.LifeMin < min)
-        {
-            GameData.PlayingCount += min - GameData.LifeMin;
-            GameData.LifeHour = System.DateTime.Now.Hour;
-            GameData.LifeMin = System.DateTime.Now.Minute;
-            Debug.Log("LifeStart Min");
-        }
+        int _sTime = int.Parse(sTime);
+        int _nTime = int.Parse(nTime);
 
-        if (GameData.PlayingCount >= 5)
+        int temp = _nTime - _sTime;
+        if (temp / 3000 > 0)
         {
-            GameData.PlayingCount = 5;
-            timeT.text = "";
-            GameData.LifeHour = 0;
-            GameData.LifeMin = 0;
-            GameData.LifeSec = 0;
-            Debug.Log("LifeStart PlayCount >= 5");
+            GameData.PlayingCount += temp / 3000;
         }
-        Debug.Log("LifeStart Nothing");
+        
+
+        //if (GameData.LifeHour < hour)
+        //{
+        //    GameData.PlayingCount += (min + 60) - GameData.LifeMin;
+        //    GameData.LifeHour = System.DateTime.Now.Hour;
+        //    GameData.LifeMin = System.DateTime.Now.Minute;
+        //    Debug.Log("LifeStart Hour");
+        //}
+        //else if (GameData.LifeMin < min)
+        //{
+        //    GameData.PlayingCount += min - GameData.LifeMin;
+        //    GameData.LifeHour = System.DateTime.Now.Hour;
+        //    GameData.LifeMin = System.DateTime.Now.Minute;
+        //    Debug.Log("LifeStart Min");
+        //}
+
+        //if (GameData.PlayingCount >= 5)
+        //{
+        //    GameData.PlayingCount = 5;
+        //    timeT.text = "";
+        //    GameData.LifeHour = 0;
+        //    GameData.LifeMin = 0;
+        //    GameData.LifeSec = 0;
+        //    Debug.Log("LifeStart PlayCount >= 5");
+        //}
         saveLoad.Save();
     }
 

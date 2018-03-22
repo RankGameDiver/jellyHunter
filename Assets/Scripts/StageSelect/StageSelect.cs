@@ -54,7 +54,7 @@ public class StageSelect : MonoBehaviour
                     case 1:
                         if (GameData.Stage1 > 0)
                         {
-                            TimeSet();
+                            //TimeSet();
                             GameData.PlayingCount -= 1;
                             Debug.Log(GameData.PlayingCount);
                             SceneManager.LoadScene("Ingame");
@@ -67,7 +67,7 @@ public class StageSelect : MonoBehaviour
                     case 2:
                         if (GameData.Stage2 > 0)
                         {
-                            TimeSet();
+                            //TimeSet();
                             GameData.PlayingCount -= 1;
                             Debug.Log(GameData.PlayingCount);
                             SceneManager.LoadScene("Ingame");
@@ -80,7 +80,7 @@ public class StageSelect : MonoBehaviour
                     case 3:
                         if (GameData.Stage3 > 0)
                         {
-                            TimeSet();
+                            //TimeSet();
                             GameData.PlayingCount -= 1;
                             Debug.Log(GameData.PlayingCount);
                             SceneManager.LoadScene("Ingame");
@@ -93,7 +93,7 @@ public class StageSelect : MonoBehaviour
                     case 4:
                         if (GameData.ExStage > 0)
                         {
-                            TimeSet();
+                            //TimeSet();
                             GameData.PlayingCount -= 1;
                             Debug.Log(GameData.PlayingCount);
                             SceneManager.LoadScene("Ingame");
@@ -112,13 +112,13 @@ public class StageSelect : MonoBehaviour
         }
     }
 
-    public void TimeSet()
-    {
-        if (GameData.LifeHour == 0 && GameData.LifeMin == 0 && GameData.LifeSec == 0)
-        {
-            GameData.LifeHour = System.DateTime.Now.Hour;
-            GameData.LifeMin = System.DateTime.Now.Minute;
-            GameData.LifeSec = System.DateTime.Now.Second;
-        }
-    }
+    //public void TimeSet()
+    //{
+    //    if (GameData.LifeHour == 0 && GameData.LifeMin == 0 && GameData.LifeSec == 0)
+    //    {
+    //        GameData.LifeHour = System.DateTime.Now.Hour;
+    //        GameData.LifeMin = System.DateTime.Now.Minute;
+    //        GameData.LifeSec = System.DateTime.Now.Second;
+    //    }
+    //}
 }
