@@ -50,7 +50,7 @@ public class CatStatus : MonoBehaviour
         Defending();
     }
 
-    public void BasicAttack()
+    public void BasicAttack() // 기본 공격 스킬
     {
         if (GameData.attackUp)
             GameData.skillPower += 1;
@@ -65,6 +65,20 @@ public class CatStatus : MonoBehaviour
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
             if (sJelly.jellyCount <= 1 && stage.gJelly[i].activeInHierarchy)
+                sJelly.Attacked(trueDamage);
+        }
+        GameData.skillPower = 0;
+    }
+
+    public void AllAttack() // 전체 공격 스킬
+    {
+        if (GameData.attackUp) { GameData.skillPower += 1; }
+        LenghthCheck();
+        float trueDamage = damage * GameData.skillPower + (length * GameData.skillPower * damage / 5);
+        for (int i = 0; i < 5; i++)
+        {
+            JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
+            if (stage.gJelly[i].activeInHierarchy)
                 sJelly.Attacked(trueDamage);
         }
         GameData.skillPower = 0;
@@ -97,13 +111,8 @@ public class CatStatus : MonoBehaviour
 
     public void Defend() // 방어 버프 활성화
     {
-        if (GameData.defendUp)
-            GameData.skillPower += 1;
-
-        if (GameData.skillPower <= 2) length = 1;
-        else if (GameData.skillPower <= 4) length = 2;
-        else length = 3;
-
+        if (GameData.defendUp) { GameData.skillPower += 1; }
+        LenghthCheck();
         if (shield == false)
         {
             shield = true;
@@ -116,20 +125,22 @@ public class CatStatus : MonoBehaviour
         //Debug.Log("Defend");
     }
 
-    public void Heal()
+    public void Heal() // 기본 힐 스킬
     {
-        if (GameData.healUp)
-            GameData.skillPower += 1;
-
-        if (GameData.skillPower <= 2) length = 1;
-        else if (GameData.skillPower <= 4) length = 2;
-        else length = 3;
-
+        if (GameData.healUp) { GameData.skillPower += 1; }
+        LenghthCheck();
         health += GameData.skillPower * 10 * length;
         if (health > maxHealth)
             health = maxHealth;
         GameData.skillPower = 0;
         //Debug.Log("Heal");
+    }
+
+    private void LenghthCheck()
+    {
+        if (GameData.skillPower <= 2) length = 1;
+        else if (GameData.skillPower <= 4) length = 2;
+        else length = 3;
     }
 
     public void Attacked(float m_damage)
