@@ -24,6 +24,8 @@ public class CatStatus : MonoBehaviour
     private bool shieldAct;
     private bool life; // 생명
 
+    public GameObject buff;
+
     private float catTempHealth;
 
     public int length = 0; // 공격 범위
@@ -90,6 +92,7 @@ public class CatStatus : MonoBehaviour
         {
             truedefend = defend + GameData.skillPower * 5;
             shieldAct = true;
+            buff.SetActive(true);
             GameData.skillPower = 0;
         }
         else if (shield && shieldAct)
@@ -101,6 +104,7 @@ public class CatStatus : MonoBehaviour
                 shieldAct = false;
                 lastTime = 0;
                 truedefend = defend;
+                buff.SetActive(false);
             }
         }
         else

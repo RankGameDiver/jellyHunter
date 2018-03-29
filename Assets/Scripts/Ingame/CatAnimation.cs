@@ -61,7 +61,7 @@ public class CatAnimation : MonoBehaviour
             case 2:
                 GameData.lastSkillKind = GameData.skillKind;
                 cat.Defend();
-                animator.Play("CatDefend");
+                animator.Play("CatDefend");            
                 switch (cat.length)
                 {
                     case 1:
