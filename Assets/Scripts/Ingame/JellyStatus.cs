@@ -93,7 +93,7 @@ public class JellyStatus : MonoBehaviour
         {
             case (int)Monster.Normal:
                 animator.Play("NJellyNormal");
-                pos.anchoredPosition = new Vector2(170, -219); 
+                pos.anchoredPosition = new Vector2(170, -219);
                 break;
             case (int)Monster.Strong:
                 animator.Play("StrongJellyNormal");
@@ -105,7 +105,7 @@ public class JellyStatus : MonoBehaviour
                 break;
             case (int)Monster.Bomb:
                 animator.Play("BombJellyNormal");
-                pos.anchoredPosition = new Vector2(170,- 170); // 아마 수정 필요
+                pos.anchoredPosition = new Vector2(170, -170); // 아마 수정 필요
                 break;
                 
         }
@@ -126,6 +126,11 @@ public class JellyStatus : MonoBehaviour
                     StartCoroutine(Attack());
                 }
                 else if (pos.anchoredPosition.x < -452.0f && jellyKind == (int)Monster.Big)
+                {
+                    isMoving = false;
+                    StartCoroutine(Attack());
+                }
+                else if (pos.anchoredPosition.x < -400.0f && jellyKind == (int)Monster.Bomb)
                 {
                     isMoving = false;
                     StartCoroutine(Attack());
@@ -161,7 +166,7 @@ public class JellyStatus : MonoBehaviour
                     break;
                 case (int)Monster.Bomb:
                     animator.Play("BombJellyAttack");
-                    //effect.Play("BombJellyAttackEft");
+                    effect.Play("BombJellyAttackEft");
                     catstatus.Attacked(damage);
                     break;
 
@@ -195,7 +200,7 @@ public class JellyStatus : MonoBehaviour
                     break;
                 case (int)Monster.Bomb:
                     animator.Play("BombJellyHurt");
-                    //effect.Play("BombJellyHurtEft");
+                    effect.Play("BombJellyHurtEft");
                     break;
             }
         }
@@ -227,7 +232,7 @@ public class JellyStatus : MonoBehaviour
                 break;
             case (int)Monster.Bomb:
                 animator.Play("BombJellyDead");
-                //effect.Play("BombJellyDeadEft");
+                effect.Play("NJellyDeadEft");
                 break;
         }
         yield break;
