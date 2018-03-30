@@ -252,16 +252,16 @@ public class Stage : MonoBehaviour
     private void StageClear()
     {
         ScoreManager.TimeBonus();
-        if (GameData.moneyUp)
+        if (GameData.moneyItem)
             GameData.Money += ScoreManager.money + (ScoreManager.money / 2);
         else
             GameData.Money += ScoreManager.money;
         gameClear.SetActive(true);
-        GameData.attackUp = false;
-        GameData.defendUp = false;
-        GameData.healUp = false;
-        GameData.moneyUp = false;
-        GameData.hpUp = false;
+        GameData.attackItem = false;
+        GameData.defendItem = false;
+        GameData.healItem = false;
+        GameData.moneyItem = false;
+        GameData.healthItem = false;
         exLv = 1;
     }
 }

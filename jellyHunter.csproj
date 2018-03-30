@@ -325,6 +325,7 @@
     <Compile Include="Assets\Scripts\Main\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\Main\SoundM.cs" />
     <Compile Include="Assets\Scripts\Main\UImanager.cs" />
+    <Compile Include="Assets\Scripts\Main\UpgradeShop.cs" />
     <Compile Include="Assets\Scripts\StageSelect\Shop.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageButton.cs" />
     <Compile Include="Assets\Scripts\StageSelect\StageSelect.cs" />

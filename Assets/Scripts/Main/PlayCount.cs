@@ -21,7 +21,7 @@ public class PlayCount : MonoBehaviour
         sec = System.DateTime.Now.Second;
         nTime = FixTimeStr(System.DateTime.Now.Month) + FixTimeStr(System.DateTime.Now.Day)
                 + FixTimeStr(System.DateTime.Now.Hour) + FixTimeStr(System.DateTime.Now.Minute) + FixTimeStr(System.DateTime.Now.Second);
-        Debug.Log(GameData.sTime);
+        //Debug.Log(GameData.sTime);
         LifeStart();
     }
 

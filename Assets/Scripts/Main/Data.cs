@@ -12,8 +12,12 @@ public class Data
     public int playingCount;
     public int sTime;
 
-    public Data(int _money = 0, int _stageT = 0, int _stage1 = 0, int _stage2 = 0, int _stage3 = 0, 
-        int _exStage = 0, int _playingCount = 0, int _sTime = 0)
+    public int attackUp;
+    public int defendUp;
+    public int healthUp;
+
+    public Data(int _money = 0, int _stageT = 0, int _stage1 = 0, int _stage2 = 0, int _stage3 = 0,
+        int _exStage = 0, int _playingCount = 0, int _sTime = 0, int _attackUp = 0, int _defendUp = 0, int _healthUp = 0)
     {
         money = _money;
         stageT = _stageT;
@@ -23,5 +27,8 @@ public class Data
         exStage = _exStage;
         playingCount = _playingCount;
         sTime = _sTime;
+        attackUp = _attackUp;
+        defendUp = _defendUp;
+        healthUp = _healthUp;
     }
 }

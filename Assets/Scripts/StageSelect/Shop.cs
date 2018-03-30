@@ -29,70 +29,70 @@ public class Shop : MonoBehaviour
 
     public void AttackUp()
     {
-        if (GameData.attackUp)
+        if (GameData.attackItem)
         {
-            GameData.attackUp = false;
+            GameData.attackItem = false;
             Item[0].SetActive(true);
         }
         else
         {
-            GameData.attackUp = true;
+            GameData.attackItem = true;
             Item[0].SetActive(false);
         }
     }
 
     public void DefendUp()
     {
-        if (GameData.defendUp)
+        if (GameData.defendItem)
         {
-            GameData.defendUp = false;
+            GameData.defendItem = false;
             Item[1].SetActive(true);
         }
         else
         {
-            GameData.defendUp = true;
+            GameData.defendItem = true;
             Item[1].SetActive(false);
         }
     }
 
     public void HealUp()
     {
-        if (GameData.healUp)
+        if (GameData.healItem)
         {
-            GameData.healUp = false;
+            GameData.healItem = false;
             Item[2].SetActive(true);
         }
         else
         {
-            GameData.healUp = true;
+            GameData.healItem = true;
             Item[2].SetActive(false);
         }
     }
 
     public void MoneyUp()
     {
-        if (GameData.moneyUp)
+        if (GameData.moneyItem)
         {
-            GameData.moneyUp = false;
+            GameData.moneyItem = false;
             Item[3].SetActive(true);
         }
         else
         {
-            GameData.moneyUp = true;
+            GameData.moneyItem = true;
             Item[3].SetActive(false);
         }
     }
 
     public void HealthUp()
     {
-        if (GameData.hpUp)
+        if (GameData.healthItem)
         {
-            GameData.hpUp = false;
+            GameData.healthItem = false;
             Item[4].SetActive(true);
         }
         else
         {
-            GameData.hpUp = true;
+            GameData.healthItem = true;
             Item[4].SetActive(false);
         }
     }

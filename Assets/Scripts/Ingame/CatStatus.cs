@@ -32,7 +32,7 @@ public class CatStatus : MonoBehaviour
 
     void Start()
     {
-        if (GameData.hpUp)
+        if (GameData.healthItem)
             maxHealth = 220;
         else
             maxHealth = 200;
@@ -54,7 +54,7 @@ public class CatStatus : MonoBehaviour
 
     public void BasicAttack() // 기본 공격 스킬
     {
-        if (GameData.attackUp)
+        if (GameData.attackItem)
             GameData.skillPower += 1;
 
         if (GameData.skillPower <= 2) length = 1;
@@ -74,7 +74,7 @@ public class CatStatus : MonoBehaviour
 
     public void AllAttack() // 전체 공격 스킬
     {
-        if (GameData.attackUp) { GameData.skillPower += 1; }
+        if (GameData.attackItem) { GameData.skillPower += 1; }
         LenghthCheck();
         float trueDamage = damage * GameData.skillPower + (length * GameData.skillPower * damage / 5);
         for (int i = 0; i < 5; i++)
@@ -115,7 +115,7 @@ public class CatStatus : MonoBehaviour
 
     public void Defend() // 방어 버프 활성화
     {
-        if (GameData.defendUp) { GameData.skillPower += 1; }
+        if (GameData.defendItem) { GameData.skillPower += 1; }
         LenghthCheck();
         if (shield == false)
         {
@@ -131,7 +131,7 @@ public class CatStatus : MonoBehaviour
 
     public void Heal() // 기본 힐 스킬
     {
-        if (GameData.healUp) { GameData.skillPower += 1; }
+        if (GameData.healItem) { GameData.skillPower += 1; }
         LenghthCheck();
         health += GameData.skillPower * 10 * length;
         if (health > maxHealth)

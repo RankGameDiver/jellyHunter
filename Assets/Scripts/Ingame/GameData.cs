@@ -34,73 +34,33 @@ public static class GameData
 
     /////////////////////스테이지////////////////////////
 
-    private static int _StageNum = 0;
-    public static int StageNum
-    {
-        get { return _StageNum; }
-        set { _StageNum = value; }
-    }
+    public static int StageNum = 0;
 
     /////////////세이브할 데이터////////////////
 
-    private static int _Money = 0;
-    public static int Money
-    {
-        get { return _Money; }
-        set { _Money = value; }
-    }
+    public static int Money = 0;
 
-    private static int _StageT = 1;
-    public static int StageT
-    {
-        get{ return _StageT; }
-        set{ _StageT = value; }
-    }
+    public static int StageT = 1;
+    public static int Stage1 = 0;
+    public static int Stage2 = 0;
+    public static int Stage3 = 0;
+    public static int ExStage = 0;
 
-    private static int _Stage1 = 0;
-    public static int Stage1
-    {
-        get { return _Stage1; }
-        set { _Stage1 = value; }
-    }
-
-    private static int _Stage2 = 0;
-    public static int Stage2
-    {
-        get { return _Stage2; }
-        set { _Stage2 = value; }
-    }
-
-    private static int _Stage3 = 0;
-    public static int Stage3
-    {
-        get { return _Stage3; }
-        set { _Stage3 = value; }
-    }
-
-    private static int _ExStage = 0;
-    public static int ExStage
-    {
-        get { return _ExStage; }
-        set { _ExStage = value; }
-    }
-
-    private static int _PlayingCount = 5;
-    public static int PlayingCount
-    {
-        get { return _PlayingCount; }
-        set { _PlayingCount = value; }
-    }
-
+    public static int PlayingCount = 5;
     public static int sTime;
+
+    // 업그레이드 상점
+    public static int attackUp = 0;
+    public static int defendUp = 0;
+    public static int healthUp = 0;
 
     /////////////아이템 적용////////////////////
 
-    public static bool attackUp;
-    public static bool defendUp;
-    public static bool healUp;
-    public static bool moneyUp;
-    public static bool hpUp;
+    public static bool attackItem;
+    public static bool defendItem;
+    public static bool healItem;
+    public static bool moneyItem;
+    public static bool healthItem;
 
     ///////////////////////////////////////////
 

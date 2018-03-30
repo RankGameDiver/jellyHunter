@@ -184,11 +184,11 @@ public class Game : MonoBehaviour
 
     public void Back()
     {
-        GameData.attackUp = false;
-        GameData.defendUp = false;
-        GameData.healUp = false;
-        GameData.moneyUp = false;
-        GameData.hpUp = false;
+        GameData.attackItem = false;
+        GameData.defendItem = false;
+        GameData.healItem = false;
+        GameData.moneyItem = false;
+        GameData.healthItem = false;
         SceneManager.LoadScene("Main");
     }
 }
