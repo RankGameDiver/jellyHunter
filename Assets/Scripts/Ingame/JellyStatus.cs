@@ -167,6 +167,7 @@ public class JellyStatus : MonoBehaviour
                 case (int)Monster.Bomb:
                     animator.Play("BombJellyAttack");
                     effect.Play("BombJellyAttackEft");
+                    yield return new WaitForSeconds(0.7f);
                     catstatus.Attacked(damage);
                     break;
 

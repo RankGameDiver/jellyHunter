@@ -45,12 +45,16 @@ public class ScoreManager : MonoBehaviour
                 moneyPlus += 30;
                 break;
             case 2: // 중보스
-                score += 10000;
-                moneyPlus += 100;
+                score += 8000;
+                moneyPlus += 80;
                 break;
             case 3: // 최종보스
                 score += 20000;
                 moneyPlus += 200;
+                break;
+            case 4:
+                score += 5000;
+                moneyPlus += 50;
                 break;
         }
         PlusMoney();

@@ -7,7 +7,7 @@ public class PlayCount : MonoBehaviour
 {
     public Text timeT;
     public Sprite[] lifeWinImg;
-    public SpriteRenderer lifeWindow;
+    public Image lifeWindow;
     private string systemTime;
     private string nTime; // 현재 시간
     private int coolTime;
