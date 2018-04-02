@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeShop : MonoBehaviour
 {
     private int[] statArr;
+    public GameObject shopCanvas;
+
+    public Image[] statWindow;
+    public Image[] skillWindow;
+
+    public void ExitShop() { shopCanvas.SetActive(false); }
+    public void OpenShop() { shopCanvas.SetActive(true); }
 
     public void GetStat()
     {
