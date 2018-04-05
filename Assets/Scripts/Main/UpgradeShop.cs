@@ -8,21 +8,11 @@ public class UpgradeShop : MonoBehaviour
     private int[] statArr;
     public GameObject shopCanvas;
 
-    public Image[] statWindow;
-    public Image[] skillWindow;
+    public GameObject[] statWindow;
+    public GameObject[] skillWindow;
 
     public void ExitShop() { shopCanvas.SetActive(false); }
     public void OpenShop() { shopCanvas.SetActive(true); }
-
-    public void GetStat()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            statArr[0] = GameData.attackUp;
-            statArr[1] = GameData.defendUp;
-            statArr[2] = GameData.healthUp;
-        }
-    }
 
     public void SetStat()
     {
@@ -34,13 +24,25 @@ public class UpgradeShop : MonoBehaviour
         }
     }
 
-    public void Upgrade(int arrKind)
+    public void GetStat()
     {
-        if (statArr[arrKind] < 5 && arrKind < 3)
+        for (int i = 0; i < 3; i++)
         {
-            statArr[arrKind]++;
+            statArr[0] = GameData.attackUp;
+            statArr[1] = GameData.defendUp;
+            statArr[2] = GameData.healthUp;
         }
+    }
+
+    public void Upgrade(int arrKind) // arrKind 0~2까지는 캐릭터 스탯, 3~7까지는 스킬 블록
+    {
+        GetStat();
+        if (statArr[arrKind] < 5 && arrKind < 3)
+            statArr[arrKind]++;
+        else if (statArr[arrKind] < 5 && arrKind < 8)
+            statArr[arrKind]++;
         else { }
+        SetStat();
     }
 
 }
