@@ -52,33 +52,22 @@ public class UpgradeShop : MonoBehaviour
     {
         if (windowType == true) // true == statWin, false == skillWin
         {
+            statWindow[0].transform.SetSiblingIndex(statWindow[0].transform.GetSiblingIndex() + 1);
             statWindow[0].SetActive(true);
             statWindow[0].GetComponent<Animator>().Play("WinSwap(backStart)");
             skillWindow[0].GetComponent<Animator>().Play("WinSwap(FrontStart)");
-            StartCoroutine(Waiting(0.6f, windowType));
             windowType = false;
             Debug.Log("statWindow Back");
         }
         else
         {
             skillWindow[0].SetActive(true);
+            skillWindow[0].transform.SetSiblingIndex(skillWindow[0].transform.GetSiblingIndex() + 1);
             statWindow[0].GetComponent<Animator>().Play("WinSwap(FrontStart)");
             skillWindow[0].GetComponent<Animator>().Play("WinSwap(backStart)");
-            StartCoroutine(Waiting(0.6f, windowType));
             windowType = true;
             Debug.Log("skillWindow Back");
         }
-    }
-
-    IEnumerator Waiting(float time, bool type)
-    {
-        yield return new WaitForSeconds(time);
-        if (type)
-            skillWindow[0].SetActive(false);
-        else
-            statWindow[0].SetActive(false);
-        Debug.Log("Waiting");
-        yield break;
     }
 
 }
