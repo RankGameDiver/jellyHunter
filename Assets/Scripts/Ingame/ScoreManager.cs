@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static int score = 0;
-    private static int prevScore = 0;
+    //private static int prevScore = 0;
 
-    private Text myText;
+    //private Text myText;
 
     private static float timeNow = 0;
 
@@ -17,13 +17,13 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        myText = GetComponent<Text>();
+        //myText = GetComponent<Text>();
     }
 
     void Update()
     {
         timeNow = timeNow + Time.deltaTime;
-        prevScore = score;
+        //prevScore = score;
     }
 
     public static void PlusChainScore(int chain)

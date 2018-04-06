@@ -10,6 +10,9 @@ public class UpgradeShop : MonoBehaviour
 
     public GameObject[] statWindow;
     public GameObject[] skillWindow;
+    public GameObject tempWindow;
+
+    private bool windowType; // true == statWin, false == skillWin
 
     public void ExitShop() { shopCanvas.SetActive(false); }
     public void OpenShop() { shopCanvas.SetActive(true); }
@@ -43,6 +46,39 @@ public class UpgradeShop : MonoBehaviour
             statArr[arrKind]++;
         else { }
         SetStat();
+    }
+
+    public void WindowSwap()
+    {
+        if (windowType == true) // true == statWin, false == skillWin
+        {
+            statWindow[0].SetActive(true);
+            statWindow[0].GetComponent<Animator>().Play("WinSwap(backStart)");
+            skillWindow[0].GetComponent<Animator>().Play("WinSwap(FrontStart)");
+            StartCoroutine(Waiting(0.6f, windowType));
+            windowType = false;
+            Debug.Log("statWindow Back");
+        }
+        else
+        {
+            skillWindow[0].SetActive(true);
+            statWindow[0].GetComponent<Animator>().Play("WinSwap(FrontStart)");
+            skillWindow[0].GetComponent<Animator>().Play("WinSwap(backStart)");
+            StartCoroutine(Waiting(0.6f, windowType));
+            windowType = true;
+            Debug.Log("skillWindow Back");
+        }
+    }
+
+    IEnumerator Waiting(float time, bool type)
+    {
+        yield return new WaitForSeconds(time);
+        if (type)
+            skillWindow[0].SetActive(false);
+        else
+            statWindow[0].SetActive(false);
+        Debug.Log("Waiting");
+        yield break;
     }
 
 }
