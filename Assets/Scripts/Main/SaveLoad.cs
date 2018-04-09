@@ -29,15 +29,11 @@ public class SaveLoad : MonoBehaviour
         if (File.Exists(Application.dataPath + "/Data/SaveData.json"))
         {
             L_sData = File.ReadAllText(Application.dataPath + "/Data/SaveData.json");
-            // Debug.Log(L_sData);
-            JsonData charData = JsonMapper.ToObject(L_sData); // string 형식이 아니라 다른 방식으로 불러오게 변환         
+            JsonData charData = JsonMapper.ToObject(L_sData);        
             GetData(charData);
         }
         else
-        {
             Save();
-        }
-
     }
 
     public void GetData(JsonData data)

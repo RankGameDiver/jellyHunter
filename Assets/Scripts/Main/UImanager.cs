@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UImanager : MonoBehaviour
 {
-
     public Canvas canvas;
     private GameObject[] window;
     private GameObject[] button;

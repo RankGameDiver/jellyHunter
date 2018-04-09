@@ -21,7 +21,6 @@ public class PlayCount : MonoBehaviour
         sec = System.DateTime.Now.Second;
         nTime = FixTimeStr(System.DateTime.Now.Month) + FixTimeStr(System.DateTime.Now.Day)
                 + FixTimeStr(System.DateTime.Now.Hour) + FixTimeStr(System.DateTime.Now.Minute) + FixTimeStr(System.DateTime.Now.Second);
-        //Debug.Log(GameData.sTime);
         LifeStart();
     }
 
@@ -36,8 +35,7 @@ public class PlayCount : MonoBehaviour
             LifeCharge();
         }
         sec = System.DateTime.Now.Second;
-       
-        LifeBar();
+        lifeWindow.sprite = lifeWinImg[GameData.PlayingCount];
     }
 
     public string FixTimeStr(int temp)
@@ -63,38 +61,6 @@ public class PlayCount : MonoBehaviour
             timeT.text = systemTime;
         }
     }
-
-    public void LifeBar()
-    {
-        lifeWindow.sprite = lifeWinImg[GameData.PlayingCount];
-    }
-
-    //public void LifeCharge() // 30분
-    //{
-    //    if (GameData.LifeMin + 30 < System.DateTime.Now.Minute || GameData.LifeHour < System.DateTime.Now.Hour && GameData.LifeMin == System.DateTime.Now.Minute)
-    //    {
-    //        if (GameData.LifeSec == sec)
-    //        {
-    //            GameData.PlayingCount++;
-    //            if (GameData.PlayingCount == 5)
-    //            {
-    //                timeT.text = "";
-    //                GameData.LifeHour = 0;
-    //                GameData.LifeMin = 0;
-    //                GameData.LifeSec = 0;
-    //                coolmin = 30;
-    //                coolsec = 0;
-    //            }
-    //            GameData.LifeMin += 30;
-    //            saveLoad.Save();
-    //            if (GameData.LifeMin <= 60)
-    //            {
-    //                GameData.LifeMin -= 30;
-    //                GameData.LifeHour++;
-    //            }
-    //        }
-    //    }
-    //}
 
     public void LifeCharge()
     {

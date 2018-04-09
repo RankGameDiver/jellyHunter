@@ -6,19 +6,19 @@ public class Game : MonoBehaviour
 {
     public GameObject[] gBlock; // 모든 블럭의 배열
     public Block[] sBlock; // 모든 블럭 스크립트의 배열
+    private GameObject currentBlock; // 가장 최근에 생성된 블럭
     [HideInInspector]
-    public GameObject currentBlock; // 현재 생성된 블럭
     public SoundM soundM;
-    public GameObject[] gJelly;
+    public GameObject[] gJelly; // 모든 몬스터의 배열
 
     [HideInInspector]
     public CatStatus catstatus;
 
-    public int chainCount = 0; //연결된 체인 개수
+    private int chainCount = 0; //연결된 체인 개수
 
     void Start()
     {
-        StartCoroutine(CreateBlockLoop()); //블럭 생성 코루틴
+        StartCoroutine(CreateBlockLoop());
     }
 
     public void OnAct() // 블럭 활성화
@@ -57,15 +57,8 @@ public class Game : MonoBehaviour
         if (GameData.blockCount < GameData.blockAmount) //현재 필드에 나와있는 블럭 갯수 < 최대 블럭 갯수일 경우
         {
             OnAct(); //블럭 활성화
-
-            for (int i = 0; i < 7; i++) //최대 블럭 갯수만큼 실행
-            {
-                if (currentBlock == gBlock[i]) //현재 블럭 = gBlock[i]일 경우
-                {
-                    sBlock[i].MoveBlock(); //블럭 이동
-                    yield return new WaitUntil(() => { return !sBlock[i].GetIsMoving(); });//* //블럭 이동 종료시까지 대기
-                }
-            }
+            currentBlock.GetComponent<Block>().MoveBlock(); //블럭 이동
+            yield return new WaitUntil(() => { return !currentBlock.GetComponent<Block>().GetIsMoving(); });//* //블럭 이동 종료시까지 대기
         }
         yield break;    //코루틴 종료시키는 코드
     }
@@ -75,9 +68,7 @@ public class Game : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             if (sBlock[i].GetBlockNum() == blockNum)
-            {
                 return i;
-            }
         }
         return 0;
     }
@@ -91,7 +82,6 @@ public class Game : MonoBehaviour
 
         while (checkRight) // 체인 체크 시작 위치 조정
         {
-            //int limit = 0;
             for (int i = 0; i < 5; i++)
             {
                 if (sBlock[cBlockArr].GetBlockNum() - 1 >= 0 && sBlock[cBlockArr].GetSkillNum() == 
@@ -101,13 +91,12 @@ public class Game : MonoBehaviour
                     blockNum--;
                 }
             }
-
             checkRight = false; //체크 종료
         }
         ChainCheck(cBlockArr, blockNum, blockCount, _blockArr); //체인 체크
     }
 
-    void ChainCheck(int cBlockArr, int blockNum, int blockCount, int temp)
+    void ChainCheck(int cBlockArr, int blockNum, int blockCount, int _blockArr)
     {
         while (blockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
@@ -119,7 +108,7 @@ public class Game : MonoBehaviour
 
             if (sBlock[cBlockArr].GetBlockNum() == blockNum) // sBlock[i]의 활성화된 순서가 j와 같을때
             {
-                if (sBlock[cBlockArr].GetSkillNum() == sBlock[temp].GetSkillNum() && sBlock[cBlockArr].GetIsMoving() == false) //스킬 종류 동일할 시
+                if (sBlock[cBlockArr].GetSkillNum() == sBlock[_blockArr].GetSkillNum() && sBlock[cBlockArr].GetIsMoving() == false) //스킬 종류 동일할 시
                 {
                     chainCount++; //체인 카운트 증가
                     OffAct(cBlockArr); //비활성화 함수
@@ -140,9 +129,7 @@ public class Game : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             if (!gBlock[i].activeInHierarchy) //비활성화 상태일 때
-            {
-                sBlock[i].SetBlockNum(10);
-            }
+            { sBlock[i].SetBlockNum(10); }
             else if (gBlock[i].activeInHierarchy && sBlock[i].GetBlockNum() > blockNum) //현재 체인이 연결된 제일 왼쪽 블럭보다 blockNum 값이 크면
             {
                 sBlock[i].SetBlockNum(sBlock[i].GetBlockNum() - chainCount);
@@ -165,9 +152,7 @@ public class Game : MonoBehaviour
     public void SetBlock() // 모든 블럭을 비활성화및 초기화
     {
         for (int i = 0; i < 7; i++)
-        {
-            OffAct(i);
-        }
+        { OffAct(i); }
         GameData.skillKind = 0;
         GameData.blockCount = 0;
     }
