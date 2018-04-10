@@ -100,7 +100,7 @@ public class Game : MonoBehaviour
     {
         while (blockNum < blockCount && chainCount < 5) // blockCount는 활성화 된 블럭의 개수이므로 1부터 시작
         {
-            if (cBlockArr >= 8) //체크 갯수 오버플로우 시
+            if (cBlockArr >= 8) //체크 갯수가 오버할 시
             {
                 cBlockArr = 0; //0으로 초기화
                 blockNum++;
