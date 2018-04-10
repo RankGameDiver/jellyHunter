@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -8,7 +9,42 @@ public class Shop : MonoBehaviour
     private RectTransform shopPos { get { return GetComponent<RectTransform>(); } }
     public RectTransform mask;
     public GameObject[] Item;
-    private int price = 100;
+    private int price = 400;
+
+    public GameObject msgBox; // 게임머니가 부족할 시에 표시되는 메시지 창
+    private float alpha;
+
+    void Update()
+    {
+        if (msgBox.GetComponent<Image>().color.a > 0)
+        { FadeOutMsg(); }
+        else { }
+    }
+
+    public void SetAlpha(float _alpha)
+    {
+        if (GameData.Money < price)
+        {
+            Color msgColor = msgBox.GetComponent<Image>().color;
+            Color textColor = msgBox.transform.GetChild(0).GetComponent<Text>().color;
+            msgBox.GetComponent<Image>().color = new Color(msgColor.r, msgColor.g, msgColor.b, _alpha);
+            msgBox.transform.GetChild(0).GetComponent<Text>().color =
+                new Color(textColor.r, textColor.g, textColor.b, _alpha);
+        }
+        else { }
+    }
+
+    public void FadeOutMsg()
+    {
+        Color msgColor = msgBox.GetComponent<Image>().color;
+        Color textColor = msgBox.transform.GetChild(0).GetComponent<Text>().color;
+        alpha = msgBox.GetComponent<Image>().color.a;
+        alpha -= 0.02f;
+        msgBox.GetComponent<Image>().color = new Color(msgColor.r, msgColor.g, msgColor.b, alpha);
+        msgBox.transform.GetChild(0).GetComponent<Text>().color = new Color(textColor.r, textColor.g, textColor.b, alpha);
+    }
+
+    ////////////////////////////// 아이템 구매 ////////////////////////////////
 
     public void AttackUp()
     {
@@ -84,13 +120,13 @@ public class Shop : MonoBehaviour
         {
             GameData.healthItem = true;
             Item[4].SetActive(false);
-            GameData.Money -= 500;
+            GameData.Money -= price;
         }
         else if (GameData.healthItem)
         {
             GameData.healthItem = false;
             Item[4].SetActive(true);
-            GameData.Money += 500;
+            GameData.Money += price;
         }
         else { }
     }

@@ -114,7 +114,6 @@ public class Stage : MonoBehaviour
         {
             case 1:
                 StartCoroutine(TestStage());
-                //StartCoroutine(Stage1());
                 break;
             case 2:
                 StartCoroutine(Stage2());
