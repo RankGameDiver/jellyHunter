@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UpgradeShop : MonoBehaviour
 {
-    private int[] statArr;
+    private int[] statArr = new int[8];
     public GameObject shopCanvas;
 
     public GameObject[] statWindow;
@@ -57,7 +57,6 @@ public class UpgradeShop : MonoBehaviour
             statWindow[0].GetComponent<Animator>().Play("WinSwap(backStart)");
             skillWindow[0].GetComponent<Animator>().Play("WinSwap(FrontStart)");
             windowType = false;
-            Debug.Log("statWindow Back");
         }
         else
         {
@@ -66,7 +65,6 @@ public class UpgradeShop : MonoBehaviour
             statWindow[0].GetComponent<Animator>().Play("WinSwap(FrontStart)");
             skillWindow[0].GetComponent<Animator>().Play("WinSwap(backStart)");
             windowType = true;
-            Debug.Log("skillWindow Back");
         }
     }
 
