@@ -23,15 +23,11 @@ public class Shop : MonoBehaviour
 
     public void SetAlpha(float _alpha)
     {
-        if (GameData.Money < price)
-        {
-            Color msgColor = msgBox.GetComponent<Image>().color;
-            Color textColor = msgBox.transform.GetChild(0).GetComponent<Text>().color;
-            msgBox.GetComponent<Image>().color = new Color(msgColor.r, msgColor.g, msgColor.b, _alpha);
-            msgBox.transform.GetChild(0).GetComponent<Text>().color =
-                new Color(textColor.r, textColor.g, textColor.b, _alpha);
-        }
-        else { }
+        Color msgColor = msgBox.GetComponent<Image>().color;
+        Color textColor = msgBox.transform.GetChild(0).GetComponent<Text>().color;
+        msgBox.GetComponent<Image>().color = new Color(msgColor.r, msgColor.g, msgColor.b, _alpha);
+        msgBox.transform.GetChild(0).GetComponent<Text>().color =
+            new Color(textColor.r, textColor.g, textColor.b, _alpha);
     }
 
     public void FadeOutMsg()
@@ -41,7 +37,8 @@ public class Shop : MonoBehaviour
         alpha = msgBox.GetComponent<Image>().color.a;
         alpha -= 0.02f;
         msgBox.GetComponent<Image>().color = new Color(msgColor.r, msgColor.g, msgColor.b, alpha);
-        msgBox.transform.GetChild(0).GetComponent<Text>().color = new Color(textColor.r, textColor.g, textColor.b, alpha);
+        msgBox.transform.GetChild(0).GetComponent<Text>().color = 
+            new Color(textColor.r, textColor.g, textColor.b, alpha);
     }
 
     ////////////////////////////// 아이템 구매 ////////////////////////////////
@@ -53,6 +50,7 @@ public class Shop : MonoBehaviour
             GameData.attackItem = true;
             Item[0].SetActive(false);
             GameData.Money -= price;
+            
         }
         else if (GameData.attackItem)
         {
@@ -60,7 +58,7 @@ public class Shop : MonoBehaviour
             Item[0].SetActive(true);
             GameData.Money += price;
         }
-        else { }
+        else { SetAlpha(1); }
     }
 
     public void DefendUp()
@@ -70,6 +68,7 @@ public class Shop : MonoBehaviour
             GameData.defendItem = true;
             Item[1].SetActive(false);
             GameData.Money -= price;
+            
         }
         else if (GameData.defendItem)
         {
@@ -77,7 +76,7 @@ public class Shop : MonoBehaviour
             Item[1].SetActive(true);
             GameData.Money += price;
         }
-        else { }
+        else { SetAlpha(1); }
     }
 
     public void HealUp()
@@ -94,7 +93,7 @@ public class Shop : MonoBehaviour
             Item[2].SetActive(true);
             GameData.Money += price;
         }
-        else { }
+        else { SetAlpha(1); }
     }
 
     public void MoneyUp()
@@ -111,7 +110,7 @@ public class Shop : MonoBehaviour
             Item[3].SetActive(true);
             GameData.Money += price;
         }
-        else { }
+        else { SetAlpha(1); }
     }
 
     public void HealthUp()
@@ -128,6 +127,6 @@ public class Shop : MonoBehaviour
             Item[4].SetActive(true);
             GameData.Money += price;
         }
-        else { }
+        else { SetAlpha(1); }
     }
 }
