@@ -1,107 +1,34 @@
-﻿public class Data
-{
-    protected int money;
-    protected int[] stageKind;
+﻿
 
-    protected int playingCount;
-    protected int sTime;
-    protected int[] statUpKind;
+public class Data
+{
+    public int money;
+    public int stageT;
+    public int stage1;
+    public int stage2;
+    public int stage3;
+    public int exStage;
+
+    public int playingCount;
+    public int sTime;
+
+    public int attackUp;
+    public int defendUp;
+    public int healthUp;
 
     public Data(int _money = 0, int _stageT = 0, int _stage1 = 0, int _stage2 = 0, int _stage3 = 0,
         int _exStage = 0, int _playingCount = 0, int _sTime = 0, int _attackUp = 0, int _defendUp = 0, int _healthUp = 0)
     {
         money = _money;
+        stageT = _stageT;
+        stage1 = _stage1;
+        stage2 = _stage2;
+        stage3 = _stage3;
+        exStage = _exStage;
         playingCount = _playingCount;
         sTime = _sTime;
-
-        stageKind = new int[5];
-        stageKind[0] = _stageT;
-        stageKind[1] = _stage1;
-        stageKind[2] = _stage2;
-        stageKind[3] = _stage3;
-        stageKind[4] = _exStage;
-
-        statUpKind = new int[3];
-        statUpKind[0] = _attackUp;
-        statUpKind[1] = _defendUp;
-        statUpKind[2] = _healthUp;
-    }
-
-    public void SetData(int _money = 0, int _stageT = 0, int _stage1 = 0, int _stage2 = 0, int _stage3 = 0,
-        int _exStage = 0, int _playingCount = 0, int _sTime = 0, int _attackUp = 0, int _defendUp = 0, int _healthUp = 0)
-    {
-        money = _money;
-        playingCount = _playingCount;
-        sTime = _sTime;
-
-        stageKind[0] = _stageT;
-        stageKind[1] = _stage1;
-        stageKind[2] = _stage2;
-        stageKind[3] = _stage3;
-        stageKind[4] = _exStage;
-
-        statUpKind[0] = _attackUp;
-        statUpKind[1] = _defendUp;
-        statUpKind[2] = _healthUp;
-    }
-
-public void Clear()
-    {
-
+        attackUp = _attackUp;
+        defendUp = _defendUp;
+        healthUp = _healthUp;
     }
 }
-
-/*
- public class Data
-{
-    protected int money;
-    protected int[] stageKind;
-
-    protected int playingCount;
-    protected int sTime;
-    protected int[] statUpKind;
-
-    public Data()
-    {
-        money = 0;
-        playingCount = 5;
-        sTime = 0;
-
-        stageKind = new int[5];
-        stageKind[0] = 0;
-        stageKind[1] = 0;
-        stageKind[2] = 0;
-        stageKind[3] = 0;
-        stageKind[4] = 0;
-
-        statUpKind = new int[3];
-        statUpKind[0] = 0;
-        statUpKind[1] = 0;
-        statUpKind[2] = 0;
-    }
-
-    public void SetData(int _money = 0, int _stageT = 0, int _stage1 = 0, int _stage2 = 0, int _stage3 = 0,
-        int _exStage = 0, int _playingCount = 0, int _sTime = 0, int _attackUp = 0, int _defendUp = 0, int _healthUp = 0)
-    {
-        money = _money;
-        playingCount = _playingCount;
-        sTime = _sTime;
-
-        stageKind[0] = _stageT;
-        stageKind[1] = _stage1;
-        stageKind[2] = _stage2;
-        stageKind[3] = _stage3;
-        stageKind[4] = _exStage;
-
-        statUpKind[0] = _attackUp;
-        statUpKind[1] = _defendUp;
-        statUpKind[2] = _healthUp;
-    }
-
-public void Clear()
-    {
-
-    }
-}
-
-     */
