@@ -32,17 +32,16 @@ public class Block : MonoBehaviour
 
     IEnumerator Move()
     {
-        if (isMoving == false)
+        if (isMoving) yield return null;
+        isMoving = true;
+
+        while (isMoving)
         {
-            isMoving = true;
-            while (isMoving)
-            {
-                if (blockPos.anchoredPosition.x >= 200 * (GameData.blockAmount - blockNum - 1) + 150)
-                    isMoving = false;
-                blockPos.anchoredPosition = Vector2.MoveTowards(new Vector2(blockPos.anchoredPosition.x, blockPos.anchoredPosition.y),
-                                                                new Vector2(200.0f * (GameData.blockAmount - blockNum - 1) + 150.0f, 0), 40.0f);
-                yield return null;
-            }
+            if (blockPos.anchoredPosition.x >= 200 * (GameData.blockAmount - blockNum - 1) + 150)
+                isMoving = false;
+            blockPos.anchoredPosition = Vector2.MoveTowards(new Vector2(blockPos.anchoredPosition.x, blockPos.anchoredPosition.y),
+                                                            new Vector2(200.0f * (GameData.blockAmount - blockNum - 1) + 150.0f, 0), 40.0f);
+            yield return null;
         }
     }
 
@@ -52,6 +51,7 @@ public class Block : MonoBehaviour
         game.UsingBlock(blockArr);
         if (GameData.blockCount < 0)
             GameData.blockCount = 0;
+        
     }
 
     public int GetSkillNum() { return skillKind; }

@@ -8,7 +8,7 @@ public class CanvasManager : MonoBehaviour
     private GameObject saveButton;
     private GameObject loadButton;
 
-    void Awake()
+    void Start()
     {
         SetButton();
     }
