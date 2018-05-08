@@ -13,7 +13,7 @@ public class CatStatus : MonoBehaviour
         public float nowDefend;
     }
 
-    public Cat cat;
+    private Cat cat;
     public Stage stage;
     public CatAnimation catAnimation;
     private SoundM soundM { get { return GetComponent<SoundM>(); } }
@@ -51,7 +51,7 @@ public class CatStatus : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount <= 1 && stage.gJelly[i].activeInHierarchy)
+            if (sJelly.jelly.jellyCount <= 1 && stage.gJelly[i].activeInHierarchy)
                 sJelly.Attacked(trueDamage);
         }
         GameData.skillPower = 0;

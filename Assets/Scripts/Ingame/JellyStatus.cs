@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class JellyStatus : MonoBehaviour
 {
-    [SerializeField]
-    private float health; // 체력
-    [SerializeField]
-    private float damage; // 공격력
-    [SerializeField]
-    private float defend; // 방어력
+    public struct Jelly
+    {
+        public float health; // 체력
+        public float damage; // 공격력
+        public float defend; // 방어력
+        public int jellyCount; // 현재 젤리의 순서
+        public int jellyKind; // 젤리 종류
+    }
 
     enum Monster { Normal, Strong, Big, Bomb };
 
+    public Jelly jelly;
     public CatStatus catstatus;
     public Stage stage;
     private Animator animator { get { return gameObject.GetComponent<Animator>(); } }
@@ -20,12 +23,7 @@ public class JellyStatus : MonoBehaviour
     private SoundM soundM { get { return gameObject.GetComponent<SoundM>(); } }
     public SoundM eftSound;
 
-    private float jellyTempHealth;
     private bool life;
-
-    public int jellyCount; // 현재 젤리의 순서
-    public int jellyKind; // 젤리 종류
-
     public RectTransform pos { get{return gameObject.GetComponent<RectTransform>(); } }
     public GameObject effectObj;
 
@@ -42,7 +40,7 @@ public class JellyStatus : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0 && life == true) // 젤리맨이 죽었을 때 실행
+        if (jelly.health <= 0 && life == true) // 젤리맨이 죽었을 때 실행
         {
             life = false;
             StartCoroutine(DeadLoop());
@@ -54,14 +52,13 @@ public class JellyStatus : MonoBehaviour
         hpBar.GetComponent<JellyHpBar>().SetHpBar();
         if (!hpBar.activeInHierarchy)
             hpBar.SetActive(true);
-        jellyTempHealth = health;
         life = true;
         gameObject.SetActive(true);
     }
 
     public void SetJelly()
     {
-        switch (jellyKind)
+        switch (jelly.jellyKind)
         {
             case (int)Monster.Normal:
                 SetStatus(50, 5, 0); // Normal Jelly
@@ -82,14 +79,14 @@ public class JellyStatus : MonoBehaviour
 
     public void SetStatus(int hp, int dmg, int def)
     {
-        health = hp;
-        damage = dmg;
-        defend = def;
+        jelly.health = hp;
+        jelly.damage = dmg;
+        jelly.defend = def;
     }
 
     public void MoveJelly() // 젤리 움직임
     {
-        switch (jellyKind)
+        switch (jelly.jellyKind)
         {
             case (int)Monster.Normal:
                 animator.Play("NJellyNormal");
@@ -117,7 +114,7 @@ public class JellyStatus : MonoBehaviour
         if (!isMoving && life) //움직이고 있지 않으면
         {
             isMoving = true; //움직임
-            soundM.SetSoundClip(jellyKind);
+            soundM.SetSoundClip(jelly.jellyKind);
             while (isMoving) //움직이는 동안
             {
                 if (pos.anchoredPosition.x < GameData.jellyMax.x) //최대 x좌표에 도달했을 경우
@@ -125,12 +122,12 @@ public class JellyStatus : MonoBehaviour
                     isMoving = false; //더 이상 움직이지 않음
                     StartCoroutine(Attack());
                 }
-                else if (pos.anchoredPosition.x < -452.0f && jellyKind == (int)Monster.Big)
+                else if (pos.anchoredPosition.x < -452.0f && jelly.jellyKind == (int)Monster.Big)
                 {
                     isMoving = false;
                     StartCoroutine(Attack());
                 }
-                else if (pos.anchoredPosition.x < -400.0f && jellyKind == (int)Monster.Bomb)
+                else if (pos.anchoredPosition.x < -400.0f && jelly.jellyKind == (int)Monster.Bomb)
                 {
                     isMoving = false;
                     StartCoroutine(Attack());
@@ -146,33 +143,33 @@ public class JellyStatus : MonoBehaviour
     {
         while (life)
         {
-            switch (jellyKind)
+            switch (jelly.jellyKind)
             {
                 case (int)Monster.Normal:
                     animator.Play("NJellyAttack");
                     effect.Play("NJellyAttackEft");
-                    catstatus.Attacked(damage);
+                    catstatus.Attacked(jelly.damage);
                     break;
                 case (int)Monster.Strong:
                     animator.Play("StrongJellyAttack");
                     effect.Play("SJellyAttackEft");
                     yield return new WaitForSeconds(0.7f); // 젤리 공격 애니메이션과 고양이 피격 타이밍 조절
-                    catstatus.Attacked(damage);
+                    catstatus.Attacked(jelly.damage);
                     break;
                 case (int)Monster.Big:
                     animator.Play("BJellyAttack");
                     effect.Play("BJellyAttackEft");
-                    catstatus.Attacked(damage);
+                    catstatus.Attacked(jelly.damage);
                     break;
                 case (int)Monster.Bomb:
                     animator.Play("BombJellyAttack");
                     effect.Play("BombJellyAttackEft");
                     yield return new WaitForSeconds(0.7f);
-                    catstatus.Attacked(damage);
+                    catstatus.Attacked(jelly.damage);
                     break;
 
             }
-            eftSound.PlaySound(jellyKind);
+            eftSound.PlaySound(jelly.jellyKind);
             yield return new WaitForSeconds(3.0f);
         }
         yield break;
@@ -180,12 +177,12 @@ public class JellyStatus : MonoBehaviour
 
     public void Attacked(float m_damage)
     {
-        jellyTempHealth = health;
-        health -= m_damage * (1 - defend / 100);
-        if (health > jellyTempHealth) health = jellyTempHealth;
+        float jellyTempHealth = jelly.health;
+        jelly.health -= m_damage * (1 - jelly.defend / 100);
+        if (jelly.health > jellyTempHealth) jelly.health = jellyTempHealth;
         if (life)
         {
-            switch (jellyKind)
+            switch (jelly.jellyKind)
             {
                 case (int)Monster.Normal:
                     animator.Play("NJellyHurt");
@@ -217,7 +214,7 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator DeadFrame() // 죽는 애니메이션 종료 후 비활성화
     {
-        switch (jellyKind)
+        switch (jelly.jellyKind)
         {
             case (int)Monster.Normal:
                 animator.Play("NJellyDead");
@@ -241,8 +238,8 @@ public class JellyStatus : MonoBehaviour
 
     IEnumerator Death()
     {
-        ScoreManager.PlusDefeatScore(jellyKind + 1);
-        if (jellyKind == (int)Monster.Big)
+        ScoreManager.PlusDefeatScore(jelly.jellyKind + 1);
+        if (jelly.jellyKind == (int)Monster.Big)
         {
             pos.anchoredPosition = new Vector2(pos.anchoredPosition.x, -219);
             animator.Play("BJellyDeadRun");
@@ -265,14 +262,14 @@ public class JellyStatus : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
-            if (sJelly.jellyCount > gameObject.GetComponent<JellyStatus>().jellyCount)  sJelly.jellyCount--;
+            if (sJelly.jelly.jellyCount > gameObject.GetComponent<JellyStatus>().jelly.jellyCount)  sJelly.jelly.jellyCount--;
         }
-        jellyCount = 10;
+        jelly.jellyCount = 10;
         yield break;
     }
 
     public float GetHealth()
     {
-        return health;
+        return jelly.health;
     }
 }
