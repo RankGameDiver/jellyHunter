@@ -4,52 +4,41 @@ using UnityEngine;
 
 public class CatStatus : MonoBehaviour
 {
-    [SerializeField]
-    private float maxHealth;
-    private float health; // 체력
-    private float damage; // 공격력    
-    [SerializeField]
-    private float defend; // 기본 방어력
-    [SerializeField]
-    private float truedefend;
+    public struct Cat
+    {
+        public float health; // 체력
+        public float nowHealth;
+        public float damage; // 공격력    
+        public float defend; // 기본 방어력
+        public float nowDefend;
+    }
 
+    public Cat cat;
     public Stage stage;
     public CatAnimation catAnimation;
-    public float lastTime; // 방어 적용 시간
     private SoundM soundM { get { return GetComponent<SoundM>(); } }
-
     public GameObject GameOver;
-
-    private bool shield; // 방어 활성화 체크
-    private bool shieldAct;
-    private bool life; // 생명
-
     public GameObject buff;
-
-    private float catTempHealth;
-
-    public int length = 0; // 공격 범위
+    private bool life; // 생명
+    private float defendTime;
 
     void Start()
     {
         if (GameData.healthItem)
-            maxHealth = 220;
+            cat.health = 220;
         else
-            maxHealth = 200;
-        health = maxHealth;
-        damage = 10;
-        defend = 5;
-        lastTime = 0;
+            cat.health = 200;
+        cat.nowHealth = cat.health;
+        cat.damage = 10;
+        cat.defend = 5;
+        defendTime = 0;
         life = true;
     }
 
     void Update()
     {
-        if (health <= 0 && life) // 플레이어가 죽었을 때 실행
-        {
+        if (cat.nowHealth <= 0 && life) // 플레이어가 죽었을 때 실행
             life = false;
-        }
-        Defending();
     }
 
     public void BasicAttack() // 기본 공격 스킬
@@ -57,11 +46,7 @@ public class CatStatus : MonoBehaviour
         if (GameData.attackItem)
             GameData.skillPower += 1;
 
-        if (GameData.skillPower <= 2) length = 1;
-        else if (GameData.skillPower <= 4) length = 2;
-        else length = 3;
-
-        float trueDamage = damage * GameData.skillPower + (length * GameData.skillPower * damage / 5 * 2);
+        float trueDamage = cat.damage * GameData.skillPower + (LenghthCheck() * GameData.skillPower * cat.damage / 5 * 2);
 
         for (int i = 0; i < 5; i++)
         {
@@ -75,8 +60,7 @@ public class CatStatus : MonoBehaviour
     public void AllAttack() // 전체 공격 스킬
     {
         if (GameData.attackItem) { GameData.skillPower += 1; }
-        LenghthCheck();
-        float trueDamage = damage * GameData.skillPower + (length * GameData.skillPower * damage / 5);
+        float trueDamage = cat.damage * GameData.skillPower + (LenghthCheck() * GameData.skillPower * cat.damage / 5);
         for (int i = 0; i < 5; i++)
         {
             JellyStatus sJelly = stage.gJelly[i].GetComponent<JellyStatus>();
@@ -86,83 +70,75 @@ public class CatStatus : MonoBehaviour
         GameData.skillPower = 0;
     }
 
-    public void Defending() // 방어 버프 적용중
-    { 
-        if (shield && !shieldAct)
-        {
-            truedefend = defend + GameData.skillPower * 5;
-            shieldAct = true;
-            buff.SetActive(true);
-            GameData.skillPower = 0;
-        }
-        else if (shield && shieldAct)
-        {
-            lastTime += Time.deltaTime;
-            if (lastTime >= 10.0f)
-            {
-                shield = false;
-                shieldAct = false;
-                lastTime = 0;
-                truedefend = defend;
-                buff.SetActive(false);
-            }
-        }
-        else
-        {
-            truedefend = defend;
-        }    
-    }
-
-    public void Defend() // 방어 버프 활성화
-    {
-        if (GameData.defendItem) { GameData.skillPower += 1; }
-        LenghthCheck();
-        if (shield == false)
-        {
-            shield = true;
-        }
-        else
-        {
-            shieldAct = false;
-            lastTime = 0;
-        }       
-        //Debug.Log("Defend");
-    }
-
     public void Heal() // 기본 힐 스킬
     {
         if (GameData.healItem) { GameData.skillPower += 1; }
-        LenghthCheck();
-        health += GameData.skillPower * 10 * length;
-        if (health > maxHealth)
-            health = maxHealth;
+        cat.nowHealth += GameData.skillPower * 10 * LenghthCheck();
+        if (cat.nowHealth > cat.health)
+            cat.nowHealth = cat.health;
         GameData.skillPower = 0;
-        //Debug.Log("Heal");
     }
 
-    private void LenghthCheck()
+    public void Defend()
     {
-        if (GameData.skillPower <= 2) length = 1;
-        else if (GameData.skillPower <= 4) length = 2;
-        else length = 3;
+        if (GameData.defendItem) { GameData.skillPower += 1; }
+
+        if (defendTime <= 0)
+            StartCoroutine(Defending());
+        else
+        defendTime += 5.0f;
+    }
+
+    IEnumerator Defending()
+    {
+        defendTime += 5.0f;
+        cat.nowDefend = cat.defend + GameData.skillPower * 5;
+        buff.SetActive(true);
+        GameData.skillPower = 0;
+
+        Debug.Log("Defending, defend : " + cat.nowDefend);
+        StartCoroutine(Timer());
+        yield return new WaitUntil(() => { return defendTime <= 0; });
+
+        cat.nowDefend = cat.defend;
+        buff.SetActive(false);
+        Debug.Log("End Defending, defend : " + cat.nowDefend);
+        yield return null;
+    }
+
+    IEnumerator Timer()
+    {
+        while (defendTime > 0)
+        {
+            defendTime -= 0.5f;
+            yield return new WaitForSeconds(0.5f);
+            //Debug.Log("defendTime : " + defendTime);
+        }
+        Debug.Log("End Timer");
+        yield return null;
+    }
+
+    public int LenghthCheck()
+    {
+        if (GameData.skillPower <= 2) return 1;
+        if (GameData.skillPower <= 4) return 2;
+        return 3;
     }
 
     public void Attacked(float m_damage)
     {
-        catTempHealth = health;
-        health -= m_damage * (1 - defend / 100);
-        if (health > catTempHealth) health = catTempHealth;
+        float tempHealth = cat.nowHealth;
+        cat.nowHealth -= m_damage * (1 - cat.defend / 100);
+        if (cat.nowHealth > tempHealth) cat.nowHealth = tempHealth;
         catAnimation.Attacked();
 
-        if (health <= 0)
-        {
+        if (cat.nowHealth <= 0)
             GameOver.SetActive(true);
-        }
     }
 
-    public float GetHealth()            { return health; }
-    public float GetMaxHP()             { return maxHealth; }
-    public void SetHealth(float hp)     { health = hp; }
-    public float GetDefend()            { return truedefend; }
+    public float GetHealth()            { return cat.nowHealth; }
+    public float GetMaxHP()             { return cat.health; }
+    public void SetHealth(float hp)     { cat.health = hp; }
+    public float GetDefend()            { return cat.defend; }
     public bool GetLife()               { return life; }
 }

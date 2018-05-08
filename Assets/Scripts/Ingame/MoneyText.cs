@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoneyText : MonoBehaviour
 {
@@ -12,7 +12,6 @@ public class MoneyText : MonoBehaviour
         moneyT = GetComponent<Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         moneyT.text = ScoreManager.money.ToString();

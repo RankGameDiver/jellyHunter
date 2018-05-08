@@ -60,7 +60,7 @@ public class Game : MonoBehaviour
             currentBlock.GetComponent<Block>().MoveBlock(); //블럭 이동
             yield return new WaitUntil(() => { return !currentBlock.GetComponent<Block>().GetIsMoving(); });//* //블럭 이동 종료시까지 대기
         }
-        yield break;    //코루틴 종료시키는 코드
+        yield return null;
     }
 
     public int FindBlockArr(int blockNum)

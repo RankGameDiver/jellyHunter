@@ -42,7 +42,7 @@ public class CatAnimation : MonoBehaviour
                 GameData.lastSkillKind = GameData.skillKind;
                 cat.BasicAttack();
                 animator.Play("CatAttack");
-                switch (cat.length)
+                switch (cat.LenghthCheck())
                 {
                     case 1:
                         //effectObj.transform.position = new Vector3(-4.47f, -0.83f, -3.0f);
@@ -62,7 +62,7 @@ public class CatAnimation : MonoBehaviour
                 GameData.lastSkillKind = GameData.skillKind;
                 cat.Defend();
                 animator.Play("CatDefend");            
-                switch (cat.length)
+                switch (cat.LenghthCheck())
                 {
                     case 1:
                         effect.Play("NCatDefend1Eft");
@@ -80,7 +80,7 @@ public class CatAnimation : MonoBehaviour
             case 3:
                 GameData.lastSkillKind = GameData.skillKind;           
                 cat.Heal();
-                switch (cat.length)
+                switch (cat.LenghthCheck())
                 {
                     case 1:
                         animator.Play("Cat1Heal");
@@ -101,7 +101,7 @@ public class CatAnimation : MonoBehaviour
             case 4:
                 GameData.lastSkillKind = GameData.skillKind;
                 cat.AllAttack();
-                switch (cat.length)
+                switch (cat.LenghthCheck())
                 {
                     case 1:
                         //animator.Play("Cat1Heal");
@@ -122,7 +122,6 @@ public class CatAnimation : MonoBehaviour
             default:
                 break;
         }
-        cat.length = 0;
         GameData.skillKind = 0;
     }
 

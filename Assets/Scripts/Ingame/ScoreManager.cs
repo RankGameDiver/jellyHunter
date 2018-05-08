@@ -6,24 +6,15 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public static int score = 0;
-    //private static int prevScore = 0;
-
-    //private Text myText;
 
     private static float timeNow = 0;
 
     public static int money = 0;
     public static int moneyPlus = 0;
 
-    void Start()
-    {
-        //myText = GetComponent<Text>();
-    }
-
     void Update()
     {
         timeNow = timeNow + Time.deltaTime;
-        //prevScore = score;
     }
 
     public static void PlusChainScore(int chain)
